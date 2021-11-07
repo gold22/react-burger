@@ -1,5 +1,32 @@
-.main {
+.header {
     display: flex;
+    direction: ltr;
+    justify-content: space-around;
+    align-items: center;
+    background: var(--background);
+}
+
+.leftNav {
+    display: flex;
+    direction: ltr;
+    justify-content: flex-end;
     align-items: center;
     column-gap: 8px;
+    flex: 1;
+}
+
+.rightNav {
+    display: flex;
+    direction: ltr;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 8px;
+    flex: 1;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
