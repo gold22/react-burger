@@ -8,7 +8,7 @@ class AppHeader extends React.Component {
         return (
             <header className={`${styles.header} ml-10 mr-10 mt-10`}>
                 <nav className={styles.leftNav}>
-                    <NavLink icon="burger" text="Конструктор" selected />
+                    <NavLink icon="burger" text="Конструктор" active />
                     <NavLink icon="list" text="Лента заказов" />
                 </nav>
                 <div className={styles.logo}>

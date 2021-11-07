@@ -1,0 +1,9 @@
+.tabs {
+    display: flex;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: calc(var(--offset-base-size)  * 6);
+}

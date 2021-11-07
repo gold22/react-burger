@@ -5,8 +5,8 @@ import styles from './nav-link.module.css';
 
 class NavLink extends React.Component {
     render() {
-        const iconType = this.props.selected ? 'primary' : 'secondary';
-        const textColor = this.props.selected ? 'text_color_primary' : 'text_color_inactive';
+        const iconType = this.props.active ? 'primary' : 'secondary';
+        const textColor = this.props.active ? 'text_color_primary' : 'text_color_inactive';
         return (
             <div className={`${styles.main} pl-5 pr-5 pb-4 pt-4`}>
                 {'burger' === this.props.icon && <BurgerIcon type={iconType}/>}
@@ -21,11 +21,11 @@ class NavLink extends React.Component {
 NavLink.propTypes = {
     icon: PropTypes.oneOf(['burger', 'list', 'profile']),
     text: PropTypes.string.isRequired,
-    selected: PropTypes.bool,
+    active: PropTypes.bool,
 };
 
 NavLink.defaultProps = {
-    selected: false
+    active: false
 };
 
 export default NavLink;
