@@ -40,7 +40,9 @@ class BurgerIngredients extends React.Component {
                     <div className={styles.cards}>
                         {this.props.ingredients.filter(ingredient => 'bun' === ingredient.type).map(ingredient => (
                             <Card
+                                key={ingredient._id}
                                 ingredient={ingredient}
+                                count={1}
                             />
                         ))}
                     </div>
@@ -48,6 +50,7 @@ class BurgerIngredients extends React.Component {
                     <div className={styles.cards}>
                         {this.props.ingredients.filter(ingredient => 'sauce' === ingredient.type).map(ingredient => (
                             <Card
+                                key={ingredient._id}
                                 ingredient={ingredient}
                             />
                         ))}
@@ -56,6 +59,7 @@ class BurgerIngredients extends React.Component {
                     <div className={styles.cards}>
                         {this.props.ingredients.filter(ingredient => 'main' === ingredient.type).map(ingredient => (
                             <Card
+                                key={ingredient._id}
                                 ingredient={ingredient}
                             />
                         ))}
