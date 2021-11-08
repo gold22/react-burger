@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './nav-link.module.css';
+import styles from './app-nav-link.module.css';
 
-class NavLink extends React.Component {
+class AppNavLink extends React.Component {
     render() {
         const iconType = this.props.active ? 'primary' : 'secondary';
         const textColor = this.props.active ? 'text_color_primary' : 'text_color_inactive';
@@ -18,14 +18,14 @@ class NavLink extends React.Component {
     }
 }
 
-NavLink.propTypes = {
+AppNavLink.propTypes = {
     icon: PropTypes.oneOf(['burger', 'list', 'profile']),
     text: PropTypes.string.isRequired,
     active: PropTypes.bool,
 };
 
-NavLink.defaultProps = {
+AppNavLink.defaultProps = {
     active: false
 };
 
-export default NavLink;
+export default AppNavLink;
