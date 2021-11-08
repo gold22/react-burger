@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientType } from '../../utils/types';
-import styles from './card.module.css';
+import styles from './ingredient-card.module.css';
 
-class Card extends React.Component {
+class IngredientCard extends React.Component {
     render() {
         const count = this.props.count;
         const { image, name, price } = this.props.ingredient;
@@ -25,13 +25,13 @@ class Card extends React.Component {
     }
 }
 
-Card.propTypes = {
+IngredientCard.propTypes = {
     ingredient: ingredientType.isRequired,
     count: PropTypes.number.isRequired,
 };
 
-Card.defaultProps = {
+IngredientCard.defaultProps = {
     count: 0,
 };
 
-export default Card;
+export default IngredientCard;

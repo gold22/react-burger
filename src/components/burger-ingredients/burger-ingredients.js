@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import Card from "../card/card";
+import IngredientCard from "../ingredient-card/ingredient-card";
 import { ingredientType } from '../../utils/types';
 import styles from './burger-ingredients.module.css';
 
@@ -39,7 +39,7 @@ class BurgerIngredients extends React.Component {
                     <p className="text text_type_main-medium">Булки</p>
                     <div className={styles.cards}>
                         {this.props.ingredients.filter(ingredient => 'bun' === ingredient.type).map(ingredient => (
-                            <Card
+                            <IngredientCard
                                 key={ingredient._id}
                                 ingredient={ingredient}
                                 count={1}
@@ -49,7 +49,7 @@ class BurgerIngredients extends React.Component {
                     <p className="text text_type_main-medium">Соусы</p>
                     <div className={styles.cards}>
                         {this.props.ingredients.filter(ingredient => 'sauce' === ingredient.type).map(ingredient => (
-                            <Card
+                            <IngredientCard
                                 key={ingredient._id}
                                 ingredient={ingredient}
                             />
@@ -58,7 +58,7 @@ class BurgerIngredients extends React.Component {
                     <p className="text text_type_main-medium">Начинка</p>
                     <div className={styles.cards}>
                         {this.props.ingredients.filter(ingredient => 'main' === ingredient.type).map(ingredient => (
-                            <Card
+                            <IngredientCard
                                 key={ingredient._id}
                                 ingredient={ingredient}
                             />
