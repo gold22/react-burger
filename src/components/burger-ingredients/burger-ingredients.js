@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
+import IngredientTabs from '../ingredient-tabs/ingredient-tabs';
 import { ingredientType } from '../../utils/types';
 import styles from './burger-ingredients.module.css';
 
@@ -24,18 +24,8 @@ class BurgerIngredients extends React.Component {
         return (
             <section>
                 <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
-                <div className={`${styles.tabs} mb-10`}>
-                    <Tab value="bun" active={'bun' === this.state.type} onClick={this.setType}>
-                        Булки
-                    </Tab>
-                    <Tab value="sauce" active={'sauce' === this.state.type} onClick={this.setType}>
-                        Соусы
-                    </Tab>
-                    <Tab value="main" active={'main' === this.state.type} onClick={this.setType}>
-                        Начинка
-                    </Tab>
-                </div>
-                <div>
+                <IngredientTabs value={this.state.type} onClick={this.setType} />
+                <div className="mt-10">
                     <p className="text text_type_main-medium">Булки</p>
                     <div className={styles.cards}>
                         {this.props.ingredients.filter(ingredient => 'bun' === ingredient.type).map(ingredient => (
