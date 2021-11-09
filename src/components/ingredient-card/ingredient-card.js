@@ -8,7 +8,6 @@ class IngredientCard extends React.Component {
     render() {
         const count = this.props.count;
         const { image, name, price } = this.props.ingredient;
-        console.log(`${name}: ${count}`);
         return (
             <div className={styles.main}>
                 {0 < count &&
