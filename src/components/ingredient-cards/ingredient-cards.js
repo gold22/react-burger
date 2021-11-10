@@ -9,7 +9,7 @@ class IngredientCards extends React.Component {
         return (
             <div>
                 <p className="text text_type_main-medium">{this.props.title}</p>
-                <div className={`${styles.cards} pt-6 pr-4 pb-10 pl-4`}>
+                <div className={`${styles.cards} pt-6 pb-10 pl-4`}>
                     {this.props.ingredients.map(ingredient => (
                         <IngredientCard
                             key={ingredient._id}

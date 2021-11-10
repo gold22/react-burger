@@ -4,10 +4,16 @@
     gap: calc(var(--offset-base-size)  * 4);
 }
 
+.mainItem {
+    display: flex;
+}
+
 .optionalItems {
     display: flex;
     flex-direction: column;
     gap: calc(var(--offset-base-size)  * 4);
+    max-height: 464px;
+    overflow-y: scroll;
 }
 
 .optionalItem {

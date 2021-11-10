@@ -9,9 +9,9 @@ class BurgerConstructor extends React.Component {
     render() {
         const total = this.props.ingredients.reduce((sum,  ingredient) => sum + ingredient.price, 0);
         return (
-            <section className={`${styles.main} pt-25 pl-4 pr-4`}>
+            <section className={`${styles.main} pt-25 pl-4`}>
                 <ConstructorElements ingredients={this.props.ingredients} />
-                <div className={`${styles.submit} pt-10`}>
+                <div className={`${styles.submit} pt-10 pr-8`}>
                     <div className={styles.total}>
                         <p className="text text_type_digits-medium">{total}</p>
                         <CurrencyIcon type="primary" />

@@ -25,7 +25,7 @@ class BurgerIngredients extends React.Component {
             <section className={styles.main}>
                 <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
                 <IngredientTabs value={this.state.type} onClick={this.setType} />
-                <div className="mt-10">
+                <div className={`${styles.cards} mt-10 custom-scroll`}>
                     <IngredientCards
                         title="Булки"
                         ingredients={this.props.ingredients.filter(ingredient => 'bun' === ingredient.type)}

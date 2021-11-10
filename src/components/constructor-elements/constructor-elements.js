@@ -10,7 +10,7 @@ class ConstructorElements extends React.Component {
         return (
             <div className={styles.main}>
                 {0 < this.props.ingredients.length &&
-                    <div className="pl-8" key="top">
+                    <div className={`${styles.mainItem} pl-8`} key="top">
                         <ConstructorElement
                             type="top"
                             isLocked
@@ -20,9 +20,9 @@ class ConstructorElements extends React.Component {
                         />
                     </div>
                 }
-                <div className={styles.optionalItems} key="middle">
+                <div className={`${styles.optionalItems} custom-scroll`} key="middle">
                     {this.props.ingredients.slice(1).map(ingredient => (
-                        <div className={styles.optionalItem} key={ingredient._id}>
+                        <div className={`${styles.optionalItem} custom-scroll pr-4`} key={ingredient._id}>
                             <DragIcon type="primary" />
                             <ConstructorElement
                                 text={ingredient.name}
@@ -33,7 +33,7 @@ class ConstructorElements extends React.Component {
                     ))}
                 </div>
                 {0 < this.props.ingredients.length &&
-                    <div className="pl-8" key="bottom">
+                    <div className={`${styles.mainItem} pl-8`} key="bottom">
                         <ConstructorElement
                             type="bottom"
                             isLocked
