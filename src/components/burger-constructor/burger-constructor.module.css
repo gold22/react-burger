@@ -1,0 +1,15 @@
+.main {
+    max-width: 600px;
+}
+
+.submit {
+    display: flex;
+    direction: ltr;
+    justify-content: flex-end;
+    gap: calc(var(--offset-base-size)  * 10);
+}
+
+.total {
+    display: flex;
+    align-items: center;
+}

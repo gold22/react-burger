@@ -3,6 +3,7 @@ import React from 'react';
 import IngredientCards from '../ingredient-cards/ingredient-cards';
 import IngredientTabs from '../ingredient-tabs/ingredient-tabs';
 import { ingredientType } from '../../utils/types';
+import styles from './burger-ingredients.module.css';
 
 class BurgerIngredients extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class BurgerIngredients extends React.Component {
 
     render() {
         return (
-            <section>
+            <section className={styles.main}>
                 <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
                 <IngredientTabs value={this.state.type} onClick={this.setType} />
                 <div className="mt-10">
