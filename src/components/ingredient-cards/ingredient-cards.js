@@ -7,7 +7,7 @@ import styles from './ingredient-cards.module.css';
 class IngredientCards extends React.Component {
     render() {
         return (
-            <div>
+            <div ref={this.props.innerRef}>
                 <p className="text text_type_main-medium">{this.props.title}</p>
                 <div className={`${styles.cards} pt-6 pb-10 pl-4`}>
                     {this.props.ingredients.map(ingredient => (
@@ -26,6 +26,7 @@ class IngredientCards extends React.Component {
 IngredientCards.propTypes = {
     title: PropTypes.string.isRequired,
     ingredients: PropTypes.arrayOf(ingredientType).isRequired,
+    innerRef: PropTypes.object.isRequired,
 };
 
 IngredientCards.defaultProps = {

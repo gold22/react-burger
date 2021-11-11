@@ -12,9 +12,15 @@ class BurgerIngredients extends React.Component {
             type: 'bun',
         }
         this.setType = this.setType.bind(this);
+        this.cards = {
+            bun: React.createRef(),
+            sauce: React.createRef(),
+            main: React.createRef(),
+        }
     }
 
     setType(type) {
+        this.cards[type].current.scrollIntoView({ behavior: 'smooth' });
         this.setState(() => ({
             type,
         }));
@@ -29,14 +35,17 @@ class BurgerIngredients extends React.Component {
                     <IngredientCards
                         title="Булки"
                         ingredients={this.props.ingredients.filter(ingredient => 'bun' === ingredient.type)}
+                        innerRef={this.cards.bun}
                     />
                     <IngredientCards
                         title="Соусы"
                         ingredients={this.props.ingredients.filter(ingredient => 'sauce' === ingredient.type)}
+                        innerRef={this.cards.sauce}
                     />
                     <IngredientCards
                         title="Начинка"
                         ingredients={this.props.ingredients.filter(ingredient => 'main' === ingredient.type)}
+                        innerRef={this.cards.main}
                     />
                 </div>
             </section>
