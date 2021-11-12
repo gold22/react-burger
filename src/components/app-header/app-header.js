@@ -7,16 +7,18 @@ class AppHeader extends React.Component {
     render() {
         return (
             <header className={`${styles.header} ml-10 mr-10 mt-10`}>
-                <nav className={styles.leftNav}>
-                    <AppNavLink icon="burger" text="Конструктор" active />
-                    <AppNavLink icon="list" text="Лента заказов" />
-                </nav>
-                <div className={styles.logo}>
-                    <Logo />
+                <div className={styles.headerContent}>
+                    <nav className={styles.leftNav}>
+                        <AppNavLink icon="burger" text="Конструктор" active />
+                        <AppNavLink icon="list" text="Лента заказов" />
+                    </nav>
+                    <div className={styles.logo}>
+                        <Logo />
+                    </div>
+                    <nav className={styles.rightNav}>
+                        <AppNavLink icon="profile" text="Личный кабинет" />
+                    </nav>
                 </div>
-                <nav className={styles.rightNav}>
-                    <AppNavLink icon="profile" text="Личный кабинет" />
-                </nav>
             </header>
         );
     }

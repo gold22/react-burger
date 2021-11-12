@@ -14,7 +14,7 @@ class ConstructorElements extends React.Component {
                         <ConstructorElement
                             type="top"
                             isLocked
-                            text={this.props.ingredients[0].name}
+                            text={`${this.props.ingredients[0].name} (верх)`}
                             price={this.props.ingredients[0].price}
                             thumbnail={this.props.ingredients[0].image_mobile}
                         />
@@ -22,7 +22,7 @@ class ConstructorElements extends React.Component {
                 }
                 <div className={`${styles.optionalItems} custom-scroll`} key="middle">
                     {this.props.ingredients.slice(1).map(ingredient => (
-                        <div className={`${styles.optionalItem} custom-scroll pr-4`} key={ingredient._id}>
+                        <div className={`${styles.optionalItem} custom-scroll pr-1`} key={ingredient._id}>
                             <DragIcon type="primary" />
                             <ConstructorElement
                                 text={ingredient.name}
@@ -37,7 +37,7 @@ class ConstructorElements extends React.Component {
                         <ConstructorElement
                             type="bottom"
                             isLocked
-                            text={this.props.ingredients[0].name}
+                            text={`${this.props.ingredients[0].name} (низ)`}
                             price={this.props.ingredients[0].price}
                             thumbnail={this.props.ingredients[0].image_mobile}
                         />

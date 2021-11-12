@@ -1,8 +1,8 @@
 import React from 'react';
-import AppHeader from './components/app-header/app-header';
-import BurgerConstructor from './components/burger-constructor/burger-constructor';
-import BurgerIngredients from './components/burger-ingredients/burger-ingredients';
-import { ingredients, orderIngredients } from './utils/data';
+import AppHeader from '../app-header/app-header';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import { ingredients, orderIngredients } from '../../utils/data';
 import styles from './app.module.css';
 
 class App extends React.Component {
