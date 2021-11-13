@@ -1,0 +1,8 @@
+.main {
+    max-width: 600px;
+}
+
+.cards {
+    max-height: 664px;
+    overflow-y: scroll;
+}

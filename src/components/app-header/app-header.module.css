@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    direction: ltr;
+    justify-content: center;
+    align-items: center;
+    background: var(--background);
+}
+
+.headerContent {
+    display: flex;
+    direction: ltr;
+    justify-content: space-between;
+    align-items: center;
+    width: 1280px;
+}
+
+.leftNav {
+    display: flex;
+    direction: ltr;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: calc(var(--offset-base-size)  * 2);
+    flex: 1;
+}
+
+.rightNav {
+    display: flex;
+    direction: ltr;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: calc(var(--offset-base-size)  * 2);
+    flex: 1;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
