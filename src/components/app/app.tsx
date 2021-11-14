@@ -5,18 +5,16 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import { ingredients, orderIngredients } from '../../utils/data';
 import styles from './app.module.css';
 
-class App extends React.Component {
-    render() {
-        return (
-            <main>
-                <AppHeader />
-                <div className={styles.panels}>
-                    <BurgerIngredients ingredients={ingredients} />
-                    <BurgerConstructor ingredients={orderIngredients} />
-                </div>
-            </main>
-        );
-    }
-}
+const App = () => {
+    return (
+        <main>
+            <AppHeader />
+            <div className={styles.panels}>
+                <BurgerIngredients ingredients={ingredients} />
+                <BurgerConstructor ingredients={orderIngredients} />
+            </div>
+        </main>
+    );
+};
 
 export default App;
