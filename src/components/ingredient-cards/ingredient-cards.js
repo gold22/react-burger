@@ -4,9 +4,9 @@ import IngredientCard from '../ingredient-card/ingredient-card';
 import { ingredientType } from '../../utils/types';
 import styles from './ingredient-cards.module.css';
 
-const IngredientCards = ({ title, ingredients, innerRef }) => {
+const IngredientCards = React.forwardRef(({ title, ingredients }, ref) => {
     return (
-        <div ref={innerRef}>
+        <div ref={ref}>
             <p className="text text_type_main-medium">{title}</p>
             <div className={`${styles.cards} pt-6 pb-10 pl-4`}>
                 {ingredients.map(ingredient => (
@@ -19,12 +19,11 @@ const IngredientCards = ({ title, ingredients, innerRef }) => {
             </div>
         </div>
     );
-};
+});
 
 IngredientCards.propTypes = {
     title: PropTypes.string.isRequired,
     ingredients: PropTypes.arrayOf(ingredientType).isRequired,
-    innerRef: PropTypes.object.isRequired,
 };
 
 IngredientCards.defaultProps = {

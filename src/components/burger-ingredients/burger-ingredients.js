@@ -30,17 +30,17 @@ const BurgerIngredients = ({ ingredients }) => {
                 <IngredientCards
                     title="Булки"
                     ingredients={ingredients.filter(ingredient => 'bun' === ingredient.type)}
-                    innerRef={cards.bun}
+                    ref={cards.bun}
                 />
                 <IngredientCards
                     title="Соусы"
                     ingredients={ingredients.filter(ingredient => 'sauce' === ingredient.type)}
-                    innerRef={cards.sauce}
+                    ref={cards.sauce}
                 />
                 <IngredientCards
                     title="Начинка"
                     ingredients={ingredients.filter(ingredient => 'main' === ingredient.type)}
-                    innerRef={cards.main}
+                    ref={cards.main}
                 />
             </div>
         </section>
