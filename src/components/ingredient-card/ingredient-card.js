@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 import { ingredientType } from '../../utils/types';
 import styles from './ingredient-card.module.css';
 
@@ -31,10 +31,7 @@ const IngredientCard = ({ ingredient, count }) => {
             </div>
             <p className={`text text_type_main-default ${styles.name}`}>{name}</p>
 
-            <Modal title="Детали ингредиента" visible={showDetails} onClose={closeDetails}>
-                <p className="text text_type_main-default">{name}</p>
-                <p className="text text_type_digits-default">{price}</p>
-            </Modal>
+            <IngredientDetails ingredient={ingredient} visible={showDetails} onClose={closeDetails} />
         </div>
     );
 };
