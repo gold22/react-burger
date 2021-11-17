@@ -2,10 +2,20 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorElements from '../constructor-elements/constructor-elements';
+import OrderDetails from '../order-details/order-details';
 import { ingredientType } from '../../utils/types';
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = ({ ingredients }) => {
+    const [showDetails, setShowDetails] = React.useState(false);
+
+    const openDetails = () => {
+        setShowDetails(true);
+    }
+    const closeDetails = () => {
+        setShowDetails(false);
+    }
+
     const total = ingredients.reduce((sum,  ingredient) => sum + ingredient.price, 0);
     return (
         <section className={`${styles.main} pt-25 pl-4`}>
@@ -15,9 +25,11 @@ const BurgerConstructor = ({ ingredients }) => {
                     <p className="text text_type_digits-medium">{total}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large">
+                <Button type="primary" size="large" onClick={openDetails}>
                     Оформить заказ
                 </Button>
+
+                <OrderDetails visible={showDetails} onClose={closeDetails} />
             </div>
         </section>
     );
