@@ -33,22 +33,25 @@ const App = () => {
         loadIngredients();
     }, []);
 
+    if (state.loading) {
+        return null;
+    }
+    if (state.loadError) {
+        return (
+            <div className={`${styles.error} mt-20`}>
+                <p className="text text_type_main-medium text_color_error">
+                    {`Ошибка загрузки: ${state.loadError}`}
+                </p>
+            </div>
+        );
+    }
     return (
         <main>
             <AppHeader />
-            {state.loadError &&
-                <div className={`${styles.error} mt-20`}>
-                    <p className="text text_type_main-medium text_color_error">
-                        {`Ошибка загрузки: ${state.loadError}`}
-                    </p>
-                </div>
-            }
-            {state.loading || state.loadError ||
-                <div className={styles.panels}>
-                    <BurgerIngredients ingredients={state.ingredients}/>
-                    <BurgerConstructor ingredients={orderIngredients}/>
-                </div>
-            }
+            <div className={styles.panels}>
+                <BurgerIngredients ingredients={state.ingredients}/>
+                <BurgerConstructor ingredients={orderIngredients}/>
+            </div>
         </main>
     );
 };
