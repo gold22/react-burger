@@ -11,27 +11,27 @@ const App = () => {
     const [state, setState] = React.useState({
         ingredients: [],
         loading: true,
-        loadError: null,
+        loadError: undefined,
     })
 
-    React.useEffect(() => {
-        const loadIngredients = async () => {
-            try {
-                const response = await fetch(API_URL);
-                if (!response.ok) {
-                    throw new Error(response.statusText || response.status.toString());
-                }
-                const result = await response.json();
-                if (!result.success) {
-                    throw new Error('Ошибка сервиса');
-                }
-                setState({ingredients: result.data, loading: false, loadError: null});
-            } catch (error) {
-                setState({ingredients: [], loading: false, loadError: error.message});
+    React.useEffect(() => {(async () => {
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) {
+                const loadError = response.statusText || response.status.toString();
+                setState({ingredients: [], loading: false, loadError});
+                return;
             }
+            const result = await response.json();
+            if (!result.success) {
+                setState({ingredients: [], loading: false, loadError: 'Ошибка сервиса'});
+                return;
+            }
+            setState({ingredients: result.data, loading: false, loadError: null});
+        } catch (error) {
+            setState({ingredients: [], loading: false, loadError: error.message});
         }
-        loadIngredients();
-    }, []);
+    })();}, []);
 
     if (state.loading) {
         return null;
