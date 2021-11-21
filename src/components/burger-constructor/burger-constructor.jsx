@@ -9,7 +9,11 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = ({ ingredients }) => {
     const [showDetails, setShowDetails] = React.useState(false);
 
-    const total = ingredients.reduce((sum,  ingredient) => sum + ingredient.price, 0);
+    const total = React.useMemo(
+        () => ingredients.reduce((sum,  ingredient) => sum + ingredient.price, 0),
+        [ingredients]
+    );
+
     return (
         <section className={`${styles.main} pt-25 pl-4`}>
             <ConstructorElements ingredients={ingredients} />
