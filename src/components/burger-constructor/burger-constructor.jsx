@@ -9,13 +9,6 @@ import styles from './burger-constructor.module.css';
 const BurgerConstructor = ({ ingredients }) => {
     const [showDetails, setShowDetails] = React.useState(false);
 
-    const openDetails = () => {
-        setShowDetails(true);
-    }
-    const closeDetails = () => {
-        setShowDetails(false);
-    }
-
     const total = ingredients.reduce((sum,  ingredient) => sum + ingredient.price, 0);
     return (
         <section className={`${styles.main} pt-25 pl-4`}>
@@ -25,11 +18,11 @@ const BurgerConstructor = ({ ingredients }) => {
                     <p className="text text_type_digits-medium">{total}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" onClick={openDetails}>
+                <Button type="primary" size="large" onClick={() => { setShowDetails(true); }}>
                     Оформить заказ
                 </Button>
 
-                <OrderDetails visible={showDetails} onClose={closeDetails} />
+                <OrderDetails visible={showDetails} onClose={() => { setShowDetails(false); }} />
             </div>
         </section>
     );
