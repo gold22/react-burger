@@ -8,15 +8,15 @@ const ConstructorElements = ({ ingredients }) => {
     return (
         <div className={styles.main}>
             {0 < ingredients.length &&
-            <div className={`${styles.mainItem} pl-8`} key="top">
-                <ConstructorElement
-                    type="top"
-                    isLocked
-                    text={`${ingredients[0].name} (верх)`}
-                    price={ingredients[0].price}
-                    thumbnail={ingredients[0].image_mobile}
-                />
-            </div>
+                <div className={`${styles.mainItem} pl-8`} key="top">
+                    <ConstructorElement
+                        type="top"
+                        isLocked
+                        text={`${ingredients[0].name} (верх)`}
+                        price={ingredients[0].price}
+                        thumbnail={ingredients[0].image_mobile}
+                    />
+                </div>
             }
             <div className={`${styles.optionalItems} custom-scroll`} key="middle">
                 {ingredients.slice(1).map(ingredient => (
@@ -31,15 +31,15 @@ const ConstructorElements = ({ ingredients }) => {
                 ))}
             </div>
             {0 < ingredients.length &&
-            <div className={`${styles.mainItem} pl-8`} key="bottom">
-                <ConstructorElement
-                    type="bottom"
-                    isLocked
-                    text={`${ingredients[0].name} (низ)`}
-                    price={ingredients[0].price}
-                    thumbnail={ingredients[0].image_mobile}
-                />
-            </div>
+                <div className={`${styles.mainItem} pl-8`} key="bottom">
+                    <ConstructorElement
+                        type="bottom"
+                        isLocked
+                        text={`${ingredients[0].name} (низ)`}
+                        price={ingredients[0].price}
+                        thumbnail={ingredients[0].image_mobile}
+                    />
+                </div>
             }
         </div>
     );
