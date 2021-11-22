@@ -10,15 +10,15 @@ const Modal = ({ title, visible, children, onClose }) => {
         if (!visible) {
             return null;
         }
-        const onKeyDown = (event) => {
+        const handleKeyDown = (event) => {
             if ('Escape' === event.key) {
                 onClose();
             }
         }
-        document.addEventListener('keydown', onKeyDown);
+        document.addEventListener('keydown', handleKeyDown);
 
         return () => {
-            document.removeEventListener('keydown', onKeyDown);
+            document.removeEventListener('keydown', handleKeyDown);
         }
     }, [visible, onClose]);
 
@@ -26,21 +26,21 @@ const Modal = ({ title, visible, children, onClose }) => {
         return null;
     }
 
-    const onCloseClick = (event) => {
+    const handleCloseClick = (event) => {
         onClose();
         event.stopPropagation();
     };
-    const onModalClick = (event) => {
+    const handleModalClick = (event) => {
         event.stopPropagation();
     };
     return ReactDOM.createPortal(
-        <ModalOverlay onClick={onCloseClick}>
-            <div className={`${styles.main} pl-10 pt-10 pr-10 pb-15`} onClick={onModalClick}>
+        <ModalOverlay onClick={handleCloseClick}>
+            <div className={`${styles.main} pl-10 pt-10 pr-10 pb-15`} onClick={handleModalClick}>
                 <div className={styles.title}>
                     <p className="text text_type_main-large">{title}</p>
                     <div className={styles.closeArea}>
                         <div className={styles.closeIcon}>
-                            <CloseIcon type="primary" onClick={onCloseClick} />
+                            <CloseIcon type="primary" onClick={handleCloseClick} />
                         </div>
                     </div>
                 </div>

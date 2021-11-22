@@ -8,18 +8,11 @@ import styles from './ingredient-card.module.css';
 const IngredientCard = ({ ingredient, count }) => {
     const [showDetails, setShowDetails] = React.useState(false);
 
-    const openDetails = () => {
-        setShowDetails(true);
-    }
-    const closeDetails = () => {
-        setShowDetails(false);
-    }
-
     const { image, name, price } = ingredient;
     return (
         <div
             className={styles.main}
-            onClick={openDetails}
+            onClick={() => { setShowDetails(true); }}
         >
             {0 < count &&
                 <Counter count={count} size="default" />
@@ -31,7 +24,11 @@ const IngredientCard = ({ ingredient, count }) => {
             </div>
             <p className={`text text_type_main-default ${styles.name}`}>{name}</p>
 
-            <IngredientDetails ingredient={ingredient} visible={showDetails} onClose={closeDetails} />
+            <IngredientDetails
+                ingredient={ingredient}
+                visible={showDetails}
+                onClose={() => { setShowDetails(false); }}
+            />
         </div>
     );
 };
