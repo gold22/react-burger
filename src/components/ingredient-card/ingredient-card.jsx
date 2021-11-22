@@ -24,7 +24,7 @@ const IngredientCard = ({ ingredient, count }) => {
             {0 < count &&
                 <Counter count={count} size="default" />
             }
-            <img className="ml-4 mr-4" src={image} alt="" />
+            <img className="ml-4 mr-4" src={image} alt={name} />
             <div className={`mt-1 mb-1 ${styles.price}`}>
                 <p className="text text_type_digits-default mr-2">{price}</p>
                 <CurrencyIcon type="primary" />
