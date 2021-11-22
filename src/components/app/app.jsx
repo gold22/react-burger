@@ -8,8 +8,8 @@ import styles from './app.module.css';
 const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
 
 const App = () => {
-    const [state, setState] = React.useState({
-        ingredients: [],
+    const [ingredients, setIngredients] = React.useState({
+        data: [],
         loading: true,
         loadError: undefined,
     })
@@ -19,28 +19,28 @@ const App = () => {
             const response = await fetch(API_URL);
             if (!response.ok) {
                 const loadError = response.statusText || response.status.toString();
-                setState({ingredients: [], loading: false, loadError});
+                setIngredients({data: [], loading: false, loadError});
                 return;
             }
             const result = await response.json();
             if (!result.success) {
-                setState({ingredients: [], loading: false, loadError: 'Ошибка сервиса'});
+                setIngredients({data: [], loading: false, loadError: 'Ошибка сервиса'});
                 return;
             }
-            setState({ingredients: result.data, loading: false, loadError: null});
+            setIngredients({data: result.data, loading: false, loadError: null});
         } catch (error) {
-            setState({ingredients: [], loading: false, loadError: error.message});
+            setIngredients({data: [], loading: false, loadError: error.message});
         }
     })();}, []);
 
-    if (state.loading) {
+    if (ingredients.loading) {
         return null;
     }
-    if (state.loadError) {
+    if (ingredients.loadError) {
         return (
             <div className={`${styles.error} mt-20`}>
                 <p className="text text_type_main-medium text_color_error">
-                    {`Ошибка загрузки: ${state.loadError}`}
+                    {`Ошибка загрузки: ${ingredients.loadError}`}
                 </p>
             </div>
         );
@@ -49,7 +49,7 @@ const App = () => {
         <main>
             <AppHeader />
             <div className={styles.panels}>
-                <BurgerIngredients ingredients={state.ingredients}/>
+                <BurgerIngredients ingredients={ingredients.data}/>
                 <BurgerConstructor ingredients={orderIngredients}/>
             </div>
         </main>
