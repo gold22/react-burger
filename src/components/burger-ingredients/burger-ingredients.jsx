@@ -6,41 +6,37 @@ import { ingredientType } from '../../utils/types';
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = ({ ingredients }) => {
-    const [state, setState] = React.useState({
-        type: 'bun',
-    });
-    const cards = {
+    const [currentTab, setCurrentTab] = React.useState('bun');
+    const categories = {
         bun: React.useRef(),
         sauce: React.useRef(),
         main: React.useRef(),
     };
 
-    const setType = (type) => {
-        cards[type].current.scrollIntoView({ behavior: 'smooth' });
-        setState({
-            type,
-        });
+    const handleTabChange = (value) => {
+        categories[value].current.scrollIntoView({ behavior: 'smooth' });
+        setCurrentTab(value);
     }
 
     return (
         <section className={styles.main}>
             <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
-            <IngredientTabs value={state.type} onClick={setType} />
+            <IngredientTabs value={currentTab} onChange={handleTabChange} />
             <div className={`${styles.cards} mt-10 custom-scroll`}>
                 <IngredientCards
                     title="Булки"
                     ingredients={ingredients.filter(ingredient => 'bun' === ingredient.type)}
-                    ref={cards.bun}
+                    ref={categories.bun}
                 />
                 <IngredientCards
                     title="Соусы"
                     ingredients={ingredients.filter(ingredient => 'sauce' === ingredient.type)}
-                    ref={cards.sauce}
+                    ref={categories.sauce}
                 />
                 <IngredientCards
                     title="Начинка"
                     ingredients={ingredients.filter(ingredient => 'main' === ingredient.type)}
-                    ref={cards.main}
+                    ref={categories.main}
                 />
             </div>
         </section>

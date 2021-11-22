@@ -3,16 +3,16 @@ import React from 'react';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './ingredient-tabs.module.css';
 
-const IngredientTabs = ({ value, onClick }) => {
+const IngredientTabs = ({ value, onChange }) => {
     return (
         <div className={styles.main}>
-            <Tab value="bun" active={'bun' === value} onClick={onClick}>
+            <Tab value="bun" active={'bun' === value} onClick={onChange}>
                 Булки
             </Tab>
-            <Tab value="sauce" active={'sauce' === value} onClick={onClick}>
+            <Tab value="sauce" active={'sauce' === value} onClick={onChange}>
                 Соусы
             </Tab>
-            <Tab value="main" active={'main' === value} onClick={onClick}>
+            <Tab value="main" active={'main' === value} onClick={onChange}>
                 Начинка
             </Tab>
         </div>
@@ -21,7 +21,7 @@ const IngredientTabs = ({ value, onClick }) => {
 
 IngredientTabs.propTypes = {
     value: PropTypes.oneOf(['bun', 'sauce', 'main']).isRequired,
-    onClick: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 
 export default IngredientTabs;
