@@ -56,8 +56,8 @@ const App = () => {
         <main>
             <AppHeader />
             <div className={styles.panels}>
-                <BurgerIngredients ingredients={ingredients.data}/>
                 <OrderContext.Provider value={[order, setOrder]}>
+                    <BurgerIngredients ingredients={ingredients.data}/>
                     <BurgerConstructor />
                 </OrderContext.Provider>
             </div>

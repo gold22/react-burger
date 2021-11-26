@@ -1,12 +1,18 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import { OrderContext } from '../../services/order-context';
 import { ingredientType } from '../../utils/types';
 import styles from './ingredient-card.module.css';
 
-const IngredientCard = ({ ingredient, count }) => {
+const IngredientCard = ({ ingredient }) => {
     const [showDetails, setShowDetails] = React.useState(false);
+    const [order] = React.useContext(OrderContext);
+
+    const count = React.useMemo(
+        () => order.getIngredientCount(ingredient._id),
+        [order, ingredient._id]
+    );
 
     const { image, name, price } = ingredient;
     return (
@@ -35,7 +41,6 @@ const IngredientCard = ({ ingredient, count }) => {
 
 IngredientCard.propTypes = {
     ingredient: ingredientType.isRequired,
-    count: PropTypes.number.isRequired,
 };
 
 IngredientCard.defaultProps = {

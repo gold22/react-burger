@@ -13,7 +13,6 @@ const IngredientCards = React.forwardRef(({ title, ingredients }, ref) => {
                     <IngredientCard
                         key={ingredient._id}
                         ingredient={ingredient}
-                        count={7}
                     />
                 ))}
             </div>
