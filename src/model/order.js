@@ -24,6 +24,18 @@ class Order {
     }
 
     /**
+     * @returns {string[]}
+     */
+    getIngredientsIds() {
+        const ids = [];
+        if (this.bun) {
+            ids.push(this.bun._id);
+        }
+        this.components.forEach((component) => { ids.push(component._id); });
+        return ids;
+    }
+
+    /**
      * @returns {number}
      */
     getTotal () {
