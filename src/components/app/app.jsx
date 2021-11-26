@@ -2,6 +2,8 @@ import React from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import Order from '../../model/order';
+import { OrderContext } from '../../services/order-context';
 import { orderIngredients } from '../../utils/data';
 import styles from './app.module.css';
 
@@ -12,7 +14,11 @@ const App = () => {
         data: [],
         loading: true,
         loadError: undefined,
-    })
+    });
+    const [order, setOrder] = React.useState(new Order({
+        bun: orderIngredients[0],
+        components: orderIngredients.slice(1)
+    }));
 
     React.useEffect(() => {(async () => {
         try {
@@ -45,12 +51,15 @@ const App = () => {
             </div>
         );
     }
+
     return (
         <main>
             <AppHeader />
             <div className={styles.panels}>
                 <BurgerIngredients ingredients={ingredients.data}/>
-                <BurgerConstructor ingredients={orderIngredients}/>
+                <OrderContext.Provider value={[order, setOrder]}>
+                    <BurgerConstructor />
+                </OrderContext.Provider>
             </div>
         </main>
     );
