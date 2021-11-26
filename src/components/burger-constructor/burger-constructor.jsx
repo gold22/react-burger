@@ -18,7 +18,7 @@ const BurgerConstructor = () => {
 
     const handleOrderCreation = async () => {
         if (orderCreation.creating) {
-            // avoid redundant requests
+            // avoid redundant requests over double mouse clicks
             return;
         }
         setOrderCreation({creating: true, error: undefined});
