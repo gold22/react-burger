@@ -12,7 +12,7 @@ const App = () => {
     const [ingredientsLoad, setIngredientsLoad] = React.useState({
         data: [],
         loading: true,
-        error: undefined,
+        error: null,
     });
     const [order, setOrder] = React.useState(new Order({
         bun: orderIngredients[0],
@@ -23,7 +23,7 @@ const App = () => {
     React.useEffect(() => {(async () => {
         try {
             const ingredients = await apiClient.getIngredients();
-            setIngredientsLoad({data: ingredients, loading: false, error: undefined});
+            setIngredientsLoad({data: ingredients, loading: false, error: null});
         } catch (error) {
             setIngredientsLoad({data: [], loading: false, error: error.message});
         }

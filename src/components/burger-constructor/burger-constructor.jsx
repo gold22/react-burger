@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorElements from '../constructor-elements/constructor-elements';
+import ErrorDialog from '../error-dialog/error-dialog';
 import OrderDetails from '../order-details/order-details';
 import Order from '../../model/order';
 import { ApiContext } from '../../services/api-context';
@@ -11,7 +12,7 @@ const BurgerConstructor = () => {
     const [showDetails, setShowDetails] = React.useState(false);
     const [orderCreation, setOrderCreation] = React.useState({
         creating: false,
-        error: undefined,
+        error: null,
     });
     const apiClient = React.useContext(ApiContext);
     const [order, setOrder] = React.useContext(OrderContext);
@@ -21,7 +22,7 @@ const BurgerConstructor = () => {
             // avoid redundant requests over double mouse clicks
             return;
         }
-        setOrderCreation({creating: true, error: undefined});
+        setOrderCreation({creating: true, error: null});
         try {
             const result = await apiClient.createOrder(order);
             setOrder((prev) => new Order({
@@ -29,7 +30,7 @@ const BurgerConstructor = () => {
                 name: result.name,
                 number: result.order.number,
             }));
-            setOrderCreation({creating: false, error: undefined});
+            setOrderCreation({creating: false, error: null});
             setShowDetails(true);
         } catch (error) {
             setOrderCreation({creating: false, error: error.message});
@@ -54,6 +55,10 @@ const BurgerConstructor = () => {
                 </Button>
 
                 <OrderDetails visible={showDetails} onClose={() => { setShowDetails(false); }} />
+                <ErrorDialog
+                    message={orderCreation.error}
+                    onClose={() => { setOrderCreation({creating: false, error: null});}}
+                />
             </div>
         </section>
     );
