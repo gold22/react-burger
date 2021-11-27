@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
+import ApiClient from './services/api-client';
 import { ApiContext } from './services/api-context';
 import reportWebVitals from './reportWebVitals';
 
@@ -8,7 +9,7 @@ const API_URL = 'https://norma.nomoreparties.space/api';
 
 ReactDOM.render(
   <React.StrictMode>
-      <ApiContext.Provider value={API_URL}>
+      <ApiContext.Provider value={new ApiClient({url: API_URL})}>
           <App />
       </ApiContext.Provider>
   </React.StrictMode>,

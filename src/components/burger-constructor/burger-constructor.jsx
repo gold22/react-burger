@@ -2,10 +2,10 @@ import React from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorElements from '../constructor-elements/constructor-elements';
 import OrderDetails from '../order-details/order-details';
+import Order from '../../model/order';
 import { ApiContext } from '../../services/api-context';
 import { OrderContext } from '../../services/order-context';
 import styles from './burger-constructor.module.css';
-import Order from "../../model/order";
 
 const BurgerConstructor = () => {
     const [showDetails, setShowDetails] = React.useState(false);
@@ -13,7 +13,7 @@ const BurgerConstructor = () => {
         creating: false,
         error: undefined,
     });
-    const apiUrl = React.useContext(ApiContext);
+    const apiClient = React.useContext(ApiContext);
     const [order, setOrder] = React.useContext(OrderContext);
 
     const handleOrderCreation = async () => {
@@ -23,26 +23,7 @@ const BurgerConstructor = () => {
         }
         setOrderCreation({creating: true, error: undefined});
         try {
-            const request = {
-                ingredients: order.getIngredientsIds(),
-            };
-            const response = await fetch(`${apiUrl}/orders`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(request),
-            });
-            if (!response.ok) {
-                const error = response.statusText || response.status.toString();
-                setOrderCreation({creating: false, error});
-                return;
-            }
-            const result = await response.json();
-            if (!result.success) {
-                setOrderCreation({creating: false, error: result.message || 'Ошибка сервиса'});
-                return;
-            }
+            const result = await apiClient.createOrder(order);
             setOrder((prev) => new Order({
                 ...prev,
                 name: result.name,

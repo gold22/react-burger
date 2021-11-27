@@ -1,9 +1,10 @@
 class Order {
     /**
-     * @param {?string=} name
-     * @param {?number=} number
-     * @param {?Object=} bun
-     * @param {Array=} components
+     * @param {Object=} properties
+     * @param {?string=} properties.name
+     * @param {?number=} properties.number
+     * @param {?Object=} properties.bun
+     * @param {Array=} properties.components
      */
     constructor({ name = null, number = null, bun = null, components = [] } = {}) {
         this.name = name;

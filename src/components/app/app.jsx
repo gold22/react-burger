@@ -18,26 +18,16 @@ const App = () => {
         bun: orderIngredients[0],
         components: orderIngredients.slice(1)
     }));
-    const apiUrl = React.useContext(ApiContext);
+    const apiClient = React.useContext(ApiContext);
 
     React.useEffect(() => {(async () => {
         try {
-            const response = await fetch(`${apiUrl}/ingredients`);
-            if (!response.ok) {
-                const error = response.statusText || response.status.toString();
-                setIngredientsLoad({data: [], loading: false, error});
-                return;
-            }
-            const result = await response.json();
-            if (!result.success) {
-                setIngredientsLoad({data: [], loading: false, error: result.message || 'Ошибка сервиса'});
-                return;
-            }
-            setIngredientsLoad({data: result.data, loading: false, error: undefined});
+            const ingredients = await apiClient.getIngredients();
+            setIngredientsLoad({data: ingredients, loading: false, error: undefined});
         } catch (error) {
             setIngredientsLoad({data: [], loading: false, error: error.message});
         }
-    })();}, [apiUrl]);
+    })();}, [apiClient]);
 
     if (ingredientsLoad.loading) {
         return null;
