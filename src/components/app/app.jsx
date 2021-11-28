@@ -9,9 +9,9 @@ import { orderIngredients } from '../../utils/data';
 import styles from './app.module.css';
 
 const App = () => {
-    const [ingredientsLoad, setIngredientsLoad] = React.useState({
-        data: [],
-        loading: true,
+    const [ingredients, setIngredients] = React.useState([]);
+    const [ingredientsLoadState, setIngredientsLoadState] = React.useState({
+        isLoading: true,
         error: null,
     });
     const [order, setOrder] = React.useState(new Order({
@@ -23,22 +23,27 @@ const App = () => {
     React.useEffect(() => {(async () => {
         try {
             const ingredients = await apiClient.getIngredients();
-            setIngredientsLoad({data: ingredients, loading: false, error: null});
+            setIngredients(ingredients);
+            setIngredientsLoadState({isLoading: false, error: null});
         } catch (error) {
-            setIngredientsLoad({data: [], loading: false, error: error.message});
+            setIngredientsLoadState({isLoading: false, error: error.message});
         }
     })();}, [apiClient]);
 
-    if (ingredientsLoad.loading) {
-        return null;
-    }
-    if (ingredientsLoad.error) {
+    if (ingredientsLoadState.isLoading) {
         return (
-            <div className={`${styles.error} mt-20`}>
-                <p className="text text_type_main-medium text_color_error">
-                    {`Ошибка загрузки: ${ingredientsLoad.error}`}
-                </p>
-            </div>
+            <main />
+        );
+    }
+    if (ingredientsLoadState.error) {
+        return (
+            <main>
+                <div className={`${styles.error} mt-20`}>
+                    <p className="text text_type_main-medium text_color_error">
+                        {`Ошибка загрузки: ${ingredientsLoadState.error}`}
+                    </p>
+                </div>
+            </main>
         );
     }
 
@@ -47,7 +52,7 @@ const App = () => {
             <AppHeader />
             <div className={styles.panels}>
                 <OrderContext.Provider value={[order, setOrder]}>
-                    <BurgerIngredients ingredients={ingredientsLoad.data}/>
+                    <BurgerIngredients ingredients={ingredients}/>
                     <BurgerConstructor />
                 </OrderContext.Provider>
             </div>
