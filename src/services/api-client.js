@@ -24,7 +24,7 @@ class ApiClient {
      * @returns {Promise<Object>}
      */
     async createOrder(order) {
-        const request = {
+        const body = {
             ingredients: order.getIngredientsIds(),
         };
         return await this.fetch(`${this.url}/orders`, {
@@ -32,7 +32,7 @@ class ApiClient {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(request),
+            body: JSON.stringify(body),
         });
     }
 
