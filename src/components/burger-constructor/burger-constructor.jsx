@@ -10,19 +10,19 @@ import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
     const [showDetails, setShowDetails] = React.useState(false);
-    const [orderCreation, setOrderCreation] = React.useState({
-        creating: false,
+    const [orderCreationState, setOrderCreationState] = React.useState({
+        isCreating: false,
         error: null,
     });
     const apiClient = React.useContext(ApiContext);
     const [order, setOrder] = React.useContext(OrderContext);
 
     const handleOrderCreation = async () => {
-        if (orderCreation.creating) {
+        if (orderCreationState.isCreating) {
             // avoid redundant requests over double mouse clicks
             return;
         }
-        setOrderCreation({creating: true, error: null});
+        setOrderCreationState({isCreating: true, error: null});
         try {
             const result = await apiClient.createOrder(order);
             setOrder((prev) => new Order({
@@ -30,10 +30,10 @@ const BurgerConstructor = () => {
                 name: result.name,
                 number: result.order.number,
             }));
-            setOrderCreation({creating: false, error: null});
+            setOrderCreationState({isCreating: false, error: null});
             setShowDetails(true);
         } catch (error) {
-            setOrderCreation({creating: false, error: error.message});
+            setOrderCreationState({isCreating: false, error: error.message});
         }
     };
 
@@ -56,8 +56,8 @@ const BurgerConstructor = () => {
 
                 <OrderDetails visible={showDetails} onClose={() => { setShowDetails(false); }} />
                 <ErrorDialog
-                    message={orderCreation.error}
-                    onClose={() => { setOrderCreation({creating: false, error: null});}}
+                    message={orderCreationState.error}
+                    onClose={() => { setOrderCreationState({isCreating: false, error: null});}}
                 />
             </div>
         </section>
