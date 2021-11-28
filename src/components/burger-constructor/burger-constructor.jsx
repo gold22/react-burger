@@ -37,8 +37,8 @@ const BurgerConstructor = () => {
         }
     };
 
-    const total = React.useMemo(
-        () => order.getTotal(),
+    const orderPrice = React.useMemo(
+        () => order.getPrice(),
         [order]
     );
 
@@ -47,7 +47,7 @@ const BurgerConstructor = () => {
             <ConstructorElements />
             <div className={`${styles.submit} pt-10 pr-8`}>
                 <div className={styles.total}>
-                    <p className="text text_type_digits-medium">{total}</p>
+                    <p className="text text_type_digits-medium">{orderPrice}</p>
                     <CurrencyIcon type="primary" />
                 </div>
                 <Button type="primary" size="large" onClick={handleOrderCreation}>

@@ -15,8 +15,7 @@ const App = () => {
         error: null,
     });
     const [order, setOrder] = React.useState(new Order({
-        bun: orderIngredients[0],
-        components: orderIngredients.slice(1)
+        ingredients: orderIngredients
     }));
     const apiClient = React.useContext(ApiContext);
 

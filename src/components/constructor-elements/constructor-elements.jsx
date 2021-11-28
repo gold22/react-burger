@@ -6,39 +6,44 @@ import styles from './constructor-elements.module.css';
 const ConstructorElements = () => {
     const [order] = React.useContext(OrderContext);
 
+    const bun = React.useMemo(
+        () => order.getBun(),
+        [order]
+    );
+
     return (
         <div className={styles.main}>
-            {order.bun &&
+            {bun &&
                 <div className={`${styles.mainItem} pl-8`} key="top">
                     <ConstructorElement
                         type="top"
                         isLocked
-                        text={`${order.bun.name} (верх)`}
-                        price={order.bun.price}
-                        thumbnail={order.bun.image_mobile}
+                        text={`${bun.name} (верх)`}
+                        price={bun.price}
+                        thumbnail={bun.image_mobile}
                     />
                 </div>
             }
             <div className={`${styles.optionalItems} custom-scroll`} key="middle">
-                {order.components.map(component => (
-                    <div className={`${styles.optionalItem} custom-scroll pr-1`} key={component._id}>
+                {order.ingredients.filter(ingredient => 'bun' !== ingredient.type).map(ingredient => (
+                    <div className={`${styles.optionalItem} custom-scroll pr-1`} key={ingredient._id}>
                         <DragIcon type="primary" />
                         <ConstructorElement
-                            text={component.name}
-                            price={component.price}
-                            thumbnail={component.image_mobile}
+                            text={ingredient.name}
+                            price={ingredient.price}
+                            thumbnail={ingredient.image_mobile}
                         />
                     </div>
                 ))}
             </div>
-            {order.bun &&
+            {bun &&
                 <div className={`${styles.mainItem} pl-8`} key="bottom">
                     <ConstructorElement
                         type="bottom"
                         isLocked
-                        text={`${order.bun.name} (низ)`}
-                        price={order.bun.price}
-                        thumbnail={order.bun.image_mobile}
+                        text={`${bun.name} (низ)`}
+                        price={bun.price}
+                        thumbnail={bun.image_mobile}
                     />
                 </div>
             }
