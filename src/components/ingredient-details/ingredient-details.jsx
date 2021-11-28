@@ -8,7 +8,7 @@ const IngredientDetails = ({ ingredient, visible, onClose }) => {
     const {calories, carbohydrates, fat, image_large, name, proteins} = ingredient;
     return (
         <Modal title="Детали ингредиента" visible={visible} onClose={onClose}>
-            <img src={image_large} alt="" />
+            <img src={image_large} alt={name} />
             <p className="text text_type_main-medium mt-4 mb-8">{name}</p>
             <div className={styles.details}>
                 <div className={styles.detail}>

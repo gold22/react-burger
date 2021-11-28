@@ -1,6 +1,6 @@
 export const orderIngredients = [
     {
-        "_id": "60666c42cc7b410027a1a9b1",
+        "_id": "60d3b41abdacab0026a733c6",
         "name": "Краторная булка N-200i",
         "type": "bun",
         "proteins": 80,
@@ -14,7 +14,7 @@ export const orderIngredients = [
         "__v": 0
     },
     {
-        "_id": "60666c42cc7b410027a1a9b9",
+        "_id": "60d3b41abdacab0026a733ce",
         "name": "Соус традиционный галактический",
         "type": "sauce",
         "proteins": 42,
@@ -28,7 +28,7 @@ export const orderIngredients = [
         "__v": 0
     },
     {
-        "_id": "60666c42cc7b410027a1a9b4",
+        "_id": "60d3b41abdacab0026a733c9",
         "name": "Мясо бессмертных моллюсков Protostomia",
         "type": "main",
         "proteins": 433,
@@ -42,7 +42,7 @@ export const orderIngredients = [
         "__v": 0
     },
     {
-        "_id": "60666c42cc7b410027a1a9bc",
+        "_id": "60d3b41abdacab0026a733d1",
         "name": "Плоды Фалленианского дерева",
         "type": "main",
         "proteins": 20,
@@ -56,7 +56,7 @@ export const orderIngredients = [
         "__v": 0
     },
     {
-        "_id": "60666c42cc7b410027a1a9bb",
+        "_id": "60d3b41abdacab0026a733d0",
         "name": "Хрустящие минеральные кольца",
         "type": "main",
         "proteins": 808,
@@ -70,7 +70,7 @@ export const orderIngredients = [
         "__v": 0
     },
     {
-        "_id": "60666c42cc7b410027a1a9b3",
+        "_id": "60d3b41abdacab0026a733c8",
         "name": "Филе Люминесцентного тетраодонтимформа",
         "type": "main",
         "proteins": 44,
@@ -84,7 +84,7 @@ export const orderIngredients = [
         "__v": 0
     },
     {
-        "_id": "60666c42cc7b410027a1a9bf",
+        "_id": "60d3b41abdacab0026a733d4",
         "name": "Сыр с астероидной плесенью",
         "type": "main",
         "proteins": 84,
@@ -98,7 +98,7 @@ export const orderIngredients = [
         "__v": 0
     },
     {
-        "_id": "60666c42cc7b410027a1a9be",
+        "_id": "60d3b41abdacab0026a733d3",
         "name": "Мини-салат Экзо-Плантаго",
         "type": "main",
         "proteins": 1,
