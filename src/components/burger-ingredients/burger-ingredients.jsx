@@ -16,7 +16,7 @@ const BurgerIngredients = ({ ingredients }) => {
     const handleTabChange = (value) => {
         categories[value].current.scrollIntoView({ behavior: 'smooth' });
         setCurrentTab(value);
-    }
+    };
 
     return (
         <section className={styles.main}>
@@ -25,17 +25,17 @@ const BurgerIngredients = ({ ingredients }) => {
             <div className={`${styles.cards} mt-10 custom-scroll`}>
                 <IngredientCards
                     title="Булки"
-                    ingredients={ingredients.filter(ingredient => 'bun' === ingredient.type)}
+                    ingredients={ingredients.filter((ingredient) => ingredient.type === 'bun')}
                     ref={categories.bun}
                 />
                 <IngredientCards
                     title="Соусы"
-                    ingredients={ingredients.filter(ingredient => 'sauce' === ingredient.type)}
+                    ingredients={ingredients.filter((ingredient) => ingredient.type === 'sauce')}
                     ref={categories.sauce}
                 />
                 <IngredientCards
                     title="Начинка"
-                    ingredients={ingredients.filter(ingredient => 'main' === ingredient.type)}
+                    ingredients={ingredients.filter((ingredient) => ingredient.type === 'main')}
                     ref={categories.main}
                 />
             </div>

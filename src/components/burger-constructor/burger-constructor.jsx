@@ -12,7 +12,7 @@ const BurgerConstructor = () => {
     const [showDetails, setShowDetails] = React.useState(false);
     const [orderCreationState, setOrderCreationState] = React.useState({
         isCreating: false,
-        error: null,
+        loadError: null,
     });
     const apiClient = React.useContext(ApiContext);
     const [order, setOrder] = React.useContext(OrderContext);
@@ -22,7 +22,7 @@ const BurgerConstructor = () => {
             // avoid redundant requests over double mouse clicks
             return;
         }
-        setOrderCreationState({isCreating: true, loadError: null});
+        setOrderCreationState({ isCreating: true, loadError: null });
         try {
             const result = await apiClient.createOrder(order);
             setOrder((prev) => new Order({
@@ -30,16 +30,16 @@ const BurgerConstructor = () => {
                 name: result.name,
                 number: result.order.number,
             }));
-            setOrderCreationState({isCreating: false, loadError: null});
+            setOrderCreationState({ isCreating: false, loadError: null });
             setShowDetails(true);
         } catch (error) {
-            setOrderCreationState({isCreating: false, loadError: error.message});
+            setOrderCreationState({ isCreating: false, loadError: error.message });
         }
     };
 
     const orderPrice = React.useMemo(
         () => order.getPrice(),
-        [order]
+        [order],
     );
 
     return (
@@ -57,7 +57,9 @@ const BurgerConstructor = () => {
                 <OrderDetails visible={showDetails} onClose={() => { setShowDetails(false); }} />
                 <ErrorDialog
                     message={orderCreationState.error}
-                    onClose={() => { setOrderCreationState({isCreating: false, loadError: null});}}
+                    onClose={() => {
+                        setOrderCreationState({ isCreating: false, loadError: null });
+                    }}
                 />
             </div>
         </section>

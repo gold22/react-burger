@@ -12,9 +12,9 @@ import styles from './app.module.css';
 
 const App = () => {
     const dispatch = useDispatch();
-    const { ingredientsList } = useSelector(state => state);
+    const { ingredientsList } = useSelector((state) => state);
     const [order, setOrder] = React.useState(new Order({
-        ingredients: orderIngredients
+        ingredients: orderIngredients,
     }));
     const apiClient = React.useContext(ApiContext);
 
@@ -22,7 +22,7 @@ const App = () => {
         () => {
             dispatch(getIngredients(apiClient));
         },
-        [dispatch, apiClient]
+        [dispatch, apiClient],
     );
 
     if (ingredientsList.isLoading) {
@@ -47,7 +47,7 @@ const App = () => {
             <AppHeader />
             <div className={styles.panels}>
                 <OrderContext.Provider value={[order, setOrder]}>
-                    <BurgerIngredients ingredients={ingredientsList.ingredients}/>
+                    <BurgerIngredients ingredients={ingredientsList.ingredients} />
                     <BurgerConstructor />
                 </OrderContext.Provider>
             </div>

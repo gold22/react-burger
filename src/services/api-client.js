@@ -7,7 +7,7 @@ class ApiClient {
      * @param {Object} config
      * @param {string} config.url
      */
-    constructor({url}) {
+    constructor({ url }) {
         this.url = url;
     }
 
@@ -15,7 +15,7 @@ class ApiClient {
      * @returns {Promise<Array>}
      */
     async getIngredients() {
-        const result = await this.fetch(`${this.url}/ingredients`);
+        const result = await ApiClient.fetch(`${this.url}/ingredients`);
         return result.data;
     }
 
@@ -27,7 +27,7 @@ class ApiClient {
         const body = {
             ingredients: order.getIngredientsIds(),
         };
-        return await this.fetch(`${this.url}/orders`, {
+        return ApiClient.fetch(`${this.url}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ class ApiClient {
      * @param {Object} options
      * @returns {Promise<?Object>}
      */
-    async fetch(url, options = {}) {
+    static async fetch(url, options = {}) {
         const response = await fetch(url, options);
         const resultText = await response.text();
         let result = null;
@@ -49,13 +49,13 @@ class ApiClient {
             result = JSON.parse(resultText);
         } catch (error) {
         }
-        if (result && true === result.success) {
+        if (result && result.success === true) {
             return result;
         }
-        if (result && false === result.success && result.message) {
+        if (result && result.success === false && result.message) {
             throw new Error(result.message);
         }
-        if (result && false === result.success) {
+        if (result && result.success === false) {
             throw new Error(resultText);
         }
         if (result && response.ok) {

@@ -1,4 +1,5 @@
 import React from 'react';
 import Order from '../model/order';
 
-export const OrderContext = React.createContext([new Order(), (order) => {}]);
+// eslint-disable-next-line import/prefer-default-export
+export const OrderContext = React.createContext([new Order(), () => {}]);

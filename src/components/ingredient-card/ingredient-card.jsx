@@ -10,8 +10,8 @@ const IngredientCard = ({ ingredient }) => {
     const [order] = React.useContext(OrderContext);
 
     const count = React.useMemo(
-        () => order.getIngredientCount(ingredient._id),
-        [order, ingredient._id]
+        () => order.getIngredientCount(ingredient.id),
+        [order, ingredient.id],
     );
 
     const { image, name, price } = ingredient;
@@ -20,9 +20,9 @@ const IngredientCard = ({ ingredient }) => {
             className={styles.main}
             onClick={() => { setShowDetails(true); }}
         >
-            {0 < count &&
+            {count > 0 && (
                 <Counter count={count} size="default" />
-            }
+            )}
             <img className="ml-4 mr-4" src={image} alt={name} />
             <div className={`mt-1 mb-1 ${styles.price}`}>
                 <p className="text text_type_digits-default mr-2">{price}</p>
@@ -41,10 +41,6 @@ const IngredientCard = ({ ingredient }) => {
 
 IngredientCard.propTypes = {
     ingredient: ingredientType.isRequired,
-};
-
-IngredientCard.defaultProps = {
-    count: 0,
 };
 
 export default IngredientCard;

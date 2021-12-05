@@ -15,8 +15,9 @@ class Order {
      * @returns {?Object}
      */
     getBun() {
+        // eslint-disable-next-line no-restricted-syntax
         for (const ingredient of this.ingredients) {
-            if ('bun' === ingredient.type) {
+            if (ingredient.type === 'bun') {
                 return ingredient;
             }
         }
@@ -28,21 +29,24 @@ class Order {
      * @returns {number}
      */
     getIngredientCount(ingredientId) {
-        return this.ingredients.reduce((count,  ingredient) => ingredientId === ingredient._id ? count + 1 : count, 0);
+        return this.ingredients.reduce(
+            (count, ingredient) => (ingredientId === ingredient.id ? count + 1 : count),
+            0,
+        );
     }
 
     /**
      * @returns {string[]}
      */
     getIngredientsIds() {
-        return this.ingredients.map((ingredient) => ingredient._id);
+        return this.ingredients.map((ingredient) => ingredient.id);
     }
 
     /**
      * @returns {number}
      */
-    getPrice () {
-        return this.ingredients.reduce((sum,  ingredient) => sum + ingredient.price, 0);
+    getPrice() {
+        return this.ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0);
     }
 }
 

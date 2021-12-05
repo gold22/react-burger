@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export const orderIngredients = [
     {
         "_id": "60d3b41abdacab0026a733c6",

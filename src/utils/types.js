@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 
+// eslint-disable-next-line import/prefer-default-export
 export const ingredientType = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     proteins: PropTypes.number.isRequired,
@@ -10,6 +11,6 @@ export const ingredientType = PropTypes.shape({
     calories: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
+    imageLarge: PropTypes.string.isRequired,
+    imageMobile: PropTypes.string.isRequired,
 });

@@ -8,22 +8,22 @@ const AppNavLink = ({ icon, text, active }) => {
     const textColor = active ? 'text_color_primary' : 'text_color_inactive';
     return (
         <div className={`${styles.main} pl-5 pr-5 pb-4 pt-4`}>
-            {'burger' === icon && <BurgerIcon type={iconType}/>}
-            {'list' === icon && <ListIcon type={iconType}/>}
-            {'profile' === icon && <ProfileIcon type={iconType}/>}
+            {icon === 'burger' && <BurgerIcon type={iconType} />}
+            {icon === 'list' && <ListIcon type={iconType} />}
+            {icon === 'profile' && <ProfileIcon type={iconType} />}
             <p className={`text text_type_main-default pl-2 ${textColor}`}>{text}</p>
         </div>
     );
 };
 
 AppNavLink.propTypes = {
-    icon: PropTypes.oneOf(['burger', 'list', 'profile']),
+    icon: PropTypes.oneOf(['burger', 'list', 'profile']).isRequired,
     text: PropTypes.string.isRequired,
     active: PropTypes.bool,
 };
 
 AppNavLink.defaultProps = {
-    active: false
+    active: false,
 };
 
 export default AppNavLink;

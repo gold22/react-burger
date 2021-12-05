@@ -1,13 +1,13 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from '../modal/modal';
 
 const ErrorDialog = ({ message, onClose }) => {
-    if (null === message) {
+    if (message === null) {
         return null;
     }
     return (
-        <Modal title="Ошибка!" visible={true} onClose={onClose}>
+        <Modal title="Ошибка!" visible onClose={onClose}>
             <p className="text text_type_main-medium text_color_error mt-4">{message}</p>
         </Modal>
     );
@@ -16,6 +16,10 @@ const ErrorDialog = ({ message, onClose }) => {
 ErrorDialog.propTypes = {
     message: PropTypes.string,
     onClose: PropTypes.func.isRequired,
+};
+
+ErrorDialog.defaultProps = {
+    message: null,
 };
 
 export default ErrorDialog;
