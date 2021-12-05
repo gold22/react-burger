@@ -22,7 +22,7 @@ const BurgerConstructor = () => {
             // avoid redundant requests over double mouse clicks
             return;
         }
-        setOrderCreationState({isCreating: true, error: null});
+        setOrderCreationState({isCreating: true, loadError: null});
         try {
             const result = await apiClient.createOrder(order);
             setOrder((prev) => new Order({
@@ -30,10 +30,10 @@ const BurgerConstructor = () => {
                 name: result.name,
                 number: result.order.number,
             }));
-            setOrderCreationState({isCreating: false, error: null});
+            setOrderCreationState({isCreating: false, loadError: null});
             setShowDetails(true);
         } catch (error) {
-            setOrderCreationState({isCreating: false, error: error.message});
+            setOrderCreationState({isCreating: false, loadError: error.message});
         }
     };
 
@@ -57,7 +57,7 @@ const BurgerConstructor = () => {
                 <OrderDetails visible={showDetails} onClose={() => { setShowDetails(false); }} />
                 <ErrorDialog
                     message={orderCreationState.error}
-                    onClose={() => { setOrderCreationState({isCreating: false, error: null});}}
+                    onClose={() => { setOrderCreationState({isCreating: false, loadError: null});}}
                 />
             </div>
         </section>
