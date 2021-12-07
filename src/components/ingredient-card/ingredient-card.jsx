@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDrag } from 'react-dnd';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { OrderContext } from '../../services/order-context';
@@ -8,6 +9,10 @@ import styles from './ingredient-card.module.css';
 const IngredientCard = ({ ingredient }) => {
     const [showDetails, setShowDetails] = React.useState(false);
     const [order] = React.useContext(OrderContext);
+    const [, dragRef] = useDrag({
+        type: 'ingredient',
+        item: { ingredient },
+    });
 
     const count = React.useMemo(
         () => order.getIngredientCount(ingredient.id),
@@ -19,6 +24,7 @@ const IngredientCard = ({ ingredient }) => {
         <div
             className={styles.main}
             onClick={() => { setShowDetails(true); }}
+            ref={dragRef}
         >
             {count > 0 && (
                 <Counter count={count} size="default" />

@@ -15,12 +15,13 @@ export const constructorReducer = (state = initialState, action) => {
         };
     }
     case actions.ADD_INGREDIENT: {
+        const index = action.index < 0 ? state.ingredients.length : action.index;
         return {
             ...state,
             ingredients: [
-                ...state.ingredients.slice(0, action.index),
+                ...state.ingredients.slice(0, index),
                 action.ingredient,
-                ...state.ingredients.slice(action.index),
+                ...state.ingredients.slice(index),
             ],
         };
     }

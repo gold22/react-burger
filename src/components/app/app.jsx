@@ -1,4 +1,6 @@
 import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch, useSelector } from 'react-redux';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
@@ -56,10 +58,12 @@ const App = () => {
         <main>
             <AppHeader />
             <div className={styles.panels}>
-                <OrderContext.Provider value={[order, setOrder]}>
-                    <BurgerIngredients ingredients={ingredientsList.ingredients} />
-                    <BurgerConstructor />
-                </OrderContext.Provider>
+                <DndProvider backend={HTML5Backend}>
+                    <OrderContext.Provider value={[order, setOrder]}>
+                        <BurgerIngredients ingredients={ingredientsList.ingredients} />
+                        <BurgerConstructor />
+                    </OrderContext.Provider>
+                </DndProvider>
             </div>
         </main>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import ConstructorElement from '../constructor-element/constructor-element';
 import styles from './constructor-elements.module.css';
 
 const ConstructorElements = () => {
@@ -9,38 +9,27 @@ const ConstructorElements = () => {
     return (
         <div className={styles.main}>
             {bun && (
-                <div className={`${styles.mainItem} pl-8`} key="top">
-                    <ConstructorElement
-                        type="top"
-                        isLocked
-                        text={`${bun.name} (верх)`}
-                        price={bun.price}
-                        thumbnail={bun.imageMobile}
-                    />
-                </div>
+                <ConstructorElement
+                    key="top"
+                    type="top"
+                    ingredient={bun}
+                />
             )}
             <div className={`${styles.optionalItems} custom-scroll`} key="middle">
-                {ingredients.map((ingredient) => (
-                    <div className={`${styles.optionalItem} custom-scroll pr-1`} key={ingredient.id}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={ingredient.name}
-                            price={ingredient.price}
-                            thumbnail={ingredient.imageMobile}
-                        />
-                    </div>
+                {ingredients.map((ingredient, index) => (
+                    <ConstructorElement
+                        key={ingredient.id}
+                        id={index}
+                        ingredient={ingredient}
+                    />
                 ))}
             </div>
             {bun && (
-                <div className={`${styles.mainItem} pl-8`} key="bottom">
-                    <ConstructorElement
-                        type="bottom"
-                        isLocked
-                        text={`${bun.name} (низ)`}
-                        price={bun.price}
-                        thumbnail={bun.imageMobile}
-                    />
-                </div>
+                <ConstructorElement
+                    key="bottom"
+                    type="bottom"
+                    ingredient={bun}
+                />
             )}
         </div>
     );
