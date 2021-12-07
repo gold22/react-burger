@@ -6,16 +6,13 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import Order from '../../model/order';
 import { ApiContext } from '../../services/api-context';
 import { OrderContext } from '../../services/order-context';
-import { orderIngredients } from '../../utils/data';
 import { getIngredients } from '../../services/actions/ingredients-list';
 import styles from './app.module.css';
 
 const App = () => {
     const dispatch = useDispatch();
     const { ingredientsList } = useSelector((state) => state);
-    const [order, setOrder] = React.useState(new Order({
-        ingredients: orderIngredients,
-    }));
+    const [order, setOrder] = React.useState(new Order());
     const apiClient = React.useContext(ApiContext);
 
     React.useEffect(
