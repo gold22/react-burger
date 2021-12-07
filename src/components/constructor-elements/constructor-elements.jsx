@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ConstructorElement from '../constructor-element/constructor-element';
@@ -18,7 +19,7 @@ const ConstructorElements = () => {
             <div className={`${styles.optionalItems} custom-scroll`} key="middle">
                 {ingredients.map((ingredient, index) => (
                     <ConstructorElement
-                        key={ingredient.id}
+                        key={index}
                         index={index}
                         ingredient={ingredient}
                     />
