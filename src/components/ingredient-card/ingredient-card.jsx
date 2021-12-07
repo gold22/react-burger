@@ -1,23 +1,22 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
+import { useSelector } from 'react-redux';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { OrderContext } from '../../services/order-context';
 import { ingredientType } from '../../utils/types';
+import { getIngredientCount } from '../../utils/consctructor';
 import styles from './ingredient-card.module.css';
 
 const IngredientCard = ({ ingredient }) => {
     const [showDetails, setShowDetails] = React.useState(false);
-    const [order] = React.useContext(OrderContext);
+    const count = useSelector((state) => getIngredientCount(
+        ingredient.id, state.burgerConstructor.bun, state.burgerConstructor.ingredients,
+    ));
+
     const [, dragRef] = useDrag({
         type: 'ingredient',
         item: { ingredient },
     });
-
-    const count = React.useMemo(
-        () => order.getIngredientCount(ingredient.id),
-        [order, ingredient.id],
-    );
 
     const { image, name, price } = ingredient;
     return (
