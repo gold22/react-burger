@@ -16,7 +16,9 @@ const BurgerConstructor = () => {
         isCreating: false,
         loadError: null,
     });
-    const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
+    const orderPrice = useSelector((state) => getPrice(
+        state.burgerConstructor.bun, state.burgerConstructor.ingredients,
+    ));
     const apiClient = React.useContext(ApiContext);
     const [order, setOrder] = React.useContext(OrderContext);
 
@@ -39,11 +41,6 @@ const BurgerConstructor = () => {
             setOrderCreationState({ isCreating: false, loadError: error.message });
         }
     };
-
-    const orderPrice = React.useMemo(
-        () => getPrice(bun, ingredients),
-        [bun, ingredients],
-    );
 
     return (
         <section className={`${styles.main} pt-25 pl-4`}>

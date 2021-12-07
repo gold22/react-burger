@@ -54,7 +54,7 @@ const ConstructorElement = ({ ingredient, type, id }) => {
 };
 
 ConstructorElement.propTypes = {
-    ingredient: PropTypes.objectOf(ingredientType).isRequired,
+    ingredient: ingredientType.isRequired,
     type: PropTypes.oneOf(['top', 'bottom', 'center']),
     id: PropTypes.number,
 };
