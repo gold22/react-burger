@@ -7,6 +7,7 @@ import Order from '../../model/order';
 import { ApiContext } from '../../services/api-context';
 import { OrderContext } from '../../services/order-context';
 import { getIngredients } from '../../services/actions/ingredients-list';
+import { setBun } from '../../services/actions/constructor';
 import styles from './app.module.css';
 
 const App = () => {
@@ -16,10 +17,22 @@ const App = () => {
     const apiClient = React.useContext(ApiContext);
 
     React.useEffect(
-        () => {
-            dispatch(getIngredients(apiClient));
-        },
+        () => { dispatch(getIngredients(apiClient)); },
         [dispatch, apiClient],
+    );
+    React.useEffect(
+        () => {
+            if (ingredientsList.isLoading || ingredientsList.loadError) {
+                return;
+            }
+            for (const ingredient of ingredientsList.ingredients) {
+                if (ingredient.type === 'bun') {
+                    dispatch(setBun(ingredient));
+                    return;
+                }
+            }
+        },
+        [dispatch, ingredientsList],
     );
 
     if (ingredientsList.isLoading) {

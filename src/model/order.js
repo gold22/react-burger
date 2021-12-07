@@ -15,7 +15,6 @@ class Order {
      * @returns {?Object}
      */
     getBun() {
-        // eslint-disable-next-line no-restricted-syntax
         for (const ingredient of this.ingredients) {
             if (ingredient.type === 'bun') {
                 return ingredient;
