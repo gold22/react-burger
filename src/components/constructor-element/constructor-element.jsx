@@ -1,22 +1,34 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useDrop } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 import {
     ConstructorElement as ConstructorElementComponent,
     DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientType } from '../../utils/types';
-import { addIngredient, removeIngredient, setBun } from '../../services/actions/constructor';
+import {
+    addIngredient,
+    moveIngredient,
+    removeIngredient,
+    setBun,
+} from '../../services/actions/constructor';
 import styles from './constructor-element.module.css';
 
 const ConstructorElement = ({ ingredient, type, index }) => {
     const dispatch = useDispatch();
 
+    const [, dragRef] = useDrag({
+        type: 'ingredient',
+        item: { index },
+    });
+
     const [, dropRef] = useDrop({
         accept: 'ingredient',
         drop(item) {
-            if (item.ingredient.type === 'bun') {
+            if ('index' in item) {
+                dispatch(moveIngredient(item.index, index));
+            } else if (item.ingredient.type === 'bun') {
                 dispatch(setBun(item.ingredient));
             } else if (type === 'top') {
                 dispatch(addIngredient(item.ingredient, 0));
@@ -34,14 +46,16 @@ const ConstructorElement = ({ ingredient, type, index }) => {
 
     if (type === 'center') {
         return (
-            <div className={`${styles.optional} pr-1`} ref={dropRef}>
-                <DragIcon type="primary" />
-                <ConstructorElementComponent
-                    text={ingredient.name}
-                    price={ingredient.price}
-                    thumbnail={ingredient.imageMobile}
-                    handleClose={handleClose}
-                />
+            <div ref={dragRef}>
+                <div className={`${styles.optional} pr-1`} ref={dropRef}>
+                    <DragIcon type="primary" />
+                    <ConstructorElementComponent
+                        text={ingredient.name}
+                        price={ingredient.price}
+                        thumbnail={ingredient.imageMobile}
+                        handleClose={handleClose}
+                    />
+                </div>
             </div>
         );
     }
