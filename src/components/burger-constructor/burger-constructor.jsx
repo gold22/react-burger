@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorElements from '../constructor-elements/constructor-elements';
 import ErrorDialog from '../error-dialog/error-dialog';
@@ -6,6 +7,7 @@ import OrderDetails from '../order-details/order-details';
 import Order from '../../model/order';
 import { ApiContext } from '../../services/api-context';
 import { OrderContext } from '../../services/order-context';
+import { getPrice } from '../../utils/consctructor';
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
@@ -14,6 +16,7 @@ const BurgerConstructor = () => {
         isCreating: false,
         loadError: null,
     });
+    const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
     const apiClient = React.useContext(ApiContext);
     const [order, setOrder] = React.useContext(OrderContext);
 
@@ -38,8 +41,8 @@ const BurgerConstructor = () => {
     };
 
     const orderPrice = React.useMemo(
-        () => order.getPrice(),
-        [order],
+        () => getPrice(bun, ingredients),
+        [bun, ingredients],
     );
 
     return (
