@@ -19,7 +19,7 @@ const ConstructorElements = () => {
                 {ingredients.map((ingredient, index) => (
                     <ConstructorElement
                         key={ingredient.id}
-                        id={index}
+                        index={index}
                         ingredient={ingredient}
                     />
                 ))}

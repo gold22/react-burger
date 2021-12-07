@@ -7,10 +7,10 @@ import {
     DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientType } from '../../utils/types';
-import { addIngredient, setBun } from '../../services/actions/constructor';
+import { addIngredient, removeIngredient, setBun } from '../../services/actions/constructor';
 import styles from './constructor-element.module.css';
 
-const ConstructorElement = ({ ingredient, type, id }) => {
+const ConstructorElement = ({ ingredient, type, index }) => {
     const dispatch = useDispatch();
 
     const [, dropRef] = useDrop({
@@ -23,10 +23,14 @@ const ConstructorElement = ({ ingredient, type, id }) => {
             } else if (type === 'bottom') {
                 dispatch(addIngredient(item.ingredient, -1));
             } else {
-                dispatch(addIngredient(item.ingredient, id));
+                dispatch(addIngredient(item.ingredient, index));
             }
         },
     });
+
+    const handleClose = () => {
+        dispatch(removeIngredient(index));
+    };
 
     if (type === 'center') {
         return (
@@ -36,6 +40,7 @@ const ConstructorElement = ({ ingredient, type, id }) => {
                     text={ingredient.name}
                     price={ingredient.price}
                     thumbnail={ingredient.imageMobile}
+                    handleClose={handleClose}
                 />
             </div>
         );
@@ -56,12 +61,12 @@ const ConstructorElement = ({ ingredient, type, id }) => {
 ConstructorElement.propTypes = {
     ingredient: ingredientType.isRequired,
     type: PropTypes.oneOf(['top', 'bottom', 'center']),
-    id: PropTypes.number,
+    index: PropTypes.number,
 };
 
 ConstructorElement.defaultProps = {
     type: 'center',
-    id: null,
+    index: null,
 };
 
 export default ConstructorElement;
