@@ -17,12 +17,30 @@ const BurgerIngredients = ({ ingredients }) => {
         categories[value].current.scrollIntoView({ behavior: 'smooth' });
         setCurrentTab(value);
     };
+    const handleScroll = (e) => {
+        const { scrollTop } = e.target;
+        const bunOffset = scrollTop;
+        const sauceOffset = Math.abs(
+            categories.sauce.current.offsetTop - categories.bun.current.offsetTop - scrollTop,
+        );
+        const mainOffset = Math.abs(
+            categories.main.current.offsetTop - categories.bun.current.offsetTop - scrollTop,
+        );
+        const minOffset = Math.min(bunOffset, sauceOffset, mainOffset);
+        if (minOffset === bunOffset && currentTab !== 'bun') {
+            setCurrentTab('bun');
+        } else if (minOffset === sauceOffset && currentTab !== 'sauce') {
+            setCurrentTab('sauce');
+        } else if (minOffset === mainOffset && currentTab !== 'main') {
+            setCurrentTab('main');
+        }
+    };
 
     return (
         <section className={styles.main}>
             <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
             <IngredientTabs value={currentTab} onChange={handleTabChange} />
-            <div className={`${styles.cards} mt-10 custom-scroll`}>
+            <div className={`${styles.cards} mt-10 custom-scroll`} onScroll={handleScroll}>
                 <IngredientCards
                     title="Булки"
                     ingredients={ingredients.filter((ingredient) => ingredient.type === 'bun')}
