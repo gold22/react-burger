@@ -13,6 +13,8 @@ export const orderReducer = (state = initialState, action) => {
     case actions.CREATE_ORDER_REQUEST: {
         return {
             ...state,
+            name: null,
+            number: null,
             isCreating: true,
             creationError: null,
         };
