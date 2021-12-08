@@ -32,22 +32,24 @@ export const constructorReducer = (state = initialState, action) => {
         };
     }
     case actions.MOVE_INGREDIENT: {
-        if (action.oldIndex === action.newIndex) {
+        const { oldIndex } = action;
+        const newIndex = action.newIndex < 0 ? state.ingredients.length : action.newIndex;
+        if (oldIndex === newIndex) {
             return state;
         }
         const { ingredients } = state;
-        const ingredient = ingredients[action.oldIndex];
+        const ingredient = ingredients[oldIndex];
         return {
             ...state,
             ingredients: [
-                ...ingredients.slice(0, Math.min(action.oldIndex, action.newIndex)),
-                ...(action.newIndex < action.oldIndex
-                    ? [ingredient, ...ingredients.slice(action.newIndex, action.oldIndex)]
+                ...ingredients.slice(0, Math.min(oldIndex, newIndex)),
+                ...(newIndex < oldIndex
+                    ? [ingredient, ...ingredients.slice(newIndex, oldIndex)]
                     : []),
-                ...(action.newIndex > action.oldIndex
-                    ? [...ingredients.slice(action.oldIndex + 1, action.newIndex + 1), ingredient]
+                ...(newIndex > oldIndex
+                    ? [...ingredients.slice(oldIndex + 1, newIndex + 1), ingredient]
                     : []),
-                ...ingredients.slice(Math.max(action.oldIndex, action.newIndex) + 1),
+                ...ingredients.slice(Math.max(oldIndex, newIndex) + 1),
             ],
         };
     }

@@ -27,7 +27,13 @@ const ConstructorElement = ({ ingredient, type, index }) => {
         accept: 'ingredient',
         drop(item) {
             if ('index' in item) {
-                dispatch(moveIngredient(item.index, index));
+                if (type === 'top') {
+                    dispatch(moveIngredient(item.index, 0));
+                } else if (type === 'bottom') {
+                    dispatch(moveIngredient(item.index, -1));
+                } else {
+                    dispatch(moveIngredient(item.index, index));
+                }
             } else if (item.ingredient.type === 'bun') {
                 dispatch(setBun(item.ingredient));
             } else if (type === 'top') {
