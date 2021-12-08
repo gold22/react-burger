@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 import { getIngredients } from '../../services/actions/ingredients-list';
+import { hideIngredientDetails } from '../../services/actions/ingredient-details';
 import { setBun } from '../../services/actions/constructor';
 import styles from './app.module.css';
 
 const App = () => {
-    const { ingredientsList } = useSelector((state) => state);
+    const { ingredientDetails, ingredientsList } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     React.useEffect(
@@ -58,6 +60,13 @@ const App = () => {
                     <BurgerConstructor />
                 </DndProvider>
             </div>
+            {ingredientDetails.ingredient && (
+                <IngredientDetails
+                    ingredient={ingredientDetails.ingredient}
+                    visible
+                    onClose={() => { dispatch(hideIngredientDetails()); }}
+                />
+            )}
         </main>
     );
 };

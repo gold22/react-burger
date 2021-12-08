@@ -1,17 +1,17 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientDetails from '../ingredient-details/ingredient-details';
 import { ingredientType } from '../../utils/types';
 import { getIngredientCount } from '../../utils/consctructor';
+import { showIngredientDetails } from '../../services/actions/ingredient-details';
 import styles from './ingredient-card.module.css';
 
 const IngredientCard = ({ ingredient }) => {
-    const [showDetails, setShowDetails] = React.useState(false);
     const count = useSelector((state) => getIngredientCount(
         ingredient.id, state.burgerConstructor.bun, state.burgerConstructor.ingredients,
     ));
+    const dispatch = useDispatch();
 
     const [, dragRef] = useDrag({
         type: 'ingredient',
@@ -22,7 +22,7 @@ const IngredientCard = ({ ingredient }) => {
     return (
         <div
             className={styles.main}
-            onClick={() => { setShowDetails(true); }}
+            onClick={() => { dispatch(showIngredientDetails(ingredient)); }}
             ref={dragRef}
         >
             {count > 0 && (
@@ -34,12 +34,6 @@ const IngredientCard = ({ ingredient }) => {
                 <CurrencyIcon type="primary" />
             </div>
             <p className={`text text_type_main-default ${styles.name}`}>{name}</p>
-
-            <IngredientDetails
-                ingredient={ingredient}
-                visible={showDetails}
-                onClose={() => { setShowDetails(false); }}
-            />
         </div>
     );
 };
