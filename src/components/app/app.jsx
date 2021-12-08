@@ -5,22 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import Order from '../../model/order';
-import { ApiContext } from '../../services/api-context';
-import { OrderContext } from '../../services/order-context';
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { setBun } from '../../services/actions/constructor';
 import styles from './app.module.css';
 
 const App = () => {
-    const dispatch = useDispatch();
     const { ingredientsList } = useSelector((state) => state);
-    const [order, setOrder] = React.useState(new Order());
-    const apiClient = React.useContext(ApiContext);
+    const dispatch = useDispatch();
 
     React.useEffect(
-        () => { dispatch(getIngredients(apiClient)); },
-        [dispatch, apiClient],
+        () => { dispatch(getIngredients()); },
+        [dispatch],
     );
     React.useEffect(
         () => {
@@ -59,10 +54,8 @@ const App = () => {
             <AppHeader />
             <div className={styles.panels}>
                 <DndProvider backend={HTML5Backend}>
-                    <OrderContext.Provider value={[order, setOrder]}>
-                        <BurgerIngredients ingredients={ingredientsList.ingredients} />
-                        <BurgerConstructor />
-                    </OrderContext.Provider>
+                    <BurgerIngredients ingredients={ingredientsList.ingredients} />
+                    <BurgerConstructor />
                 </DndProvider>
             </div>
         </main>

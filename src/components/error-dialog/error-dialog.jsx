@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from '../modal/modal';
 
-const ErrorDialog = ({ message, onClose }) => {
-    if (message === null) {
+const ErrorDialog = ({ visible, message, onClose }) => {
+    if (!visible) {
         return null;
     }
     return (
@@ -14,6 +14,7 @@ const ErrorDialog = ({ message, onClose }) => {
 };
 
 ErrorDialog.propTypes = {
+    visible: PropTypes.bool.isRequired,
     message: PropTypes.string,
     onClose: PropTypes.func.isRequired,
 };

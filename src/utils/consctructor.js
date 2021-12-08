@@ -11,3 +11,7 @@ export const getIngredientCount = (ingredientId, bun, ingredients) => {
         0,
     );
 };
+
+export const getIngredientsIds = (bun, ingredients) => (
+    [bun.id, bun.id, ...ingredients.map((ingredient) => ingredient.id)]
+);

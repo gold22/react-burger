@@ -6,22 +6,20 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import App from './components/app/app';
 import ApiClient from './services/api-client';
-import { ApiContext } from './services/api-context';
 import { rootReducer } from './services/reducers';
 // eslint-disable-next-line import/extensions,import/no-unresolved
 import reportWebVitals from './reportWebVitals';
 
-const enhancer = composeWithDevTools(applyMiddleware(thunk));
-const store = createStore(rootReducer, enhancer);
-
 const API_URL = 'https://norma.nomoreparties.space/api';
+const apiClient = new ApiClient({ url: API_URL });
+
+const enhancer = composeWithDevTools(applyMiddleware(thunk.withExtraArgument(apiClient)));
+const store = createStore(rootReducer, enhancer);
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <ApiContext.Provider value={new ApiClient({ url: API_URL })}>
-                <App />
-            </ApiContext.Provider>
+            <App />
         </Provider>
     </React.StrictMode>,
     document.getElementById('root'),

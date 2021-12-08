@@ -1,45 +1,28 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorElements from '../constructor-elements/constructor-elements';
 import ErrorDialog from '../error-dialog/error-dialog';
 import OrderDetails from '../order-details/order-details';
-import Order from '../../model/order';
-import { ApiContext } from '../../services/api-context';
-import { OrderContext } from '../../services/order-context';
 import { getPrice } from '../../utils/consctructor';
+import { createOrder } from '../../services/actions/order';
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
     const [showDetails, setShowDetails] = React.useState(false);
-    const [orderCreationState, setOrderCreationState] = React.useState({
-        isCreating: false,
-        loadError: null,
-    });
     const orderPrice = useSelector((state) => getPrice(
         state.burgerConstructor.bun, state.burgerConstructor.ingredients,
     ));
-    const apiClient = React.useContext(ApiContext);
-    const [order, setOrder] = React.useContext(OrderContext);
+    const { order } = useSelector((state) => state);
+    const dispatch = useDispatch();
 
-    const handleOrderCreation = async () => {
-        if (orderCreationState.isCreating) {
+    const handleOrderCreation = () => {
+        if (order.isCreating) {
             // avoid redundant requests over double mouse clicks
             return;
         }
-        setOrderCreationState({ isCreating: true, loadError: null });
-        try {
-            const result = await apiClient.createOrder(order);
-            setOrder((prev) => new Order({
-                ...prev,
-                name: result.name,
-                number: result.order.number,
-            }));
-            setOrderCreationState({ isCreating: false, loadError: null });
-            setShowDetails(true);
-        } catch (error) {
-            setOrderCreationState({ isCreating: false, loadError: error.message });
-        }
+        dispatch(createOrder());
+        setShowDetails(true);
     };
 
     return (
@@ -54,12 +37,14 @@ const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
 
-                <OrderDetails visible={showDetails} onClose={() => { setShowDetails(false); }} />
+                <OrderDetails
+                    visible={showDetails && !order.isCreating && !order.creationError}
+                    onClose={() => { setShowDetails(false); }}
+                />
                 <ErrorDialog
-                    message={orderCreationState.error}
-                    onClose={() => {
-                        setOrderCreationState({ isCreating: false, loadError: null });
-                    }}
+                    visible={showDetails && !order.isCreating && !!order.creationError}
+                    message={order.creationError}
+                    onClose={() => { setShowDetails(false); }}
                 />
             </div>
         </section>

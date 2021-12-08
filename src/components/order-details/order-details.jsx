@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Modal from '../modal/modal';
-import { OrderContext } from '../../services/order-context';
 import donePath from '../../images/done.gif';
 
 const OrderDetails = ({ visible, onClose }) => {
-    const [order] = React.useContext(OrderContext);
+    const { order } = useSelector((state) => state);
 
     return (
         <Modal title="" visible={visible} onClose={onClose}>

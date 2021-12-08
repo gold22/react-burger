@@ -1,7 +1,3 @@
-// noinspection ES6UnusedImports
-// eslint-disable-next-line no-unused-vars
-import Order from '../model/order';
-
 class ApiClient {
     /**
      * @param {Object} config
@@ -20,12 +16,12 @@ class ApiClient {
     }
 
     /**
-     * @param {Order} order
+     * @param {string[]} ingredientsIds
      * @returns {Promise<Object>}
      */
-    async createOrder(order) {
+    async createOrder(ingredientsIds) {
         const body = {
-            ingredients: order.getIngredientsIds(),
+            ingredients: ingredientsIds,
         };
         return ApiClient.fetch(`${this.url}/orders`, {
             method: 'POST',
