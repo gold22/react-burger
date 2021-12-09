@@ -1,4 +1,8 @@
-import * as actions from '../actions/ingredients-list';
+import {
+    GET_INGREDIENTS_REQUEST,
+    GET_INGREDIENTS_SUCCESS,
+    GET_INGREDIENTS_ERROR,
+} from '../actions/ingredients-list';
 
 const initialState = {
     ingredients: [],
@@ -9,13 +13,13 @@ const initialState = {
 // eslint-disable-next-line import/prefer-default-export
 export const ingredientsListReducer = (state = initialState, action) => {
     switch (action.type) {
-    case actions.GET_INGREDIENTS_REQUEST: {
+    case GET_INGREDIENTS_REQUEST: {
         return {
             ...state,
             isLoading: true,
         };
     }
-    case actions.GET_INGREDIENTS_SUCCESS: {
+    case GET_INGREDIENTS_SUCCESS: {
         return {
             ...state,
             isLoading: false,
@@ -23,7 +27,7 @@ export const ingredientsListReducer = (state = initialState, action) => {
             ingredients: action.ingredients,
         };
     }
-    case actions.GET_INGREDIENTS_ERROR: {
+    case GET_INGREDIENTS_ERROR: {
         return {
             ...initialState,
             isLoading: false,

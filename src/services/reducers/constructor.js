@@ -1,4 +1,9 @@
-import * as actions from '../actions/constructor';
+import {
+    SET_BUN,
+    ADD_INGREDIENT,
+    REMOVE_INGREDIENT,
+    MOVE_INGREDIENT,
+} from '../actions/constructor';
 
 const initialState = {
     bun: null,
@@ -8,13 +13,13 @@ const initialState = {
 // eslint-disable-next-line import/prefer-default-export
 export const constructorReducer = (state = initialState, action) => {
     switch (action.type) {
-    case actions.SET_BUN: {
+    case SET_BUN: {
         return {
             ...state,
             bun: action.bun,
         };
     }
-    case actions.ADD_INGREDIENT: {
+    case ADD_INGREDIENT: {
         const index = action.index < 0 ? state.ingredients.length : action.index;
         return {
             ...state,
@@ -25,13 +30,13 @@ export const constructorReducer = (state = initialState, action) => {
             ],
         };
     }
-    case actions.REMOVE_INGREDIENT: {
+    case REMOVE_INGREDIENT: {
         return {
             ...state,
             ingredients: state.ingredients.filter((ingredient, index) => index !== action.index),
         };
     }
-    case actions.MOVE_INGREDIENT: {
+    case MOVE_INGREDIENT: {
         const { oldIndex } = action;
         const newIndex = action.newIndex < 0 ? state.ingredients.length : action.newIndex;
         if (oldIndex === newIndex) {

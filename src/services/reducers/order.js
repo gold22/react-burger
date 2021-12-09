@@ -1,4 +1,8 @@
-import * as actions from '../actions/order';
+import {
+    CREATE_ORDER_REQUEST,
+    CREATE_ORDER_SUCCESS,
+    CREATE_ORDER_ERROR,
+} from '../actions/order';
 
 const initialState = {
     name: null,
@@ -10,13 +14,13 @@ const initialState = {
 // eslint-disable-next-line import/prefer-default-export
 export const orderReducer = (state = initialState, action) => {
     switch (action.type) {
-    case actions.CREATE_ORDER_REQUEST: {
+    case CREATE_ORDER_REQUEST: {
         return {
             ...state,
             isCreating: true,
         };
     }
-    case actions.CREATE_ORDER_SUCCESS: {
+    case CREATE_ORDER_SUCCESS: {
         return {
             ...state,
             name: action.name,
@@ -25,7 +29,7 @@ export const orderReducer = (state = initialState, action) => {
             creationError: null,
         };
     }
-    case actions.CREATE_ORDER_ERROR: {
+    case CREATE_ORDER_ERROR: {
         return {
             ...initialState,
             creationError: action.message,

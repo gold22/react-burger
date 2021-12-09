@@ -1,4 +1,7 @@
-import * as actions from '../actions/ingredient-details';
+import {
+    SHOW_INGREDIENT_DETAILS,
+    HIDE_INGREDIENT_DETAILS,
+} from '../actions/ingredient-details';
 
 const initialState = {
     ingredient: null,
@@ -7,13 +10,13 @@ const initialState = {
 // eslint-disable-next-line import/prefer-default-export
 export const ingredientDetailsReducer = (state = initialState, action) => {
     switch (action.type) {
-    case actions.SHOW_INGREDIENT_DETAILS: {
+    case SHOW_INGREDIENT_DETAILS: {
         return {
             ...state,
             ingredient: action.ingredient,
         };
     }
-    case actions.HIDE_INGREDIENT_DETAILS: {
+    case HIDE_INGREDIENT_DETAILS: {
         return {
             ...state,
             ingredient: null,
