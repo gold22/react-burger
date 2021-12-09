@@ -5,7 +5,7 @@
     column-gap: calc(var(--offset-base-size)  * 10);
 }
 
-.error {
+.message {
     display: flex;
     justify-content: center;
 }

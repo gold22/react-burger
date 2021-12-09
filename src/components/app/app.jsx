@@ -34,13 +34,19 @@ const App = () => {
 
     if (ingredientsList.isLoading) {
         return (
-            <main />
+            <main>
+                <div className={`${styles.message} mt-20`}>
+                    <p className="text text_type_main-medium">
+                        Загрузка...
+                    </p>
+                </div>
+            </main>
         );
     }
     if (ingredientsList.loadError) {
         return (
             <main>
-                <div className={`${styles.error} mt-20`}>
+                <div className={`${styles.message} mt-20`}>
                     <p className="text text_type_main-medium text_color_error">
                         {`Ошибка загрузки: ${ingredientsList.loadError}`}
                     </p>
