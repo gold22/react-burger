@@ -24,11 +24,9 @@ const App = () => {
             if (ingredientsList.isLoading || ingredientsList.loadError) {
                 return;
             }
-            for (const ingredient of ingredientsList.ingredients) {
-                if (ingredient.type === 'bun') {
-                    dispatch(setBun(ingredient));
-                    return;
-                }
+            const bun = ingredientsList.ingredients.find((ingredient) => ingredient.type === 'bun');
+            if (bun) {
+                dispatch(setBun(bun));
             }
         },
         [dispatch, ingredientsList],
