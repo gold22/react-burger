@@ -19,12 +19,13 @@ export const ingredientsListReducer = (state = initialState, action) => {
         return {
             ...state,
             isLoading: false,
+            loadError: null,
             ingredients: action.ingredients,
         };
     }
     case actions.GET_INGREDIENTS_ERROR: {
         return {
-            ...state,
+            ...initialState,
             isLoading: false,
             loadError: action.message,
         };

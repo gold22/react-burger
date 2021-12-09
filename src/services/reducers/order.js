@@ -13,10 +13,7 @@ export const orderReducer = (state = initialState, action) => {
     case actions.CREATE_ORDER_REQUEST: {
         return {
             ...state,
-            name: null,
-            number: null,
             isCreating: true,
-            creationError: null,
         };
     }
     case actions.CREATE_ORDER_SUCCESS: {
@@ -25,12 +22,12 @@ export const orderReducer = (state = initialState, action) => {
             name: action.name,
             number: action.number,
             isCreating: false,
+            creationError: null,
         };
     }
     case actions.CREATE_ORDER_ERROR: {
         return {
-            ...state,
-            isCreating: false,
+            ...initialState,
             creationError: action.message,
         };
     }
