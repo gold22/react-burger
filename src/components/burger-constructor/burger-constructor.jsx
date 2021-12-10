@@ -4,14 +4,14 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import ConstructorElements from '../constructor-elements/constructor-elements';
 import ErrorDialog from '../error-dialog/error-dialog';
 import OrderDetails from '../order-details/order-details';
-import { getPrice } from '../../utils/consctructor';
+import { getIngredientsPrice } from '../../utils/ingredients';
 import { createOrder } from '../../services/actions/order';
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
     const [showDetails, setShowDetails] = React.useState(false);
-    const orderPrice = useSelector((state) => getPrice(
-        state.burgerConstructor.bun, state.burgerConstructor.ingredients,
+    const orderPrice = useSelector((state) => getIngredientsPrice(
+        state.burgerConstructor.ingredients,
     ));
     const { order } = useSelector((state) => state);
     const dispatch = useDispatch();

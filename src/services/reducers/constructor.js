@@ -1,12 +1,13 @@
+import { v4 as uuid } from 'uuid';
 import {
     SET_BUN,
     ADD_INGREDIENT,
     REMOVE_INGREDIENT,
     MOVE_INGREDIENT,
 } from '../actions/constructor';
+import { getBun } from '../../utils/ingredients';
 
 const initialState = {
-    bun: null,
     ingredients: [],
 };
 
@@ -14,20 +15,25 @@ const initialState = {
 export const constructorReducer = (state = initialState, action) => {
     switch (action.type) {
     case SET_BUN: {
+        const ingredients = getBun(state.ingredients)
+            ? [action.bun, ...state.ingredients.slice(1, state.ingredients.length - 1), action.bun]
+            : [action.bun, ...state.ingredients, action.bun];
         return {
             ...state,
-            bun: action.bun,
+            ingredients,
         };
     }
     case ADD_INGREDIENT: {
-        const index = action.index < 0 ? state.ingredients.length : action.index;
+        const ingredient = {
+            ...action.ingredient,
+            uuid: uuid(),
+        };
+        const ingredients = [...state.ingredients];
+        const index = action.index === 0 && getBun(state.ingredients) ? 1 : action.index;
+        ingredients.splice(index, 0, ingredient);
         return {
             ...state,
-            ingredients: [
-                ...state.ingredients.slice(0, index),
-                action.ingredient,
-                ...state.ingredients.slice(index),
-            ],
+            ingredients,
         };
     }
     case REMOVE_INGREDIENT: {
@@ -37,25 +43,18 @@ export const constructorReducer = (state = initialState, action) => {
         };
     }
     case MOVE_INGREDIENT: {
-        const { oldIndex } = action;
-        const newIndex = action.newIndex < 0 ? state.ingredients.length : action.newIndex;
-        if (oldIndex === newIndex) {
-            return state;
+        const ingredients = [...state.ingredients];
+        const [ingredient] = ingredients.splice(action.oldIndex, 1);
+        let { newIndex } = action;
+        if (newIndex === 0 && getBun(state.ingredients)) {
+            newIndex += 1;
+        } else if (newIndex === state.ingredients.length - 1 && getBun(state.ingredients)) {
+            newIndex -= 1;
         }
-        const { ingredients } = state;
-        const ingredient = ingredients[oldIndex];
+        ingredients.splice(newIndex, 0, ingredient);
         return {
             ...state,
-            ingredients: [
-                ...ingredients.slice(0, Math.min(oldIndex, newIndex)),
-                ...(newIndex < oldIndex
-                    ? [ingredient, ...ingredients.slice(newIndex, oldIndex)]
-                    : []),
-                ...(newIndex > oldIndex
-                    ? [...ingredients.slice(oldIndex + 1, newIndex + 1), ingredient]
-                    : []),
-                ...ingredients.slice(Math.max(oldIndex, newIndex) + 1),
-            ],
+            ingredients,
         };
     }
     default: {

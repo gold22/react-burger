@@ -7,6 +7,7 @@ import {
     DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientType } from '../../utils/types';
+import { isBun } from '../../utils/ingredients';
 import {
     addIngredient,
     moveIngredient,
@@ -27,19 +28,9 @@ const ConstructorElement = ({ ingredient, type, index }) => {
         accept: 'ingredient',
         drop(item) {
             if ('index' in item) {
-                if (type === 'top') {
-                    dispatch(moveIngredient(item.index, 0));
-                } else if (type === 'bottom') {
-                    dispatch(moveIngredient(item.index, -1));
-                } else {
-                    dispatch(moveIngredient(item.index, index));
-                }
-            } else if (item.ingredient.type === 'bun') {
+                dispatch(moveIngredient(item.index, index));
+            } else if (isBun(item.ingredient)) {
                 dispatch(setBun(item.ingredient));
-            } else if (type === 'top') {
-                dispatch(addIngredient(item.ingredient, 0));
-            } else if (type === 'bottom') {
-                dispatch(addIngredient(item.ingredient, -1));
             } else {
                 dispatch(addIngredient(item.ingredient, index));
             }
@@ -81,12 +72,11 @@ const ConstructorElement = ({ ingredient, type, index }) => {
 ConstructorElement.propTypes = {
     ingredient: ingredientType.isRequired,
     type: PropTypes.oneOf(['top', 'bottom', 'center']),
-    index: PropTypes.number,
+    index: PropTypes.number.isRequired,
 };
 
 ConstructorElement.defaultProps = {
     type: 'center',
-    index: null,
 };
 
 export default ConstructorElement;

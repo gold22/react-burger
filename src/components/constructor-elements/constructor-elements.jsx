@@ -1,33 +1,36 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ConstructorElement from '../constructor-element/constructor-element';
+import { getBun, isBun } from '../../utils/ingredients';
 import styles from './constructor-elements.module.css';
 
 const ConstructorElements = () => {
-    const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
+    const { bun, ingredients } = useSelector((state) => ({
+        bun: getBun(state.burgerConstructor.ingredients),
+        ingredients: state.burgerConstructor.ingredients.filter((ingredient) => !isBun(ingredient)),
+    }));
 
     return (
         <div className={styles.main}>
             {bun && (
                 <ConstructorElement
-                    key="top"
+                    index={0}
                     type="top"
                     ingredient={bun}
                 />
             )}
-            <div className={`${styles.optionalItems} custom-scroll`} key="middle">
+            <div className={`${styles.optionalItems} custom-scroll`}>
                 {ingredients.map((ingredient, index) => (
                     <ConstructorElement
-                        key={index}
-                        index={index}
+                        key={ingredient.uuid}
+                        index={bun ? index + 1 : bun}
                         ingredient={ingredient}
                     />
                 ))}
             </div>
             {bun && (
                 <ConstructorElement
-                    key="bottom"
+                    index={ingredients.length + 1}
                     type="bottom"
                     ingredient={bun}
                 />

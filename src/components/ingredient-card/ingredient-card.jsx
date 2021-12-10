@@ -3,13 +3,13 @@ import { useDrag } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientType } from '../../utils/types';
-import { getIngredientCount } from '../../utils/consctructor';
+import { getIngredientCount } from '../../utils/ingredients';
 import { showIngredientDetails } from '../../services/actions/ingredient-details';
 import styles from './ingredient-card.module.css';
 
 const IngredientCard = ({ ingredient }) => {
     const count = useSelector((state) => getIngredientCount(
-        ingredient.id, state.burgerConstructor.bun, state.burgerConstructor.ingredients,
+        ingredient.id, state.burgerConstructor.ingredients,
     ));
     const dispatch = useDispatch();
 

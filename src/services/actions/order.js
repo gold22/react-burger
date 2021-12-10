@@ -1,4 +1,4 @@
-import { getIngredientsIds } from '../../utils/consctructor';
+import { getIngredientsIds } from '../../utils/ingredients';
 
 export const CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST';
 export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
@@ -9,8 +9,8 @@ export const createOrder = () => async (dispatch, getState, apiClient) => {
         type: CREATE_ORDER_REQUEST,
     });
     try {
-        const { bun, ingredients } = getState().burgerConstructor;
-        const result = await apiClient.createOrder(getIngredientsIds(bun, ingredients));
+        const { ingredients } = getState().burgerConstructor;
+        const result = await apiClient.createOrder(getIngredientsIds(ingredients));
         dispatch({
             type: CREATE_ORDER_SUCCESS,
             name: result.name,

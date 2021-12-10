@@ -9,6 +9,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { hideIngredientDetails } from '../../services/actions/ingredient-details';
 import { setBun } from '../../services/actions/constructor';
+import { getBun } from '../../utils/ingredients';
 import styles from './app.module.css';
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
             if (ingredientsList.isLoading || ingredientsList.loadError) {
                 return;
             }
-            const bun = ingredientsList.ingredients.find((ingredient) => ingredient.type === 'bun');
+            const bun = getBun(ingredientsList.ingredients);
             if (bun) {
                 dispatch(setBun(bun));
             }
