@@ -3,10 +3,18 @@ import React from 'react';
 import IngredientCards from '../ingredient-cards/ingredient-cards';
 import IngredientTabs from '../ingredient-tabs/ingredient-tabs';
 import { ingredientType } from '../../utils/types';
+import {
+    INGREDIENT_TYPE_BUN,
+    INGREDIENT_TYPE_SAUCE,
+    INGREDIENT_TYPE_MAIN,
+    isBun,
+    isSauce,
+    isMain,
+} from '../../utils/ingredients';
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = ({ ingredients }) => {
-    const [currentTab, setCurrentTab] = React.useState('bun');
+    const [currentTab, setCurrentTab] = React.useState(INGREDIENT_TYPE_BUN);
     const categories = {
         bun: React.useRef(),
         sauce: React.useRef(),
@@ -27,12 +35,12 @@ const BurgerIngredients = ({ ingredients }) => {
             categories.main.current.offsetTop - categories.bun.current.offsetTop - scrollTop,
         );
         const minOffset = Math.min(bunOffset, sauceOffset, mainOffset);
-        if (minOffset === bunOffset && currentTab !== 'bun') {
-            setCurrentTab('bun');
-        } else if (minOffset === sauceOffset && currentTab !== 'sauce') {
-            setCurrentTab('sauce');
-        } else if (minOffset === mainOffset && currentTab !== 'main') {
-            setCurrentTab('main');
+        if (minOffset === bunOffset && currentTab !== INGREDIENT_TYPE_BUN) {
+            setCurrentTab(INGREDIENT_TYPE_BUN);
+        } else if (minOffset === sauceOffset && currentTab !== INGREDIENT_TYPE_SAUCE) {
+            setCurrentTab(INGREDIENT_TYPE_SAUCE);
+        } else if (minOffset === mainOffset && currentTab !== INGREDIENT_TYPE_MAIN) {
+            setCurrentTab(INGREDIENT_TYPE_MAIN);
         }
     };
 
@@ -43,17 +51,17 @@ const BurgerIngredients = ({ ingredients }) => {
             <div className={`${styles.cards} mt-10 custom-scroll`} onScroll={handleScroll}>
                 <IngredientCards
                     title="Булки"
-                    ingredients={ingredients.filter((ingredient) => ingredient.type === 'bun')}
+                    ingredients={ingredients.filter((ingredient) => isBun(ingredient))}
                     ref={categories.bun}
                 />
                 <IngredientCards
                     title="Соусы"
-                    ingredients={ingredients.filter((ingredient) => ingredient.type === 'sauce')}
+                    ingredients={ingredients.filter((ingredient) => isSauce(ingredient))}
                     ref={categories.sauce}
                 />
                 <IngredientCards
                     title="Начинка"
-                    ingredients={ingredients.filter((ingredient) => ingredient.type === 'main')}
+                    ingredients={ingredients.filter((ingredient) => isMain(ingredient))}
                     ref={categories.main}
                 />
             </div>

@@ -21,6 +21,14 @@ export const isBun = (ingredient) => (
     ingredient.type === INGREDIENT_TYPE_BUN
 );
 
+export const isSauce = (ingredient) => (
+    ingredient.type === INGREDIENT_TYPE_SAUCE
+);
+
+export const isMain = (ingredient) => (
+    ingredient.type === INGREDIENT_TYPE_MAIN
+);
+
 export const getBun = (ingredients) => (
     ingredients.find((ingredient) => isBun(ingredient))
 );
