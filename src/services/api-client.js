@@ -45,28 +45,17 @@ class ApiClient {
             result = JSON.parse(resultText);
         } catch (error) {
         }
-        if (result && result.success === true) {
+        if (result && result.success) {
             return result;
         }
-        if (result && result.success === false && result.message) {
+        if (result && result.message) {
             throw new Error(result.message);
         }
-        if (result && result.success === false) {
-            throw new Error(resultText);
-        }
-        if (result && response.ok) {
-            return result;
-        }
-        if (response.ok) {
-            return null;
-        }
-        if (resultText) {
-            throw new Error(resultText);
-        }
-        if (response.statusText) {
-            throw new Error(response.statusText);
-        }
-        throw new Error(`Ошибка HTTP ${response.status}`);
+        throw new Error(
+            'Произошла неожиданная ошибка при обработке запроса'
+            + `: Код состояния HTTP - ${response.status}`
+            + `: HTTP ответ - ${resultText}`,
+        );
     }
 }
 
