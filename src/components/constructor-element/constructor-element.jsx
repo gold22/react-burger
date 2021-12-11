@@ -37,7 +37,7 @@ const ConstructorElement = ({ ingredient, type, index }) => {
         },
     });
 
-    const handleClose = () => {
+    const handleRemoveIngredient = () => {
         dispatch(removeIngredient(index));
     };
 
@@ -50,7 +50,7 @@ const ConstructorElement = ({ ingredient, type, index }) => {
                         text={ingredient.name}
                         price={ingredient.price}
                         thumbnail={ingredient.imageMobile}
-                        handleClose={handleClose}
+                        handleClose={handleRemoveIngredient}
                     />
                 </div>
             </div>
