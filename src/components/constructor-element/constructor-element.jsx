@@ -28,7 +28,9 @@ const ConstructorElement = ({ ingredient, type, index }) => {
         accept: 'ingredient',
         drop(item) {
             if ('index' in item) {
-                dispatch(moveIngredient(item.index, index));
+                if (item.index !== index) {
+                    dispatch(moveIngredient(item.index, index));
+                }
             } else if (isBun(item.ingredient)) {
                 dispatch(setBun(item.ingredient));
             } else {
