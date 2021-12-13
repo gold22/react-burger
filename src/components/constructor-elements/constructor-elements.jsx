@@ -1,47 +1,40 @@
 import React from 'react';
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { OrderContext } from '../../services/order-context';
+import { useSelector } from 'react-redux';
+import ConstructorElement from '../constructor-element/constructor-element';
+import { getBun, isBun } from '../../utils/ingredients';
 import styles from './constructor-elements.module.css';
 
 const ConstructorElements = () => {
-    const [order] = React.useContext(OrderContext);
+    const { bun, ingredients } = useSelector((state) => ({
+        bun: getBun(state.burgerConstructor.ingredients),
+        ingredients: state.burgerConstructor.ingredients.filter((ingredient) => !isBun(ingredient)),
+    }));
 
     return (
         <div className={styles.main}>
-            {order.bun &&
-                <div className={`${styles.mainItem} pl-8`} key="top">
+            {bun && (
+                <ConstructorElement
+                    index={0}
+                    type="top"
+                    ingredient={bun}
+                />
+            )}
+            <div className={`${styles.optionalItems} custom-scroll`}>
+                {ingredients.map((ingredient, index) => (
                     <ConstructorElement
-                        type="top"
-                        isLocked
-                        text={`${order.bun.name} (верх)`}
-                        price={order.bun.price}
-                        thumbnail={order.bun.image_mobile}
+                        key={ingredient.uuid}
+                        index={bun ? index + 1 : bun}
+                        ingredient={ingredient}
                     />
-                </div>
-            }
-            <div className={`${styles.optionalItems} custom-scroll`} key="middle">
-                {order.components.map(component => (
-                    <div className={`${styles.optionalItem} custom-scroll pr-1`} key={component._id}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={component.name}
-                            price={component.price}
-                            thumbnail={component.image_mobile}
-                        />
-                    </div>
                 ))}
             </div>
-            {order.bun &&
-                <div className={`${styles.mainItem} pl-8`} key="bottom">
-                    <ConstructorElement
-                        type="bottom"
-                        isLocked
-                        text={`${order.bun.name} (низ)`}
-                        price={order.bun.price}
-                        thumbnail={order.bun.image_mobile}
-                    />
-                </div>
-            }
+            {bun && (
+                <ConstructorElement
+                    index={ingredients.length + 1}
+                    type="bottom"
+                    ingredient={bun}
+                />
+            )}
         </div>
     );
 };

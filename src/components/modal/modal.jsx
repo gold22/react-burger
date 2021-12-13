@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -11,15 +11,15 @@ const Modal = ({ title, visible, children, onClose }) => {
             return null;
         }
         const handleKeyDown = (event) => {
-            if ('Escape' === event.key) {
+            if (event.key === 'Escape') {
                 onClose();
             }
-        }
+        };
         document.addEventListener('keydown', handleKeyDown);
 
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
-        }
+        };
     }, [visible, onClose]);
 
     if (!visible) {
@@ -49,7 +49,7 @@ const Modal = ({ title, visible, children, onClose }) => {
                 </div>
             </div>
         </ModalOverlay>,
-        document.getElementById('modal')
+        document.getElementById('modal'),
     );
 };
 

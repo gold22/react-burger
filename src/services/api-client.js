@@ -1,13 +1,9 @@
-// noinspection ES6UnusedImports
-// eslint-disable-next-line no-unused-vars
-import Order from '../model/order';
-
 class ApiClient {
     /**
      * @param {Object} config
      * @param {string} config.url
      */
-    constructor({url}) {
+    constructor({ url }) {
         this.url = url;
     }
 
@@ -15,24 +11,24 @@ class ApiClient {
      * @returns {Promise<Array>}
      */
     async getIngredients() {
-        const result = await this.fetch(`${this.url}/ingredients`);
+        const result = await ApiClient.fetch(`${this.url}/ingredients`);
         return result.data;
     }
 
     /**
-     * @param {Order} order
+     * @param {string[]} ingredientsIds
      * @returns {Promise<Object>}
      */
-    async createOrder(order) {
-        const request = {
-            ingredients: order.getIngredientsIds(),
+    async createOrder(ingredientsIds) {
+        const body = {
+            ingredients: ingredientsIds,
         };
-        return await this.fetch(`${this.url}/orders`, {
+        return ApiClient.fetch(`${this.url}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(request),
+            body: JSON.stringify(body),
         });
     }
 
@@ -41,7 +37,7 @@ class ApiClient {
      * @param {Object} options
      * @returns {Promise<?Object>}
      */
-    async fetch(url, options = {}) {
+    static async fetch(url, options = {}) {
         const response = await fetch(url, options);
         const resultText = await response.text();
         let result = null;
@@ -49,28 +45,17 @@ class ApiClient {
             result = JSON.parse(resultText);
         } catch (error) {
         }
-        if (result && true === result.success) {
+        if (result && result.success) {
             return result;
         }
-        if (result && false === result.success && result.message) {
+        if (result && result.message) {
             throw new Error(result.message);
         }
-        if (result && false === result.success) {
-            throw new Error(resultText);
-        }
-        if (result && response.ok) {
-            return result;
-        }
-        if (response.ok) {
-            return null;
-        }
-        if (resultText) {
-            throw new Error(resultText);
-        }
-        if (response.statusText) {
-            throw new Error(response.statusText);
-        }
-        throw new Error(`Ошибка HTTP ${response.status}`);
+        throw new Error(
+            'Произошла неожиданная ошибка при обработке запроса'
+            + `: Код состояния HTTP - ${response.status}`
+            + `: HTTP ответ - ${resultText}`,
+        );
     }
 }
 
