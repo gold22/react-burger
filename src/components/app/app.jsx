@@ -1,10 +1,8 @@
 import React from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import ConstructorPage from '../../pages/constructor-page/constructor-page';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { hideIngredientDetails } from '../../services/actions/ingredient-details';
@@ -59,12 +57,13 @@ const App = () => {
     return (
         <main>
             <AppHeader />
-            <div className={styles.panels}>
-                <DndProvider backend={HTML5Backend}>
-                    <BurgerIngredients ingredients={ingredientsList.ingredients} />
-                    <BurgerConstructor />
-                </DndProvider>
-            </div>
+            <Router>
+                <Switch>
+                    <Route path="/">
+                        <ConstructorPage />
+                    </Route>
+                </Switch>
+            </Router>
             {ingredientDetails.ingredient && (
                 <IngredientDetails
                     ingredient={ingredientDetails.ingredient}

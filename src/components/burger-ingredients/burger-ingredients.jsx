@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import IngredientCards from '../ingredient-cards/ingredient-cards';
 import IngredientTabs from '../ingredient-tabs/ingredient-tabs';
-import { ingredientType } from '../../utils/types';
 import {
     INGREDIENT_TYPE_BUN,
     INGREDIENT_TYPE_SAUCE,
@@ -13,8 +12,9 @@ import {
 } from '../../utils/ingredients';
 import styles from './burger-ingredients.module.css';
 
-const BurgerIngredients = ({ ingredients }) => {
+const BurgerIngredients = () => {
     const [currentTab, setCurrentTab] = React.useState(INGREDIENT_TYPE_BUN);
+    const { ingredients } = useSelector((state) => state.ingredientsList);
     const categories = {
         bun: React.useRef(),
         sauce: React.useRef(),
@@ -67,10 +67,6 @@ const BurgerIngredients = ({ ingredients }) => {
             </div>
         </section>
     );
-};
-
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientType).isRequired,
 };
 
 export default BurgerIngredients;
