@@ -3,28 +3,39 @@ import { Link } from 'react-router-dom';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
-import styles from './login-page.module.css';
+import loginStyles from '../login-page/login-page.module.css';
 
-const LoginPage = () => {
+const RegisterPage = () => {
+    const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
+    const updateName = (e) => {
+        setName(e.target.value);
+    };
     const updateEmail = (e) => {
         setEmail(e.target.value);
     };
     const updatePassword = (e) => {
         setPassword(e.target.value);
     };
-    const logIn = (e) => {
+    const register = (e) => {
         e.preventDefault();
     };
 
     return (
         <DialogPage>
-            <Form onSubmit={logIn}>
+            <Form onSubmit={register}>
                 <p className="text text_type_main-medium">
-                    Вход
+                    Регистрация
                 </p>
+                <Input
+                    type="text"
+                    name="name"
+                    placeholder="Имя"
+                    value={name}
+                    onChange={updateName}
+                />
                 <Input
                     type="text"
                     name="email"
@@ -38,24 +49,16 @@ const LoginPage = () => {
                     onChange={updatePassword}
                 />
                 <Button type="primary" size="medium">
-                    Войти
+                    Зарегистрироваться
                 </Button>
             </Form>
-            <div className={styles.links}>
+            <div className={loginStyles.links}>
                 <div>
                     <span className="text text_type_main-default text_color_inactive">
-                        Вы - новый пользователь?&nbsp;
+                        Уже зарегистрированы?&nbsp;
                     </span>
-                    <Link to="/register" className="text text_type_main-default text_color_accent">
-                        Зарегистрироваться
-                    </Link>
-                </div>
-                <div>
-                    <span className="text text_type_main-default text_color_inactive">
-                        Забыли пароль?&nbsp;
-                    </span>
-                    <Link to="/forgot-password" className="text text_type_main-default text_color_accent">
-                        Восстановить пароль
+                    <Link to="/login" className="text text_type_main-default text_color_accent">
+                        Войти
                     </Link>
                 </div>
             </div>
@@ -63,4 +66,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default RegisterPage;

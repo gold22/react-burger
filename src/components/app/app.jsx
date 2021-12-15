@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import ConstructorPage from '../../pages/constructor-page/constructor-page';
 import LoginPage from '../../pages/login-page/login-page';
+import RegisterPage from '../../pages/register-page/register-page';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { hideIngredientDetails } from '../../services/actions/ingredient-details';
@@ -62,6 +63,9 @@ const App = () => {
                 <Switch>
                     <Route path="/login">
                         <LoginPage />
+                    </Route>
+                    <Route path="/register">
+                        <RegisterPage />
                     </Route>
                     <Route path="/">
                         <ConstructorPage />
