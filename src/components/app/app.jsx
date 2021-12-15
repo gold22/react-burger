@@ -5,7 +5,8 @@ import AppHeader from '../app-header/app-header';
 import ConstructorPage from '../../pages/constructor-page/constructor-page';
 import LoginPage from '../../pages/login-page/login-page';
 import RegisterPage from '../../pages/register-page/register-page';
-import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
+import ForgotPasswordPage from '../../pages/forgot-password-page/forgot-password-page';
+import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { hideIngredientDetails } from '../../services/actions/ingredient-details';
@@ -70,6 +71,9 @@ const App = () => {
                     </Route>
                     <Route path="/forgot-password">
                         <ForgotPasswordPage />
+                    </Route>
+                    <Route path="/reset-password">
+                        <ResetPasswordPage />
                     </Route>
                     <Route path="/">
                         <ConstructorPage />
