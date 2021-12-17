@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import ConstructorPage from '../../pages/constructor-page/constructor-page';
+import IngredientDetailsPage from '../../pages/ingredient-details-page/ingredient-details-page';
 import LoginPage from '../../pages/login-page/login-page';
 import ForgotPasswordPage from '../../pages/forgot-password-page/forgot-password-page';
 import ProfilePage from '../../pages/profile-page/profile-page';
 import RegisterPage from '../../pages/register-page/register-page';
 import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page';
-import IngredientDetails from '../ingredient-details/ingredient-details';
+import IngredientDetailsDialog from '../ingredient-details-dialog/ingredient-details-dialog';
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { hideIngredientDetails } from '../../services/actions/ingredient-details';
 import { setBun } from '../../services/actions/constructor';
@@ -79,13 +80,16 @@ const App = () => {
                     <Route path="/profile">
                         <ProfilePage />
                     </Route>
+                    <Route path="/ingredients/:id">
+                        <IngredientDetailsPage />
+                    </Route>
                     <Route path="/">
                         <ConstructorPage />
                     </Route>
                 </Switch>
             </Router>
             {ingredientDetails.ingredient && (
-                <IngredientDetails
+                <IngredientDetailsDialog
                     ingredient={ingredientDetails.ingredient}
                     visible
                     onClose={() => { dispatch(hideIngredientDetails()); }}
