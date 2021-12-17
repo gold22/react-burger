@@ -1,3 +1,10 @@
+/**
+ * @typedef {Object} AuthResult
+ * @property {{name: string, email: string}} user
+ * @property {string} accessToken
+ * @property {string} refreshToken
+ */
+
 class ApiClient {
     /**
      * @param {Object} config
@@ -33,9 +40,23 @@ class ApiClient {
     }
 
     /**
+     * @param {{name: string, email: string, password: string}} user
+     * @returns {Promise<AuthResult>}
+     */
+    async registerUser(user) {
+        return ApiClient.fetch(`${this.url}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        });
+    }
+
+    /**
      * @param {string} url
      * @param {Object} options
-     * @returns {Promise<?Object>}
+     * @returns {Promise<Object>}
      */
     static async fetch(url, options = {}) {
         const response = await fetch(url, options);
