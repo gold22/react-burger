@@ -4,6 +4,7 @@ import { constructorReducer } from './constructor';
 import { ingredientDetailsReducer } from './ingredient-details';
 import { ingredientsListReducer } from './ingredients-list';
 import { orderReducer } from './order';
+import { resetPasswordReducer } from './reset-password';
 
 // eslint-disable-next-line import/prefer-default-export
 export const rootReducer = combineReducers({
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
     ingredientDetails: ingredientDetailsReducer,
     ingredientsList: ingredientsListReducer,
     order: orderReducer,
+    resetPassword: resetPasswordReducer,
 });

@@ -68,6 +68,35 @@ class ApiClient {
     }
 
     /**
+     * @param {string} email
+     * @returns {Promise<void>}
+     */
+    async sendResetUserPasswordEmail(email) {
+        await ApiClient.fetch(`${this.url}/password-reset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+    }
+
+    /**
+     * @param {string} password
+     * @param {string} token
+     * @returns {Promise<void>}
+     */
+    async resetUserPassword({ password, token }) {
+        await ApiClient.fetch(`${this.url}/password-reset/reset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ password, token }),
+        });
+    }
+
+    /**
      * @param {string} url
      * @param {Object} options
      * @returns {Promise<Object>}

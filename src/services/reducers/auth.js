@@ -14,6 +14,10 @@ const unauthState = {
     registrationError: null,
     isLoggingIn: false,
     loginError: null,
+    isSendingEmail: false,
+    sendingEmailError: null,
+    isResettingPassword: false,
+    resetPasswordError: null,
 };
 
 const initialState = {
@@ -40,7 +44,6 @@ export const authReducer = (state = initialState, action) => {
         };
     }
     case REGISTER_USER_ERROR: {
-        localStorage.removeItem('refreshToken');
         return {
             ...state,
             ...unauthState,
@@ -63,7 +66,6 @@ export const authReducer = (state = initialState, action) => {
         };
     }
     case LOGIN_USER_ERROR: {
-        localStorage.removeItem('refreshToken');
         return {
             ...state,
             ...unauthState,
