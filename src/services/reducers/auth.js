@@ -7,7 +7,7 @@ import {
     LOGIN_USER_ERROR,
 } from '../actions/auth';
 
-const initialState = {
+const unauthState = {
     user: null,
     accessToken: null,
     isRegistering: false,
@@ -16,19 +16,25 @@ const initialState = {
     loginError: null,
 };
 
+const initialState = {
+    redirectPath: '/',
+    ...unauthState,
+};
+
 // eslint-disable-next-line import/prefer-default-export
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
     case REGISTER_USER_REQUEST: {
         return {
-            ...initialState,
+            ...state,
             isRegistering: true,
         };
     }
     case REGISTER_USER_SUCCESS: {
         localStorage.setItem('refreshToken', action.refreshToken);
         return {
-            ...initialState,
+            ...state,
+            ...unauthState,
             user: action.user,
             accessToken: action.accessToken,
         };
@@ -36,20 +42,22 @@ export const authReducer = (state = initialState, action) => {
     case REGISTER_USER_ERROR: {
         localStorage.removeItem('refreshToken');
         return {
-            ...initialState,
+            ...state,
+            ...unauthState,
             registrationError: action.message,
         };
     }
     case LOGIN_USER_REQUEST: {
         return {
-            ...initialState,
+            ...state,
             isLoggingIn: true,
         };
     }
     case LOGIN_USER_SUCCESS: {
         localStorage.setItem('refreshToken', action.refreshToken);
         return {
-            ...initialState,
+            ...state,
+            ...unauthState,
             user: action.user,
             accessToken: action.accessToken,
         };
@@ -57,7 +65,8 @@ export const authReducer = (state = initialState, action) => {
     case LOGIN_USER_ERROR: {
         localStorage.removeItem('refreshToken');
         return {
-            ...initialState,
+            ...state,
+            ...unauthState,
             loginError: action.message,
         };
     }

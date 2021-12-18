@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
@@ -29,13 +29,17 @@ const LoginPage = () => {
         dispatch(logInUser({ email, password }));
     };
 
+    if (auth.user) {
+        return <Redirect to={auth.redirectPath} />;
+    }
+
     return (
         <DialogPage>
             <Form onSubmit={logIn}>
                 <p className="text text_type_main-medium">
                     Вход
                 </p>
-                {!auth.isLoggingIn && auth.loginError && (
+                {auth.loginError && (
                     <ErrorMessage message={auth.loginError} />
                 )}
                 <Input
