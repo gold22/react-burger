@@ -54,6 +54,20 @@ class ApiClient {
     }
 
     /**
+     * @param {{email: string, password: string}} user
+     * @returns {Promise<AuthResult>}
+     */
+    async logInUser(user) {
+        return ApiClient.fetch(`${this.url}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        });
+    }
+
+    /**
      * @param {string} url
      * @param {Object} options
      * @returns {Promise<Object>}
