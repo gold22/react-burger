@@ -52,8 +52,8 @@ class ApiClient {
             },
             body: JSON.stringify(user),
         });
-        localStorage.setItem('accessToken', result.accessToken);
-        localStorage.setItem('refreshToken', result.refreshToken);
+        ApiClient.setAccessToken(result.accessToken);
+        ApiClient.setRefreshToken(result.refreshToken);
         return result.user;
     }
 
@@ -70,9 +70,25 @@ class ApiClient {
             },
             body: JSON.stringify(user),
         });
-        localStorage.setItem('accessToken', result.accessToken);
-        localStorage.setItem('refreshToken', result.refreshToken);
+        ApiClient.setAccessToken(result.accessToken);
+        ApiClient.setRefreshToken(result.refreshToken);
         return result.user;
+    }
+
+    /**
+     * @returns {Promise<void>}
+     */
+    async logOutUser() {
+        await this.fetch(`${this.url}/auth/logout`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: ApiClient.getAccessToken(),
+            },
+            body: JSON.stringify({ token: ApiClient.getRefreshToken() }),
+        });
+        ApiClient.setAccessToken(null);
+        ApiClient.setRefreshToken(null);
     }
 
     /**
@@ -110,7 +126,7 @@ class ApiClient {
     async getUser() {
         const result = await this.fetch(`${this.url}/auth/user`, {
             headers: {
-                Authorization: localStorage.getItem('accessToken'),
+                Authorization: ApiClient.getAccessToken(),
             },
         });
         return result.user;
@@ -125,7 +141,7 @@ class ApiClient {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: localStorage.getItem('accessToken'),
+                Authorization: ApiClient.getAccessToken(),
             },
             body: JSON.stringify(user),
         });
@@ -140,11 +156,11 @@ class ApiClient {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: localStorage.getItem('accessToken'),
+                Authorization: ApiClient.getAccessToken(),
             },
-            body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
+            body: JSON.stringify({ token: ApiClient.getRefreshToken() }),
         });
-        localStorage.setItem('accessToken', result.accessToken);
+        ApiClient.setAccessToken(result.accessToken);
     }
 
     /**
@@ -160,7 +176,7 @@ class ApiClient {
                 ...options,
                 headers: {
                     ...options.headers,
-                    Authorization: localStorage.getItem('accessToken'),
+                    Authorization: ApiClient.getAccessToken(),
                 },
             });
         }
@@ -181,6 +197,30 @@ class ApiClient {
             + `: Код состояния HTTP - ${response.status}`
             + `: HTTP ответ - ${resultText}`,
         );
+    }
+
+    static getAccessToken() {
+        return localStorage.getItem('accessToken') ?? '';
+    }
+
+    static setAccessToken(accessToken) {
+        if (accessToken) {
+            localStorage.setItem('accessToken', accessToken);
+        } else {
+            localStorage.removeItem('accessToken');
+        }
+    }
+
+    static getRefreshToken() {
+        return localStorage.getItem('refreshToken') ?? '';
+    }
+
+    static setRefreshToken(refreshToken) {
+        if (refreshToken) {
+            localStorage.setItem('refreshToken', refreshToken);
+        } else {
+            localStorage.removeItem('refreshToken');
+        }
     }
 }
 

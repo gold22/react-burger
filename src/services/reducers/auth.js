@@ -5,6 +5,9 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_ERROR,
+    LOGOUT_USER_REQUEST,
+    LOGOUT_USER_SUCCESS,
+    LOGOUT_USER_ERROR,
     GET_USER_REQUEST,
     GET_USER_SUCCESS,
     GET_USER_ERROR,
@@ -19,6 +22,8 @@ const unauthState = {
     registrationError: null,
     isLoggingIn: false,
     loginError: null,
+    isLoggingOut: false,
+    logoutError: null,
     isSendingEmail: false,
     sendingEmailError: null,
     isResettingPassword: false,
@@ -75,6 +80,25 @@ export const authReducer = (state = initialState, action) => {
             ...state,
             ...unauthState,
             loginError: action.message,
+        };
+    }
+    case LOGOUT_USER_REQUEST: {
+        return {
+            ...state,
+            isLoggingOut: true,
+            logoutError: null,
+        };
+    }
+    case LOGOUT_USER_SUCCESS: {
+        return {
+            ...initialState,
+        };
+    }
+    case LOGOUT_USER_ERROR: {
+        return {
+            ...state,
+            isLoggingOut: false,
+            logoutError: action.message,
         };
     }
     case GET_USER_REQUEST: {
