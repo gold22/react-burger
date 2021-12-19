@@ -14,7 +14,8 @@ const Form = ({ children, onSubmit }) => (
 Form.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.element,
-        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.bool,
+        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.element, PropTypes.bool])),
     ]).isRequired,
     onSubmit: PropTypes.func.isRequired,
 };

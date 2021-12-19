@@ -18,7 +18,7 @@ class ApiClient {
      * @returns {Promise<Array>}
      */
     async getIngredients() {
-        const result = await ApiClient.fetch(`${this.url}/ingredients`);
+        const result = await this.fetch(`${this.url}/ingredients`);
         return result.data;
     }
 
@@ -30,7 +30,7 @@ class ApiClient {
         const body = {
             ingredients: ingredientsIds,
         };
-        return ApiClient.fetch(`${this.url}/orders`, {
+        return this.fetch(`${this.url}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,30 +41,38 @@ class ApiClient {
 
     /**
      * @param {{name: string, email: string, password: string}} user
-     * @returns {Promise<AuthResult>}
+     * @returns {Promise<{email: string, name: string}>}
      */
     async registerUser(user) {
-        return ApiClient.fetch(`${this.url}/auth/register`, {
+        /** @type {AuthResult} */
+        const result = await this.fetch(`${this.url}/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user),
         });
+        localStorage.setItem('accessToken', result.accessToken);
+        localStorage.setItem('refreshToken', result.refreshToken);
+        return result.user;
     }
 
     /**
      * @param {{email: string, password: string}} user
-     * @returns {Promise<AuthResult>}
+     * @returns {Promise<{email: string, name: string}>}
      */
     async logInUser(user) {
-        return ApiClient.fetch(`${this.url}/auth/login`, {
+        /** @type {AuthResult} */
+        const result = await this.fetch(`${this.url}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user),
         });
+        localStorage.setItem('accessToken', result.accessToken);
+        localStorage.setItem('refreshToken', result.refreshToken);
+        return result.user;
     }
 
     /**
@@ -72,7 +80,7 @@ class ApiClient {
      * @returns {Promise<void>}
      */
     async sendResetUserPasswordEmail(email) {
-        await ApiClient.fetch(`${this.url}/password-reset`, {
+        await this.fetch(`${this.url}/password-reset`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +95,7 @@ class ApiClient {
      * @returns {Promise<void>}
      */
     async resetUserPassword({ password, token }) {
-        await ApiClient.fetch(`${this.url}/password-reset/reset`, {
+        await this.fetch(`${this.url}/password-reset/reset`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -97,12 +105,65 @@ class ApiClient {
     }
 
     /**
+     * @returns {Promise<{email: string, name: string}>}
+     */
+    async getUser() {
+        const result = await this.fetch(`${this.url}/auth/user`, {
+            headers: {
+                Authorization: localStorage.getItem('accessToken'),
+            },
+        });
+        return result.user;
+    }
+
+    /**
+     * @param {{name: string, email: string, password: string}} user
+     * @returns {Promise<{email: string, name: string}>}
+     */
+    async updateUser(user) {
+        const result = await this.fetch(`${this.url}/auth/user`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: localStorage.getItem('accessToken'),
+            },
+            body: JSON.stringify(user),
+        });
+        return result.user;
+    }
+
+    /**
+     * @returns {Promise<void>}
+     */
+    async updateToken() {
+        const result = await this.fetch(`${this.url}/auth/token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: localStorage.getItem('accessToken'),
+            },
+            body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
+        });
+        localStorage.setItem('accessToken', result.accessToken);
+    }
+
+    /**
      * @param {string} url
      * @param {Object} options
      * @returns {Promise<Object>}
      */
-    static async fetch(url, options = {}) {
-        const response = await fetch(url, options);
+    async fetch(url, options = {}) {
+        let response = await fetch(url, options);
+        if (response.status === 403 && 'headers' in options && 'Authorization' in options.headers) {
+            await this.updateToken();
+            response = await fetch(url, {
+                ...options,
+                headers: {
+                    ...options.headers,
+                    Authorization: localStorage.getItem('accessToken'),
+                },
+            });
+        }
         const resultText = await response.text();
         let result = null;
         try {

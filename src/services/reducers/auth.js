@@ -5,11 +5,16 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_ERROR,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_ERROR,
+    UPDATE_USER_REQUEST,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_ERROR,
 } from '../actions/auth';
 
 const unauthState = {
     user: null,
-    accessToken: null,
     isRegistering: false,
     registrationError: null,
     isLoggingIn: false,
@@ -18,6 +23,10 @@ const unauthState = {
     sendingEmailError: null,
     isResettingPassword: false,
     resetPasswordError: null,
+    isLoading: true,
+    loadError: null,
+    isUpdating: true,
+    updateError: null,
 };
 
 const initialState = {
@@ -35,12 +44,10 @@ export const authReducer = (state = initialState, action) => {
         };
     }
     case REGISTER_USER_SUCCESS: {
-        localStorage.setItem('refreshToken', action.refreshToken);
         return {
             ...state,
             ...unauthState,
             user: action.user,
-            accessToken: action.accessToken,
         };
     }
     case REGISTER_USER_ERROR: {
@@ -57,12 +64,10 @@ export const authReducer = (state = initialState, action) => {
         };
     }
     case LOGIN_USER_SUCCESS: {
-        localStorage.setItem('refreshToken', action.refreshToken);
         return {
             ...state,
             ...unauthState,
             user: action.user,
-            accessToken: action.accessToken,
         };
     }
     case LOGIN_USER_ERROR: {
@@ -70,6 +75,48 @@ export const authReducer = (state = initialState, action) => {
             ...state,
             ...unauthState,
             loginError: action.message,
+        };
+    }
+    case GET_USER_REQUEST: {
+        return {
+            ...state,
+            isLoading: true,
+        };
+    }
+    case GET_USER_SUCCESS: {
+        return {
+            ...state,
+            user: action.user,
+            isLoading: false,
+            loadError: null,
+        };
+    }
+    case GET_USER_ERROR: {
+        return {
+            ...state,
+            isLoading: false,
+            loadError: action.message,
+        };
+    }
+    case UPDATE_USER_REQUEST: {
+        return {
+            ...state,
+            isUpdating: true,
+        };
+    }
+    case UPDATE_USER_SUCCESS: {
+        return {
+            ...state,
+            user: action.user,
+            isUpdating: false,
+            updateError: null,
+        };
+    }
+    case UPDATE_USER_ERROR: {
+        return {
+            ...state,
+            isUpdating: false,
+            updateError: action.message,
         };
     }
     default: {
