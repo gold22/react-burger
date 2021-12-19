@@ -62,8 +62,8 @@ const App = () => {
 
     return (
         <main>
-            <AppHeader />
             <Router>
+                <AppHeader />
                 <Switch>
                     <Route path="/login">
                         <LoginPage />
