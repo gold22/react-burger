@@ -8,6 +8,10 @@ const ProfilePage = () => (
         <div className={styles.container}>
             <div className={styles.menu}>
                 <ProfileMenu />
+
+                <p className="text text_type_main-default text_color_inactive mt-20">
+                    В этом разделе вы можете изменить свои персональные данные
+                </p>
             </div>
             <div className={styles.form}>
                 <ProfileForm />

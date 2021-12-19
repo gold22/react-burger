@@ -6,6 +6,7 @@ import ConstructorPage from '../../pages/constructor-page/constructor-page';
 import IngredientDetailsPage from '../../pages/ingredient-details-page/ingredient-details-page';
 import LoginPage from '../../pages/login-page/login-page';
 import ForgotPasswordPage from '../../pages/forgot-password-page/forgot-password-page';
+import ProfileOrdersPage from '../../pages/profile-orders-page/profile-orders-page';
 import ProfilePage from '../../pages/profile-page/profile-page';
 import RegisterPage from '../../pages/register-page/register-page';
 import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page';
@@ -76,6 +77,9 @@ const App = () => {
                     </Route>
                     <Route path="/reset-password">
                         <ResetPasswordPage />
+                    </Route>
+                    <Route path="/profile/orders">
+                        <ProfileOrdersPage />
                     </Route>
                     <Route path="/profile">
                         <ProfilePage />

@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+    justify-content: center;
+    margin: 0 calc(var(--offset-base-size)  * 10);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 112px 0 0 0;
+    width: 1240px;
+}
+
+.menu {
+    width: 33%;
+}
+
+.orders {
+    width: 66%;
+}
