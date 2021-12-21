@@ -17,13 +17,18 @@ const ResetPasswordPage = () => {
     const dispatch = useDispatch();
 
     React.useEffect(() => () => {
+        if (resetPassword.isPasswordReset) {
+            localStorage.removeItem('isEmailSent');
+        }
         dispatch(resetPasswordReset());
-    }, [dispatch]);
+    }, [resetPassword.isPasswordReset, dispatch]);
 
     if (auth.user || ApiClient.isAuthenticated()) {
         return <Redirect to="/" />;
     }
-
+    if (!localStorage.getItem('isEmailSent')) {
+        return <Redirect to="/forgot-password" />;
+    }
     if (resetPassword.isPasswordReset) {
         return <Redirect to="/login" push />;
     }

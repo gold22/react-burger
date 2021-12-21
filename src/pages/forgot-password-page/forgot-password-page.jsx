@@ -34,8 +34,8 @@ const ForgotPasswordPage = () => {
     if (auth.user || ApiClient.isAuthenticated()) {
         return <Redirect to="/" />;
     }
-
     if (resetPassword.isEmailSent) {
+        localStorage.setItem('isEmailSent', 'true');
         return <Redirect to="/reset-password" push />;
     }
 
