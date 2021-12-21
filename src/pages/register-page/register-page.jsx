@@ -6,6 +6,7 @@ import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
 import { registerUser } from '../../services/actions/auth';
+import ApiClient from '../../services/api-client';
 import loginStyles from '../login-page/login-page.module.css';
 
 const RegisterPage = () => {
@@ -33,7 +34,7 @@ const RegisterPage = () => {
         dispatch(registerUser({ name, email, password }));
     };
 
-    if (auth.user) {
+    if (auth.user || ApiClient.isAuthenticated()) {
         return <Redirect to="/" />;
     }
 

@@ -6,17 +6,23 @@ import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
 import { resetPasswordReset, resetUserPassword } from '../../services/actions/reset-password';
+import ApiClient from '../../services/api-client';
 import loginStyles from '../login-page/login-page.module.css';
 
 const ResetPasswordPage = () => {
     const [password, setPassword] = React.useState('');
     const [token, setToken] = React.useState('');
+    const { auth } = useSelector((state) => state);
     const { resetPassword } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     React.useEffect(() => () => {
         dispatch(resetPasswordReset());
     }, [dispatch]);
+
+    if (auth.user || ApiClient.isAuthenticated()) {
+        return <Redirect to="/" />;
+    }
 
     if (resetPassword.isPasswordReset) {
         return <Redirect to="/login" push />;
