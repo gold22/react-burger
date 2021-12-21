@@ -222,6 +222,10 @@ class ApiClient {
             localStorage.removeItem('refreshToken');
         }
     }
+
+    static isAuthenticated() {
+        return !!ApiClient.getRefreshToken();
+    }
 }
 
 export default ApiClient;
