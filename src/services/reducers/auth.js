@@ -14,6 +14,7 @@ import {
     UPDATE_USER_REQUEST,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
+    SET_REDIRECT_TO,
 } from '../actions/auth';
 
 const unauthState = {
@@ -35,7 +36,7 @@ const unauthState = {
 };
 
 const initialState = {
-    redirectPath: '/',
+    redirectTo: '/',
     ...unauthState,
 };
 
@@ -141,6 +142,12 @@ export const authReducer = (state = initialState, action) => {
             ...state,
             isUpdating: false,
             updateError: action.message,
+        };
+    }
+    case SET_REDIRECT_TO: {
+        return {
+            ...state,
+            redirectTo: action.redirectTo,
         };
     }
     default: {

@@ -14,6 +14,7 @@ import RegisterPage from '../../pages/register-page/register-page';
 import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page';
 import IngredientDetailsDialog from '../ingredient-details-dialog/ingredient-details-dialog';
 import ErrorMessage from '../error-message/error-message';
+import ProtectedRoute from '../protected-route/protected-route';
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { hideIngredientDetails } from '../../services/actions/ingredient-details';
 import { setBun } from '../../services/actions/constructor';
@@ -81,12 +82,12 @@ const App = () => {
                     <Route path="/reset-password">
                         <ResetPasswordPage />
                     </Route>
-                    <Route path="/profile/orders">
+                    <ProtectedRoute path="/profile/orders">
                         <ProfileOrdersPage />
-                    </Route>
-                    <Route path="/profile">
+                    </ProtectedRoute>
+                    <ProtectedRoute path="/profile">
                         <ProfilePage />
-                    </Route>
+                    </ProtectedRoute>
                     <Route path="/ingredients/:id">
                         <IngredientDetailsPage />
                     </Route>

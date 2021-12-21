@@ -30,7 +30,7 @@ const LoginPage = () => {
     };
 
     if (auth.user) {
-        return <Redirect to={auth.redirectPath} />;
+        return <Redirect to={auth.redirectTo} />;
     }
 
     return (
