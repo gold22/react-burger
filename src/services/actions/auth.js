@@ -13,7 +13,6 @@ export const GET_USER_ERROR = 'GET_USER_ERROR';
 export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_ERROR = 'UPDATE_USER_ERROR';
-export const SET_REDIRECT_TO = 'SET_REDIRECT_TO';
 
 export const registerUser = (user) => async (dispatch, getState, apiClient) => {
     dispatch({
@@ -103,8 +102,3 @@ export const updateUser = (user) => async (dispatch, getState, apiClient) => {
         });
     }
 };
-
-export const setRedirectTo = (redirectTo) => ({
-    type: SET_REDIRECT_TO,
-    redirectTo,
-});

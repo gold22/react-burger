@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
@@ -11,6 +11,7 @@ import styles from './login-page.module.css';
 const LoginPage = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const location = useLocation();
     const { auth } = useSelector((state) => state);
     const dispatch = useDispatch();
 
@@ -30,7 +31,7 @@ const LoginPage = () => {
     };
 
     if (auth.user) {
-        return <Redirect to={auth.redirectTo} />;
+        return <Redirect to={location.state?.from || '/'} />;
     }
 
     return (

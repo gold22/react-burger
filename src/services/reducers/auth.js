@@ -14,10 +14,9 @@ import {
     UPDATE_USER_REQUEST,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
-    SET_REDIRECT_TO,
 } from '../actions/auth';
 
-const unauthState = {
+const initialState = {
     user: null,
     isRegistering: false,
     registrationError: null,
@@ -35,11 +34,6 @@ const unauthState = {
     updateError: null,
 };
 
-const initialState = {
-    redirectTo: '/',
-    ...unauthState,
-};
-
 // eslint-disable-next-line import/prefer-default-export
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -51,15 +45,13 @@ export const authReducer = (state = initialState, action) => {
     }
     case REGISTER_USER_SUCCESS: {
         return {
-            ...state,
-            ...unauthState,
+            ...initialState,
             user: action.user,
         };
     }
     case REGISTER_USER_ERROR: {
         return {
-            ...state,
-            ...unauthState,
+            ...initialState,
             registrationError: action.message,
         };
     }
@@ -71,15 +63,13 @@ export const authReducer = (state = initialState, action) => {
     }
     case LOGIN_USER_SUCCESS: {
         return {
-            ...state,
-            ...unauthState,
+            ...initialState,
             user: action.user,
         };
     }
     case LOGIN_USER_ERROR: {
         return {
-            ...state,
-            ...unauthState,
+            ...initialState,
             loginError: action.message,
         };
     }
@@ -142,12 +132,6 @@ export const authReducer = (state = initialState, action) => {
             ...state,
             isUpdating: false,
             updateError: action.message,
-        };
-    }
-    case SET_REDIRECT_TO: {
-        return {
-            ...state,
-            redirectTo: action.redirectTo,
         };
     }
     default: {

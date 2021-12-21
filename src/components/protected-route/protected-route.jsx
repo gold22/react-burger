@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
-import { setRedirectTo } from '../../services/actions/auth';
 
 const ProtectedRoute = ({ children, path }) => {
     const { auth } = useSelector((state) => state);
-    const dispatch = useDispatch();
 
     const render = ({ location }) => {
         if (auth.user) {
             return children;
         }
-        dispatch(setRedirectTo(location));
-        return <Redirect to="/login" push />;
+        return (
+            <Redirect
+                to={{
+                    pathname: '/login',
+                    state: { from: location },
+                }}
+            />
+        );
     };
 
     return (
