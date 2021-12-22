@@ -20,9 +20,9 @@ const IngredientCard = ({ ingredient }) => {
     });
 
     const handleShowDetails = () => {
-        history.replace({
+        history.push({
             pathname: generatePath('/ingredients/:id', { id: ingredient.id }),
-            state: { from: location },
+            state: { background: location },
         });
     };
 
