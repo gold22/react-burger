@@ -2,6 +2,14 @@
     max-width: 600px;
 }
 
+.dropArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 192px;
+    width: 568px;
+}
+
 .submit {
     display: flex;
     direction: ltr;

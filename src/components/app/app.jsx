@@ -15,8 +15,6 @@ import ResetPasswordPage from '../../pages/reset-password-page/reset-password-pa
 import ErrorMessage from '../error-message/error-message';
 import ProtectedRoute from '../protected-route/protected-route';
 import { getIngredients } from '../../services/actions/ingredients-list';
-import { setBun } from '../../services/actions/constructor';
-import { getBun } from '../../utils/ingredients';
 
 const App = () => {
     const { ingredientsList } = useSelector((state) => state);
@@ -25,18 +23,6 @@ const App = () => {
     React.useEffect(
         () => { dispatch(getIngredients()); },
         [dispatch],
-    );
-    React.useEffect(
-        () => {
-            if (ingredientsList.isLoading || ingredientsList.loadError) {
-                return;
-            }
-            const bun = getBun(ingredientsList.ingredients);
-            if (bun) {
-                dispatch(setBun(bun));
-            }
-        },
-        [dispatch, ingredientsList],
     );
 
     if (ingredientsList.isLoading) {
