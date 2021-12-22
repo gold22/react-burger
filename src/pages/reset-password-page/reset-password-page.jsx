@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
@@ -14,19 +14,17 @@ const ResetPasswordPage = () => {
     const [token, setToken] = React.useState('');
     const { auth } = useSelector((state) => state);
     const { resetPassword } = useSelector((state) => state);
+    const location = useLocation();
     const dispatch = useDispatch();
 
     React.useEffect(() => () => {
-        if (resetPassword.isPasswordReset) {
-            localStorage.removeItem('isEmailSent');
-        }
         dispatch(resetPasswordReset());
     }, [resetPassword.isPasswordReset, dispatch]);
 
     if (auth.user || ApiClient.isAuthenticated()) {
         return <Redirect to="/" />;
     }
-    if (!localStorage.getItem('isEmailSent')) {
+    if (location.state?.from.pathname !== '/forgot-password') {
         return <Redirect to="/forgot-password" />;
     }
     if (resetPassword.isPasswordReset) {

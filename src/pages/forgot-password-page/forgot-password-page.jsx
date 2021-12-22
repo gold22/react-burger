@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
@@ -13,6 +13,7 @@ const ForgotPasswordPage = () => {
     const [email, setEmail] = React.useState('');
     const { auth } = useSelector((state) => state);
     const { resetPassword } = useSelector((state) => state);
+    const location = useLocation();
     const dispatch = useDispatch();
 
     React.useEffect(() => () => {
@@ -35,8 +36,15 @@ const ForgotPasswordPage = () => {
         return <Redirect to="/" />;
     }
     if (resetPassword.isEmailSent) {
-        localStorage.setItem('isEmailSent', 'true');
-        return <Redirect to="/reset-password" push />;
+        return (
+            <Redirect
+                to={{
+                    pathname: '/reset-password',
+                    state: { from: location },
+                }}
+                push
+            />
+        );
     }
 
     return (
