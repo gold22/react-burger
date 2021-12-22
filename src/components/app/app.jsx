@@ -12,16 +12,14 @@ import ProfileOrdersPage from '../../pages/profile-orders-page/profile-orders-pa
 import ProfilePage from '../../pages/profile-page/profile-page';
 import RegisterPage from '../../pages/register-page/register-page';
 import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page';
-import IngredientDetailsDialog from '../ingredient-details-dialog/ingredient-details-dialog';
 import ErrorMessage from '../error-message/error-message';
 import ProtectedRoute from '../protected-route/protected-route';
 import { getIngredients } from '../../services/actions/ingredients-list';
-import { hideIngredientDetails } from '../../services/actions/ingredient-details';
 import { setBun } from '../../services/actions/constructor';
 import { getBun } from '../../utils/ingredients';
 
 const App = () => {
-    const { ingredientDetails, ingredientsList } = useSelector((state) => state);
+    const { ingredientsList } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     React.useEffect(
@@ -96,13 +94,6 @@ const App = () => {
                     </Route>
                 </Switch>
             </Router>
-            {ingredientDetails.ingredient && (
-                <IngredientDetailsDialog
-                    ingredient={ingredientDetails.ingredient}
-                    visible
-                    onClose={() => { dispatch(hideIngredientDetails()); }}
-                />
-            )}
         </main>
     );
 };
