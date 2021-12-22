@@ -6,18 +6,17 @@ import DialogPage from '../../components/dialog-page/dialog-page';
 import ErrorMessage from '../../components/error-message/error-message';
 import { showIngredientDetails } from '../../services/actions/ingredient-details';
 import { getIngredient } from '../../utils/ingredients';
-import { deserializeQuery } from '../../utils/url';
 import ConstructorPage from '../constructor-page/constructor-page';
 
 const IngredientDetailsPage = () => {
     const { id } = useParams();
     const { ingredients } = useSelector((state) => state.ingredientsList);
-    const { search } = useLocation();
+    const { state } = useLocation();
     const dispatch = useDispatch();
 
-    const { view } = React.useMemo(
-        () => deserializeQuery(search),
-        [search],
+    const isModal = React.useMemo(
+        () => state?.from.pathname === '/',
+        [state],
     );
     const ingredient = React.useMemo(
         () => getIngredient(id, ingredients),
@@ -25,10 +24,10 @@ const IngredientDetailsPage = () => {
     );
 
     React.useEffect(() => {
-        if (ingredient && view === 'modal') {
+        if (ingredient && isModal) {
             dispatch(showIngredientDetails(ingredient));
         }
-    }, [ingredient, view, dispatch]);
+    }, [ingredient, isModal, dispatch]);
 
     if (!ingredient) {
         return (
@@ -38,7 +37,7 @@ const IngredientDetailsPage = () => {
         );
     }
 
-    if (view === 'modal') {
+    if (isModal) {
         return <ConstructorPage />;
     }
 
