@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid';
+
 export const SET_BUN = 'SET_BUN';
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
@@ -10,7 +12,10 @@ export const setBun = (bun) => ({
 
 export const addIngredient = (ingredient, index) => ({
     type: ADD_INGREDIENT,
-    ingredient,
+    ingredient: {
+        ...ingredient,
+        uuid: uuid(),
+    },
     index,
 });
 
