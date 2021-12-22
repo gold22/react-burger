@@ -34,6 +34,7 @@ class ApiClient {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: ApiClient.getAccessToken(),
             },
             body: JSON.stringify(body),
         });

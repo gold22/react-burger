@@ -1,11 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorElements from '../constructor-elements/constructor-elements';
 import ErrorDialog from '../error-dialog/error-dialog';
 import OrderDetails from '../order-details/order-details';
 import { getIngredientsPrice } from '../../utils/ingredients';
 import { createOrder } from '../../services/actions/order';
+import ApiClient from '../../services/api-client';
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
@@ -14,11 +16,16 @@ const BurgerConstructor = () => {
         state.burgerConstructor.ingredients,
     ));
     const { order } = useSelector((state) => state);
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const handleOrderCreation = () => {
         if (order.isCreating) {
             // avoid redundant requests over double mouse clicks
+            return;
+        }
+        if (!ApiClient.isAuthenticated()) {
+            history.replace({ pathname: '/login' });
             return;
         }
         dispatch(createOrder());
