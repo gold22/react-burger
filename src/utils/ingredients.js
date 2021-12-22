@@ -2,6 +2,10 @@ export const INGREDIENT_TYPE_BUN = 'bun';
 export const INGREDIENT_TYPE_SAUCE = 'sauce';
 export const INGREDIENT_TYPE_MAIN = 'main';
 
+export const getIngredient = (ingredientId, ingredients) => (
+    ingredients.find((ingredient) => ingredientId === ingredient.id)
+);
+
 export const getIngredientCount = (ingredientId, ingredients) => (
     ingredients.reduce(
         (count, ingredient) => (ingredientId === ingredient.id ? count + 1 : count),
