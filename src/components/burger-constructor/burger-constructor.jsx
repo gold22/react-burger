@@ -6,6 +6,7 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import ConstructorElements from '../constructor-elements/constructor-elements';
 import ErrorDialog from '../error-dialog/error-dialog';
 import OrderDetails from '../order-details/order-details';
+import Modal from '../modal/modal';
 import { getIngredientsPrice, isBun } from '../../utils/ingredients';
 import { createOrder } from '../../services/actions/order';
 import { setBun } from '../../services/actions/constructor';
@@ -67,6 +68,13 @@ const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
 
+                <Modal
+                    title="Оформление заказа"
+                    visible={showDetails && order.isCreating}
+                    onClose={() => {}}
+                >
+                    <p className="text text_type_main-medium text_color_inactive mt-8 mb-6">Ваш заказ оформляется...</p>
+                </Modal>
                 <OrderDetails
                     visible={showDetails && !order.isCreating && !order.creationError}
                     onClose={() => { setShowDetails(false); }}
