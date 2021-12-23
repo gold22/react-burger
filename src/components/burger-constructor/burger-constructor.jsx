@@ -9,7 +9,7 @@ import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 import { getIngredientsPrice, isBun } from '../../utils/ingredients';
 import { createOrder } from '../../services/actions/order';
-import { setBun } from '../../services/actions/constructor';
+import { removeIngredients, setBun } from '../../services/actions/constructor';
 import ApiClient from '../../services/api-client';
 import styles from './burger-constructor.module.css';
 
@@ -34,6 +34,11 @@ const BurgerConstructor = () => {
         }
         dispatch(createOrder());
         setShowDetails(true);
+    };
+
+    const handleOrderClose = () => {
+        dispatch(removeIngredients());
+        setShowDetails(false);
     };
 
     const [, dropRef] = useDrop({
@@ -77,7 +82,7 @@ const BurgerConstructor = () => {
                 </Modal>
                 <OrderDetails
                     visible={showDetails && !order.isCreating && !order.creationError}
-                    onClose={() => { setShowDetails(false); }}
+                    onClose={handleOrderClose}
                 />
                 <ErrorDialog
                     visible={showDetails && !order.isCreating && !!order.creationError}

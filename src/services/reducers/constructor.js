@@ -2,6 +2,7 @@ import {
     SET_BUN,
     ADD_INGREDIENT,
     REMOVE_INGREDIENT,
+    REMOVE_INGREDIENTS,
     MOVE_INGREDIENT,
 } from '../actions/constructor';
 import { getBun } from '../../utils/ingredients';
@@ -35,6 +36,12 @@ export const constructorReducer = (state = initialState, action) => {
         return {
             ...state,
             ingredients: state.ingredients.filter((ingredient, index) => index !== action.index),
+        };
+    }
+    case REMOVE_INGREDIENTS: {
+        return {
+            ...state,
+            ingredients: [],
         };
     }
     case MOVE_INGREDIENT: {
