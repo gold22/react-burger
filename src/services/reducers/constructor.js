@@ -1,8 +1,8 @@
-import { v4 as uuid } from 'uuid';
 import {
     SET_BUN,
     ADD_INGREDIENT,
     REMOVE_INGREDIENT,
+    REMOVE_INGREDIENTS,
     MOVE_INGREDIENT,
 } from '../actions/constructor';
 import { getBun } from '../../utils/ingredients';
@@ -24,13 +24,9 @@ export const constructorReducer = (state = initialState, action) => {
         };
     }
     case ADD_INGREDIENT: {
-        const ingredient = {
-            ...action.ingredient,
-            uuid: uuid(),
-        };
         const ingredients = [...state.ingredients];
         const index = action.index === 0 && getBun(state.ingredients) ? 1 : action.index;
-        ingredients.splice(index, 0, ingredient);
+        ingredients.splice(index, 0, action.ingredient);
         return {
             ...state,
             ingredients,
@@ -40,6 +36,12 @@ export const constructorReducer = (state = initialState, action) => {
         return {
             ...state,
             ingredients: state.ingredients.filter((ingredient, index) => index !== action.index),
+        };
+    }
+    case REMOVE_INGREDIENTS: {
+        return {
+            ...state,
+            ingredients: [],
         };
     }
     case MOVE_INGREDIENT: {

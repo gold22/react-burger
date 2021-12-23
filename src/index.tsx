@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+// @ts-ignore
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './components/app/app';
 import ApiClient from './services/api-client';
 import { rootReducer } from './services/reducers';
@@ -19,7 +21,9 @@ const store = createStore(rootReducer, enhancer);
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <Router>
+                <App />
+            </Router>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root'),

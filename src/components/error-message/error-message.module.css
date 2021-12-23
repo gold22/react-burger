@@ -1,5 +1,6 @@
 .main {
     display: flex;
     align-items: center;
-    text-decoration: none;
+    padding: 8px;
+    max-width: 480px;
 }

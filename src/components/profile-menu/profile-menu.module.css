@@ -1,0 +1,9 @@
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuItem {
+    padding: 17px 0;
+    text-decoration: none;
+}

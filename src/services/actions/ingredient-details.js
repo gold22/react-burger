@@ -6,7 +6,6 @@ export const showIngredientDetails = (ingredient) => ({
     ingredient,
 });
 
-export const hideIngredientDetails = (ingredient) => ({
+export const hideIngredientDetails = () => ({
     type: HIDE_INGREDIENT_DETAILS,
-    ingredient,
 });
