@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import AppNavLink from '../app-nav-link/app-nav-link';
 import styles from './app-header.module.css';
@@ -11,7 +12,9 @@ const AppHeader = () => (
                 <AppNavLink icon="list" text="Лента заказов" to="/orders" />
             </nav>
             <div className={styles.logo}>
-                <Logo />
+                <Link to="/">
+                    <Logo />
+                </Link>
             </div>
             <nav className={styles.rightNav}>
                 <AppNavLink icon="profile" text="Личный кабинет" to="/profile" />
