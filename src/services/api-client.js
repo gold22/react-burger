@@ -162,6 +162,7 @@ class ApiClient {
             body: JSON.stringify({ token: ApiClient.getRefreshToken() }),
         });
         ApiClient.setAccessToken(result.accessToken);
+        ApiClient.setRefreshToken(result.refreshToken);
     }
 
     /**
