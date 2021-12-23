@@ -44,6 +44,19 @@ const BurgerIngredients = () => {
         }
     };
 
+    const buns = React.useMemo(
+        () => ingredients.filter((ingredient) => isBun(ingredient)),
+        [ingredients],
+    );
+    const sauces = React.useMemo(
+        () => ingredients.filter((ingredient) => isSauce(ingredient)),
+        [ingredients],
+    );
+    const mains = React.useMemo(
+        () => ingredients.filter((ingredient) => isMain(ingredient)),
+        [ingredients],
+    );
+
     return (
         <section className={styles.main}>
             <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
@@ -51,17 +64,17 @@ const BurgerIngredients = () => {
             <div className={`${styles.cards} mt-10 custom-scroll`} onScroll={handleScroll}>
                 <IngredientCards
                     title="Булки"
-                    ingredients={ingredients.filter((ingredient) => isBun(ingredient))}
+                    ingredients={buns}
                     ref={categories.bun}
                 />
                 <IngredientCards
                     title="Соусы"
-                    ingredients={ingredients.filter((ingredient) => isSauce(ingredient))}
+                    ingredients={sauces}
                     ref={categories.sauce}
                 />
                 <IngredientCards
                     title="Начинка"
-                    ingredients={ingredients.filter((ingredient) => isMain(ingredient))}
+                    ingredients={mains}
                     ref={categories.main}
                 />
             </div>
