@@ -36,8 +36,12 @@
     "extends": [
       "react-app",
       "react-app/jest",
-      "airbnb"
+      "airbnb",
+      "airbnb-typescript"
     ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
     "rules": {
       "indent": [
         "error",
@@ -71,7 +75,12 @@
         4
       ],
       "jsx-a11y/click-events-have-key-events": "off",
-      "jsx-a11y/no-static-element-interactions": "off"
+      "jsx-a11y/no-static-element-interactions": "off",
+      "@typescript-eslint/indent": [
+        "error",
+        4,
+        { "SwitchCase": 0 }
+      ]
     }
   },
   "browserslist": {
@@ -87,6 +96,7 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "18.2.1"
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-airbnb-typescript": "^16.1.0"
   }
 }

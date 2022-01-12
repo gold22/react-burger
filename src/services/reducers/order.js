@@ -11,7 +11,7 @@ const initialState = {
     creationError: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export
+// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
 export const orderReducer = (state = initialState, action) => {
     switch (action.type) {
     case CREATE_ORDER_REQUEST: {

@@ -10,7 +10,7 @@ const initialState = {
     loadError: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export
+// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
 export const ingredientsListReducer = (state = initialState, action) => {
     switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {

@@ -18,7 +18,7 @@ const initialState = {
     resetPasswordError: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export
+// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
 export const resetPasswordReducer = (state = initialState, action) => {
     switch (action.type) {
     case SEND_RESET_USER_PASSWORD_EMAIL_REQUEST: {
