@@ -1,6 +1,7 @@
 import { Location } from 'history';
 
 export type TIngredient = {
+    uuid: string;
     id: string;
     name: string;
     type: string;
