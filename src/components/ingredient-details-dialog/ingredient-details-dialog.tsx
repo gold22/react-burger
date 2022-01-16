@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,9 +7,18 @@ import ErrorMessage from '../error-message/error-message';
 import { getIngredient } from '../../utils/ingredients';
 import { hideIngredientDetails, showIngredientDetails } from '../../services/actions/ingredient-details';
 
-const IngredientDetailsDialog = ({ visible, onClose }) => {
-    const { id } = useParams();
-    const { ingredients } = useSelector((state) => state.ingredientsList);
+type TIngredientDetailsDialogProps = {
+    visible: boolean;
+    onClose: () => void;
+};
+
+type TIngredientDetailsDialogParams = {
+    id: string;
+};
+
+const IngredientDetailsDialog: React.FC<TIngredientDetailsDialogProps> = ({ visible, onClose }) => {
+    const { id } = useParams<TIngredientDetailsDialogParams>();
+    const { ingredients } = useSelector((state: any) => state.ingredientsList);
     const dispatch = useDispatch();
 
     const ingredient = React.useMemo(
@@ -32,11 +40,6 @@ const IngredientDetailsDialog = ({ visible, onClose }) => {
             )}
         </Modal>
     );
-};
-
-IngredientDetailsDialog.propTypes = {
-    visible: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
 };
 
 export default IngredientDetailsDialog;
