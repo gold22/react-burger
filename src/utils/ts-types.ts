@@ -16,6 +16,10 @@ export type TIngredient = {
 
 export type TIngredients = Array<TIngredient>;
 
+export type TIngredientDragItem = {
+    ingredient: TIngredient;
+};
+
 export type TLocationState = {
     background: Location;
 };
