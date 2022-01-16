@@ -1,3 +1,5 @@
+import { Location } from 'history';
+
 export type TIngredient = {
     id: string;
     name: string;
@@ -13,6 +15,10 @@ export type TIngredient = {
 };
 
 export type TIngredients = Array<TIngredient>;
+
+export type TLocationState = {
+    background: Location;
+};
 
 export enum IngredientType {
     Bun = 'bun',
