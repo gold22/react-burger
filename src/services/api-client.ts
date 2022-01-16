@@ -5,28 +5,65 @@
  * @property {string} refreshToken
  */
 
+export type TApiConfig = {
+    url: string;
+};
+
+export type TApiIngredient = {
+    _id: string;
+    name: string;
+    type: string;
+    proteins: number;
+    fat: number;
+    carbohydrates: number;
+    calories: number;
+    price: number;
+    image: string;
+    imageLarge: string;
+    imageMobile: string;
+};
+
+export type TApiIngredients = Array<TApiIngredient>;
+
+export type TApiOrder = {
+    name: string;
+    order: { number: string };
+};
+
+export type TApiUser = {
+    name: string;
+    email: string;
+    password: string;
+};
+
+export type TApiUserInfo = {
+    name: string;
+    email: string;
+};
+
+export type TApiUserCredentials = {
+    email: string;
+    password: string;
+};
+
+export type TApiUserResetPasswordInfo = {
+    password: string;
+    token: string;
+};
+
 class ApiClient {
-    /**
-     * @param {Object} config
-     * @param {string} config.url
-     */
-    constructor({ url }) {
+    private readonly url: string;
+
+    constructor({ url }: TApiConfig) {
         this.url = url;
     }
 
-    /**
-     * @returns {Promise<Array>}
-     */
-    async getIngredients() {
+    async getIngredients(): Promise<TApiIngredients> {
         const result = await this.fetch(`${this.url}/ingredients`);
         return result.data;
     }
 
-    /**
-     * @param {string[]} ingredientsIds
-     * @returns {Promise<Object>}
-     */
-    async createOrder(ingredientsIds) {
+    async createOrder(ingredientsIds: Array<string>): Promise<TApiOrder> {
         const body = {
             ingredients: ingredientsIds,
         };
@@ -40,11 +77,7 @@ class ApiClient {
         });
     }
 
-    /**
-     * @param {{name: string, email: string, password: string}} user
-     * @returns {Promise<{email: string, name: string}>}
-     */
-    async registerUser(user) {
+    async registerUser(user: TApiUser): Promise<TApiUserInfo> {
         /** @type {AuthResult} */
         const result = await this.fetch(`${this.url}/auth/register`, {
             method: 'POST',
@@ -58,11 +91,7 @@ class ApiClient {
         return result.user;
     }
 
-    /**
-     * @param {{email: string, password: string}} user
-     * @returns {Promise<{email: string, name: string}>}
-     */
-    async logInUser(user) {
+    async logInUser(user: TApiUserCredentials): Promise<TApiUserInfo> {
         /** @type {AuthResult} */
         const result = await this.fetch(`${this.url}/auth/login`, {
             method: 'POST',
@@ -76,10 +105,7 @@ class ApiClient {
         return result.user;
     }
 
-    /**
-     * @returns {Promise<void>}
-     */
-    async logOutUser() {
+    async logOutUser(): Promise<void> {
         await this.fetch(`${this.url}/auth/logout`, {
             method: 'POST',
             headers: {
@@ -92,11 +118,7 @@ class ApiClient {
         ApiClient.setRefreshToken(null);
     }
 
-    /**
-     * @param {string} email
-     * @returns {Promise<void>}
-     */
-    async sendResetUserPasswordEmail(email) {
+    async sendResetUserPasswordEmail(email: string): Promise<void> {
         await this.fetch(`${this.url}/password-reset`, {
             method: 'POST',
             headers: {
@@ -106,12 +128,7 @@ class ApiClient {
         });
     }
 
-    /**
-     * @param {string} password
-     * @param {string} token
-     * @returns {Promise<void>}
-     */
-    async resetUserPassword({ password, token }) {
+    async resetUserPassword({ password, token }: TApiUserResetPasswordInfo): Promise<void> {
         await this.fetch(`${this.url}/password-reset/reset`, {
             method: 'POST',
             headers: {
@@ -121,10 +138,7 @@ class ApiClient {
         });
     }
 
-    /**
-     * @returns {Promise<{email: string, name: string}>}
-     */
-    async getUser() {
+    async getUser(): Promise<TApiUserInfo> {
         const result = await this.fetch(`${this.url}/auth/user`, {
             headers: {
                 Authorization: ApiClient.getAccessToken(),
@@ -133,11 +147,7 @@ class ApiClient {
         return result.user;
     }
 
-    /**
-     * @param {{name: string, email: string, password: string}} user
-     * @returns {Promise<{email: string, name: string}>}
-     */
-    async updateUser(user) {
+    async updateUser(user: TApiUser): Promise<TApiUserInfo> {
         const result = await this.fetch(`${this.url}/auth/user`, {
             method: 'PATCH',
             headers: {
@@ -149,10 +159,7 @@ class ApiClient {
         return result.user;
     }
 
-    /**
-     * @returns {Promise<void>}
-     */
-    async updateToken() {
+    async updateToken(): Promise<void> {
         const result = await this.fetch(`${this.url}/auth/token`, {
             method: 'POST',
             headers: {
@@ -165,14 +172,9 @@ class ApiClient {
         ApiClient.setRefreshToken(result.refreshToken);
     }
 
-    /**
-     * @param {string} url
-     * @param {Object} options
-     * @returns {Promise<Object>}
-     */
-    async fetch(url, options = {}) {
+    async fetch(url: string, options: RequestInit = {}): Promise<any> {
         let response = await fetch(url, options);
-        if (response.status === 403 && 'headers' in options && 'Authorization' in options.headers) {
+        if (response.status === 403 && options.headers && 'Authorization' in options.headers) {
             await this.updateToken();
             response = await fetch(url, {
                 ...options,
@@ -201,11 +203,11 @@ class ApiClient {
         );
     }
 
-    static getAccessToken() {
+    static getAccessToken(): string {
         return localStorage.getItem('accessToken') ?? '';
     }
 
-    static setAccessToken(accessToken) {
+    static setAccessToken(accessToken: string | null): void {
         if (accessToken) {
             localStorage.setItem('accessToken', accessToken);
         } else {
@@ -213,11 +215,11 @@ class ApiClient {
         }
     }
 
-    static getRefreshToken() {
+    static getRefreshToken(): string {
         return localStorage.getItem('refreshToken') ?? '';
     }
 
-    static setRefreshToken(refreshToken) {
+    static setRefreshToken(refreshToken: string | null): void {
         if (refreshToken) {
             localStorage.setItem('refreshToken', refreshToken);
         } else {
@@ -225,7 +227,7 @@ class ApiClient {
         }
     }
 
-    static isAuthenticated() {
+    static isAuthenticated(): boolean {
         return !!ApiClient.getRefreshToken();
     }
 }
