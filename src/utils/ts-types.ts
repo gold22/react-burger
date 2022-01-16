@@ -13,3 +13,9 @@ export type TIngredient = {
 };
 
 export type TIngredients = Array<TIngredient>;
+
+export enum IngredientType {
+    Bun = 'bun',
+    Sauce = 'sauce',
+    Main = 'main',
+}
