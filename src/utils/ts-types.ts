@@ -17,7 +17,8 @@ export type TIngredient = {
 export type TIngredients = Array<TIngredient>;
 
 export type TIngredientDragItem = {
-    ingredient: TIngredient;
+    ingredient?: TIngredient;
+    index?: number;
 };
 
 export type TLocationState = {

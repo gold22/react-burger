@@ -24,6 +24,7 @@ const ConstructorElements = () => {
                     <ConstructorElement
                         key={ingredient.uuid}
                         index={bun ? index + 1 : bun}
+                        type="center"
                         ingredient={ingredient}
                     />
                 ))}

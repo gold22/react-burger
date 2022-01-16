@@ -48,7 +48,7 @@ const BurgerConstructor = () => {
             dispatch(setBun(item.ingredient));
         },
         canDrop(item) {
-            return isBun(item.ingredient);
+            return typeof item.ingredient !== 'undefined' && isBun(item.ingredient);
         },
     });
 
