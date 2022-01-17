@@ -11,8 +11,8 @@ import loginStyles from '../login-page/login-page.module.css';
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = React.useState('');
-    const { auth } = useSelector((state) => state);
-    const { resetPassword } = useSelector((state) => state);
+    const { auth } = useSelector((state: any) => state);
+    const { resetPassword } = useSelector((state: any) => state);
     const location = useLocation();
     const dispatch = useDispatch();
 
@@ -20,10 +20,10 @@ const ForgotPasswordPage = () => {
         dispatch(resetEmailSent());
     }, [dispatch]);
 
-    const updateEmail = (e) => {
+    const updateEmail: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setEmail(e.target.value);
     };
-    const restore = (e) => {
+    const restore: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         if (resetPassword.isSendingEmail) {
             // avoid redundant requests over double mouse clicks
