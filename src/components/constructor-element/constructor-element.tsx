@@ -12,7 +12,7 @@ import {
     removeIngredient,
     setBun,
 } from '../../services/actions/constructor';
-import { TIngredient, TIngredientDragItem } from '../../utils/ts-types';
+import { TIngredient, TIngredientDragItem } from '../../utils/types';
 import styles from './constructor-element.module.css';
 
 type TConstructorElementProps = {

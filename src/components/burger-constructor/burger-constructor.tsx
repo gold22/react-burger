@@ -11,7 +11,7 @@ import { getIngredientsPrice, isBun } from '../../utils/ingredients';
 import { createOrder } from '../../services/actions/order';
 import { removeIngredients, setBun } from '../../services/actions/constructor';
 import ApiClient from '../../services/api-client';
-import { TIngredientDragItem } from '../../utils/ts-types';
+import { TIngredientDragItem } from '../../utils/types';
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {

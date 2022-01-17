@@ -1,8 +1,4 @@
-import { IngredientType, TIngredient, TIngredients } from './ts-types';
-
-export const INGREDIENT_TYPE_BUN = 'bun';
-export const INGREDIENT_TYPE_SAUCE = 'sauce';
-export const INGREDIENT_TYPE_MAIN = 'main';
+import { IngredientType, TIngredient, TIngredients } from './types';
 
 export const getIngredient = (
     ingredientId: string,

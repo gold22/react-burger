@@ -1,5 +1,5 @@
 import React from 'react';
-import { TIngredient } from '../../utils/ts-types';
+import { TIngredient } from '../../utils/types';
 import styles from './ingredient-details.module.css';
 
 type TIngredientDetailsProps = {

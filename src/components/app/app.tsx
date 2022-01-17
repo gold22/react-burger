@@ -15,7 +15,7 @@ import ResetPasswordPage from '../../pages/reset-password-page/reset-password-pa
 import IngredientDetailsDialog from '../ingredient-details-dialog/ingredient-details-dialog';
 import ErrorMessage from '../error-message/error-message';
 import ProtectedRoute from '../protected-route/protected-route';
-import { TLocationState } from '../../utils/ts-types';
+import { TLocationState } from '../../utils/types';
 import { getIngredients } from '../../services/actions/ingredients-list';
 
 const App = () => {
