@@ -25,7 +25,7 @@ const ResetPasswordPage = () => {
     if (auth.user || ApiClient.isAuthenticated()) {
         return <Redirect to="/" />;
     }
-    if (!location.state.from || location.state.from.pathname !== '/forgot-password') {
+    if (!location.state || !location.state.from || location.state.from.pathname !== '/forgot-password') {
         return <Redirect to="/forgot-password" />;
     }
     if (resetPassword.isPasswordReset) {

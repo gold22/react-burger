@@ -10,7 +10,7 @@ import ApiClient from '../../services/api-client';
 import loginStyles from '../login-page/login-page.module.css';
 
 const ForgotPasswordPage = () => {
-    const [email, setEmail] = React.useState('');
+    const [email, setEmail] = React.useState<string>('');
     const { auth } = useSelector((state: any) => state);
     const { resetPassword } = useSelector((state: any) => state);
     const location = useLocation();
