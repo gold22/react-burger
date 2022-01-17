@@ -23,7 +23,8 @@ export type TIngredientDragItem = {
 };
 
 export type TLocationState = {
-    background: Location;
+    background?: Location;
+    from?: string;
 };
 
 export enum IngredientType {
