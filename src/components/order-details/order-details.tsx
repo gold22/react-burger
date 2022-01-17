@@ -4,8 +4,13 @@ import { useSelector } from 'react-redux';
 import Modal from '../modal/modal';
 import donePath from '../../images/done.gif';
 
-const OrderDetails = ({ visible, onClose }) => {
-    const { order } = useSelector((state) => state);
+type TOrderDetailsProps = {
+    visible: boolean;
+    onClose: () => void;
+};
+
+const OrderDetails: React.FC<TOrderDetailsProps> = ({ visible, onClose }) => {
+    const { order } = useSelector((state: any) => state);
 
     return (
         <Modal title="" visible={visible} onClose={onClose}>
