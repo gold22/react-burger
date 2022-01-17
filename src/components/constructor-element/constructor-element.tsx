@@ -1,12 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import { useDrag, useDrop } from 'react-dnd';
 import {
     ConstructorElement as ConstructorElementComponent,
     DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ingredientType } from '../../utils/types';
 import { isBun } from '../../utils/ingredients';
 import {
     addIngredient,
@@ -14,27 +12,37 @@ import {
     removeIngredient,
     setBun,
 } from '../../services/actions/constructor';
+import { TIngredient, TIngredientDragItem } from '../../utils/types';
 import styles from './constructor-element.module.css';
 
-const ConstructorElement = ({ ingredient, type, index }) => {
+type TConstructorElementProps = {
+    ingredient: TIngredient;
+    type: 'top' | 'bottom' | 'center';
+    index: number;
+};
+
+const ConstructorElement: React.FC<TConstructorElementProps> = ({ ingredient, type, index }) => {
     const dispatch = useDispatch();
 
-    const [, dragRef] = useDrag({
+    const [, dragRef] = useDrag<TIngredientDragItem, unknown, unknown>({
         type: 'ingredient',
         item: { index },
     });
 
-    const [, dropRef] = useDrop({
+    const [, dropRef] = useDrop<TIngredientDragItem, unknown, unknown>({
         accept: 'ingredient',
         drop(item) {
-            if ('index' in item) {
+            if (typeof item.index !== 'undefined') {
                 if (item.index !== index) {
                     dispatch(moveIngredient(item.index, index));
                 }
-            } else if (isBun(item.ingredient)) {
-                dispatch(setBun(item.ingredient));
-            } else {
-                dispatch(addIngredient(item.ingredient, index));
+            }
+            if (typeof item.ingredient !== 'undefined') {
+                if (isBun(item.ingredient)) {
+                    dispatch(setBun(item.ingredient));
+                } else {
+                    dispatch(addIngredient(item.ingredient, index));
+                }
             }
         },
     });
@@ -69,16 +77,6 @@ const ConstructorElement = ({ ingredient, type, index }) => {
             />
         </div>
     );
-};
-
-ConstructorElement.propTypes = {
-    ingredient: ingredientType.isRequired,
-    type: PropTypes.oneOf(['top', 'bottom', 'center']),
-    index: PropTypes.number.isRequired,
-};
-
-ConstructorElement.defaultProps = {
-    type: 'center',
 };
 
 export default ConstructorElement;

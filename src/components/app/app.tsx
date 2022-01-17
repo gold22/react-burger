@@ -15,11 +15,12 @@ import ResetPasswordPage from '../../pages/reset-password-page/reset-password-pa
 import IngredientDetailsDialog from '../ingredient-details-dialog/ingredient-details-dialog';
 import ErrorMessage from '../error-message/error-message';
 import ProtectedRoute from '../protected-route/protected-route';
+import { TLocationState } from '../../utils/types';
 import { getIngredients } from '../../services/actions/ingredients-list';
 
 const App = () => {
-    const { ingredientsList } = useSelector((state) => state);
-    const location = useLocation();
+    const { ingredientsList } = useSelector((state: any) => state);
+    const location = useLocation<TLocationState>();
     const history = useHistory();
     const dispatch = useDispatch();
 

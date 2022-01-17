@@ -1,12 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { getUser } from '../../services/actions/auth';
 import ApiClient from '../../services/api-client';
 
-const ProtectedRoute = ({ children, path }) => {
-    const { auth } = useSelector((state) => state);
+type TProtectedRouteProps = {
+    path: string;
+};
+
+const ProtectedRoute: React.FC<TProtectedRouteProps> = ({ children, path }) => {
+    const { auth } = useSelector((state: any) => state);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -19,7 +22,7 @@ const ProtectedRoute = ({ children, path }) => {
         return null;
     }
 
-    const render = ({ location }) => {
+    const render = ({ location }: RouteComponentProps): React.ReactNode => {
         if (auth.user) {
             return children;
         }
@@ -39,14 +42,6 @@ const ProtectedRoute = ({ children, path }) => {
             render={render}
         />
     );
-};
-
-ProtectedRoute.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.arrayOf(PropTypes.element),
-    ]).isRequired,
-    path: PropTypes.string.isRequired,
 };
 
 export default ProtectedRoute;

@@ -7,10 +7,10 @@ import { getUser, updateUser } from '../../services/actions/auth';
 import styles from './profile-form.module.css';
 
 const ProfileForm = () => {
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const { auth } = useSelector((state) => state);
+    const [name, setName] = React.useState<string>('');
+    const [email, setEmail] = React.useState<string>('');
+    const [password, setPassword] = React.useState<string>('');
+    const { auth } = useSelector((state: any) => state);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -22,25 +22,22 @@ const ProfileForm = () => {
         }
     }, [auth.user, dispatch]);
 
-    const updateName = (e) => {
+    const updateName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setName(e.target.value);
     };
-    const updateEmail = (e) => {
+    const updateEmail: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setEmail(e.target.value);
     };
-    const updatePassword = (e) => {
+    const updatePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setPassword(e.target.value);
     };
-    const update = (e) => {
+    const update: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        const user = { name, email };
-        if (password) {
-            user.password = password;
-        }
+        const user = { name, email, password };
         dispatch(updateUser(user));
         setPassword('');
     };
-    const reset = (e) => {
+    const reset = (e: React.SyntheticEvent): void => {
         e.preventDefault();
         setName(auth.user.name);
         setEmail(auth.user.email);

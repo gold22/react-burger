@@ -7,14 +7,15 @@ import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
 import { resetPasswordReset, resetUserPassword } from '../../services/actions/reset-password';
 import ApiClient from '../../services/api-client';
+import { TLocationState } from '../../utils/types';
 import loginStyles from '../login-page/login-page.module.css';
 
 const ResetPasswordPage = () => {
-    const [password, setPassword] = React.useState('');
-    const [token, setToken] = React.useState('');
-    const { auth } = useSelector((state) => state);
-    const { resetPassword } = useSelector((state) => state);
-    const location = useLocation();
+    const [password, setPassword] = React.useState<string>('');
+    const [token, setToken] = React.useState<string>('');
+    const { auth } = useSelector((state: any) => state);
+    const { resetPassword } = useSelector((state: any) => state);
+    const location = useLocation<TLocationState>();
     const dispatch = useDispatch();
 
     React.useEffect(() => () => {
@@ -24,20 +25,20 @@ const ResetPasswordPage = () => {
     if (auth.user || ApiClient.isAuthenticated()) {
         return <Redirect to="/" />;
     }
-    if (location.state?.from.pathname !== '/forgot-password') {
+    if (!location.state || !location.state.from || location.state.from.pathname !== '/forgot-password') {
         return <Redirect to="/forgot-password" />;
     }
     if (resetPassword.isPasswordReset) {
         return <Redirect to="/login" push />;
     }
 
-    const updatePassword = (e) => {
+    const updatePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setPassword(e.target.value);
     };
-    const updateToken = (e) => {
+    const updateToken: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setToken(e.target.value);
     };
-    const reset = (e) => {
+    const reset: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         if (resetPassword.isResettingPassword) {
             // avoid redundant requests over double mouse clicks

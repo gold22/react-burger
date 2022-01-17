@@ -2,12 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ConstructorElement from '../constructor-element/constructor-element';
 import { getBun, isBun } from '../../utils/ingredients';
+import { TIngredient } from '../../utils/types';
 import styles from './constructor-elements.module.css';
 
 const ConstructorElements = () => {
-    const { bun, ingredients } = useSelector((state) => ({
+    const { bun, ingredients } = useSelector((state: any) => ({
         bun: getBun(state.burgerConstructor.ingredients),
-        ingredients: state.burgerConstructor.ingredients.filter((ingredient) => !isBun(ingredient)),
+        ingredients: state.burgerConstructor.ingredients.filter(
+            (ingredient: TIngredient) => !isBun(ingredient),
+        ),
     }));
 
     return (
@@ -20,10 +23,11 @@ const ConstructorElements = () => {
                 />
             )}
             <div className={`${styles.optionalItems} custom-scroll`}>
-                {ingredients.map((ingredient, index) => (
+                {ingredients.map((ingredient: TIngredient, index: number) => (
                     <ConstructorElement
                         key={ingredient.uuid}
-                        index={bun ? index + 1 : bun}
+                        index={bun ? index + 1 : index}
+                        type="center"
                         ingredient={ingredient}
                     />
                 ))}

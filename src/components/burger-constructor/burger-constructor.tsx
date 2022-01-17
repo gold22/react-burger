@@ -11,15 +11,16 @@ import { getIngredientsPrice, isBun } from '../../utils/ingredients';
 import { createOrder } from '../../services/actions/order';
 import { removeIngredients, setBun } from '../../services/actions/constructor';
 import ApiClient from '../../services/api-client';
+import { TIngredientDragItem } from '../../utils/types';
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
-    const [showDetails, setShowDetails] = React.useState(false);
-    const { ingredientsCount, orderPrice } = useSelector((state) => ({
+    const [showDetails, setShowDetails] = React.useState<boolean>(false);
+    const { ingredientsCount, orderPrice } = useSelector((state: any) => ({
         ingredientsCount: state.burgerConstructor.ingredients.length,
         orderPrice: getIngredientsPrice(state.burgerConstructor.ingredients),
     }));
-    const { order } = useSelector((state) => state);
+    const { order } = useSelector((state: any) => state);
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -41,13 +42,13 @@ const BurgerConstructor = () => {
         setShowDetails(false);
     };
 
-    const [, dropRef] = useDrop({
+    const [, dropRef] = useDrop<TIngredientDragItem, unknown, unknown>({
         accept: 'ingredient',
         drop(item) {
             dispatch(setBun(item.ingredient));
         },
         canDrop(item) {
-            return isBun(item.ingredient);
+            return typeof item.ingredient !== 'undefined' && isBun(item.ingredient);
         },
     });
 

@@ -7,9 +7,13 @@ import ErrorMessage from '../../components/error-message/error-message';
 import { getIngredient } from '../../utils/ingredients';
 import { hideIngredientDetails, showIngredientDetails } from '../../services/actions/ingredient-details';
 
+type TIngredientDetailsPageParams = {
+    id: string;
+};
+
 const IngredientDetailsPage = () => {
-    const { id } = useParams();
-    const { ingredients } = useSelector((state) => state.ingredientsList);
+    const { id } = useParams<TIngredientDetailsPageParams>();
+    const { ingredients } = useSelector((state: any) => state.ingredientsList);
     const dispatch = useDispatch();
 
     const ingredient = React.useMemo(

@@ -7,7 +7,7 @@ const initialState = {
     ingredient: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export
+// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
 export const ingredientDetailsReducer = (state = initialState, action) => {
     switch (action.type) {
     case SHOW_INGREDIENT_DETAILS: {

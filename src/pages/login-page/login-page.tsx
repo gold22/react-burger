@@ -7,22 +7,23 @@ import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
 import { logInUser } from '../../services/actions/auth';
 import ApiClient from '../../services/api-client';
+import { TLocationState } from '../../utils/types';
 import styles from './login-page.module.css';
 
 const LoginPage = () => {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const location = useLocation();
-    const { auth } = useSelector((state) => state);
+    const [email, setEmail] = React.useState<string>('');
+    const [password, setPassword] = React.useState<string>('');
+    const location = useLocation<TLocationState>();
+    const { auth } = useSelector((state: any) => state);
     const dispatch = useDispatch();
 
-    const updateEmail = (e) => {
+    const updateEmail: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setEmail(e.target.value);
     };
-    const updatePassword = (e) => {
+    const updatePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setPassword(e.target.value);
     };
-    const logIn = (e) => {
+    const logIn: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         if (auth.isLoggingIn) {
             // avoid redundant requests over double mouse clicks

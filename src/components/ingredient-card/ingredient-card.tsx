@@ -3,18 +3,22 @@ import { generatePath, useHistory, useLocation } from 'react-router-dom';
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ingredientType } from '../../utils/types';
 import { getIngredientCount } from '../../utils/ingredients';
+import { TIngredient, TIngredientDragItem, TLocationState } from '../../utils/types';
 import styles from './ingredient-card.module.css';
 
-const IngredientCard = ({ ingredient }) => {
-    const count = useSelector((state) => getIngredientCount(
+type TIngredientCardProps = {
+    ingredient: TIngredient;
+};
+
+const IngredientCard: React.FC<TIngredientCardProps> = ({ ingredient }) => {
+    const count = useSelector((state: any) => getIngredientCount(
         ingredient.id, state.burgerConstructor.ingredients,
     ));
     const location = useLocation();
-    const history = useHistory();
+    const history = useHistory<TLocationState>();
 
-    const [, dragRef] = useDrag({
+    const [, dragRef] = useDrag<TIngredientDragItem, unknown, unknown>({
         type: 'ingredient',
         item: { ingredient },
     });
@@ -44,10 +48,6 @@ const IngredientCard = ({ ingredient }) => {
             <p className={`text text_type_main-default ${styles.name}`}>{name}</p>
         </div>
     );
-};
-
-IngredientCard.propTypes = {
-    ingredient: ingredientType.isRequired,
 };
 
 export default IngredientCard;

@@ -1,8 +1,12 @@
 import React from 'react';
-import { ingredientType } from '../../utils/types';
+import { TIngredient } from '../../utils/types';
 import styles from './ingredient-details.module.css';
 
-const IngredientDetails = ({ ingredient }) => {
+type TIngredientDetailsProps = {
+    ingredient: TIngredient;
+};
+
+const IngredientDetails: React.FC<TIngredientDetailsProps> = ({ ingredient }) => {
     const { calories, carbohydrates, fat, imageLarge, name, proteins } = ingredient;
     return (
         <>
@@ -28,10 +32,6 @@ const IngredientDetails = ({ ingredient }) => {
             </div>
         </>
     );
-};
-
-IngredientDetails.propTypes = {
-    ingredient: ingredientType.isRequired,
 };
 
 export default IngredientDetails;
