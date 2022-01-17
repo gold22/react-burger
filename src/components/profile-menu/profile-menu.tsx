@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './profile-menu.module.css';
 
 const ProfileMenu = () => {
-    const getNavLinkClassName = (isActive) => (isActive
+    const getNavLinkClassName = (isActive: boolean) => (isActive
         ? `text text_type_main-medium text_color_primary ${styles.menuItem}`
         : `text text_type_main-medium text_color_inactive  ${styles.menuItem}`
     );
