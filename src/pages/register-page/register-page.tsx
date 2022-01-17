@@ -10,22 +10,22 @@ import ApiClient from '../../services/api-client';
 import loginStyles from '../login-page/login-page.module.css';
 
 const RegisterPage = () => {
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const { auth } = useSelector((state) => state);
+    const [name, setName] = React.useState<string>('');
+    const [email, setEmail] = React.useState<string>('');
+    const [password, setPassword] = React.useState<string>('');
+    const { auth } = useSelector((state: any) => state);
     const dispatch = useDispatch();
 
-    const updateName = (e) => {
+    const updateName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setName(e.target.value);
     };
-    const updateEmail = (e) => {
+    const updateEmail: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setEmail(e.target.value);
     };
-    const updatePassword = (e) => {
+    const updatePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setPassword(e.target.value);
     };
-    const register = (e) => {
+    const register: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         if (auth.isRegistering) {
             // avoid redundant requests over double mouse clicks
