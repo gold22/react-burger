@@ -6,7 +6,7 @@ import ErrorMessage from '../../components/error-message/error-message';
 import { logOutUser } from '../../services/actions/auth';
 
 const LogoutPage = () => {
-    const { auth } = useSelector((state) => state);
+    const { auth } = useSelector((state: any) => state);
     const dispatch = useDispatch();
 
     React.useEffect(
