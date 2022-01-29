@@ -15,8 +15,28 @@ import {
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
 } from '../constants/auth';
+import { TApiUserInfo } from '../types/api';
+import { TAuthActions } from '../types/actions/auth';
 
-const initialState = {
+export type TAuthState = {
+    user: TApiUserInfo | null;
+    isRegistering: boolean;
+    registrationError: string | null;
+    isLoggingIn: boolean;
+    loginError: string | null;
+    isLoggingOut: boolean;
+    logoutError: string | null;
+    isSendingEmail: boolean;
+    sendingEmailError: string | null;
+    isResettingPassword: boolean;
+    resetPasswordError: string | null;
+    isLoading: boolean;
+    loadError: string | null;
+    isUpdating: boolean;
+    updateError: string | null;
+};
+
+const initialState: TAuthState = {
     user: null,
     isRegistering: false,
     registrationError: null,
@@ -34,8 +54,8 @@ const initialState = {
     updateError: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
-export const authReducer = (state = initialState, action) => {
+// eslint-disable-next-line @typescript-eslint/default-param-last
+export const authReducer = (state: TAuthState = initialState, action: TAuthActions): TAuthState => {
     switch (action.type) {
     case REGISTER_USER_REQUEST: {
         return {

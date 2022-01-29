@@ -15,8 +15,16 @@ import {
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
 } from '../constants/auth';
+import { TApiUser, TApiUserCredentials } from '../types/api';
+import { TDispatch, TGetState, TThunk } from '../types/store';
+import ApiClient from '../api-client';
+import { getErrorMessage } from '../../utils/error';
 
-export const registerUser = (user) => async (dispatch, getState, apiClient) => {
+export const registerUser: TThunk = (user: TApiUser) => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: REGISTER_USER_REQUEST,
     });
@@ -29,12 +37,16 @@ export const registerUser = (user) => async (dispatch, getState, apiClient) => {
     } catch (error) {
         dispatch({
             type: REGISTER_USER_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };
 
-export const logInUser = (user) => async (dispatch, getState, apiClient) => {
+export const logInUser: TThunk = (user: TApiUserCredentials) => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: LOGIN_USER_REQUEST,
     });
@@ -47,12 +59,16 @@ export const logInUser = (user) => async (dispatch, getState, apiClient) => {
     } catch (error) {
         dispatch({
             type: LOGIN_USER_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };
 
-export const logOutUser = () => async (dispatch, getState, apiClient) => {
+export const logOutUser: TThunk = () => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: LOGOUT_USER_REQUEST,
     });
@@ -64,12 +80,16 @@ export const logOutUser = () => async (dispatch, getState, apiClient) => {
     } catch (error) {
         dispatch({
             type: LOGOUT_USER_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };
 
-export const getUser = () => async (dispatch, getState, apiClient) => {
+export const getUser = () => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: GET_USER_REQUEST,
     });
@@ -82,12 +102,16 @@ export const getUser = () => async (dispatch, getState, apiClient) => {
     } catch (error) {
         dispatch({
             type: GET_USER_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };
 
-export const updateUser = (user) => async (dispatch, getState, apiClient) => {
+export const updateUser = (user: TApiUser) => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: UPDATE_USER_REQUEST,
     });
@@ -100,7 +124,7 @@ export const updateUser = (user) => async (dispatch, getState, apiClient) => {
     } catch (error) {
         dispatch({
             type: UPDATE_USER_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };
