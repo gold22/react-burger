@@ -6,6 +6,7 @@ import { TConstructorActions } from './actions/constructor';
 import { TIngredientDetailsActions } from './actions/ingredient-details';
 import { TIngredientsListActions } from './actions/ingredients-list';
 import { TOrderActions } from './actions/order';
+import { TResetPasswordActions } from './actions/reset-password';
 import ApiClient from '../api-client';
 
 type TApplicationActions =
@@ -13,7 +14,8 @@ type TApplicationActions =
     | TConstructorActions
     | TIngredientDetailsActions
     | TIngredientsListActions
-    | TOrderActions;
+    | TOrderActions
+    | TResetPasswordActions;
 
 export type TGetState = typeof store.getState;
 export type TRootState = ReturnType<TGetState>;

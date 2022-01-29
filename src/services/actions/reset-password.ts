@@ -8,8 +8,17 @@ import {
     RESET_USER_PASSWORD_ERROR,
     RESET_PASSWORD_RESET,
 } from '../constants/reset-password';
+import { TDispatch, TGetState, TThunk } from '../types/store';
+import { TApiUserResetPasswordInfo } from '../types/api';
+import { IResetEmailSentAction, IResetPasswordResetAction } from '../types/actions/reset-password';
+import ApiClient from '../api-client';
+import { getErrorMessage } from '../../utils/error';
 
-export const sendResetUserPasswordEmail = (email) => async (dispatch, getState, apiClient) => {
+export const sendResetUserPasswordEmail: TThunk = (email: string) => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: SEND_RESET_USER_PASSWORD_EMAIL_REQUEST,
     });
@@ -21,16 +30,20 @@ export const sendResetUserPasswordEmail = (email) => async (dispatch, getState, 
     } catch (error) {
         dispatch({
             type: SEND_RESET_USER_PASSWORD_EMAIL_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };
 
-export const resetEmailSent = () => ({
+export const resetEmailSent = (): IResetEmailSentAction => ({
     type: RESET_EMAIL_SENT,
 });
 
-export const resetUserPassword = ({ password, token }) => async (dispatch, getState, apiClient) => {
+export const resetUserPassword: TThunk = ({ password, token }: TApiUserResetPasswordInfo) => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: RESET_USER_PASSWORD_REQUEST,
     });
@@ -42,11 +55,11 @@ export const resetUserPassword = ({ password, token }) => async (dispatch, getSt
     } catch (error) {
         dispatch({
             type: RESET_USER_PASSWORD_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };
 
-export const resetPasswordReset = () => ({
+export const resetPasswordReset = (): IResetPasswordResetAction => ({
     type: RESET_PASSWORD_RESET,
 });

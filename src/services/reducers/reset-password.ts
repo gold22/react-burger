@@ -8,8 +8,18 @@ import {
     RESET_USER_PASSWORD_ERROR,
     RESET_PASSWORD_RESET,
 } from '../constants/reset-password';
+import { TResetPasswordActions } from '../types/actions/reset-password';
 
-const initialState = {
+export type TResetPasswordState = {
+    isEmailSent: boolean;
+    isSendingEmail: boolean;
+    sendingEmailError: string | null;
+    isPasswordReset: boolean;
+    isResettingPassword: boolean;
+    resetPasswordError: string | null;
+};
+
+const initialState: TResetPasswordState = {
     isEmailSent: false,
     isSendingEmail: false,
     sendingEmailError: null,
@@ -18,8 +28,11 @@ const initialState = {
     resetPasswordError: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
-export const resetPasswordReducer = (state = initialState, action) => {
+export const resetPasswordReducer = (
+    // eslint-disable-next-line @typescript-eslint/default-param-last
+    state: TResetPasswordState = initialState,
+    action: TResetPasswordActions,
+) => {
     switch (action.type) {
     case SEND_RESET_USER_PASSWORD_EMAIL_REQUEST: {
         return {
