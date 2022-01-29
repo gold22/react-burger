@@ -2,13 +2,22 @@ import {
     SHOW_INGREDIENT_DETAILS,
     HIDE_INGREDIENT_DETAILS,
 } from '../constants/ingredient-details';
+import { TIngredient } from '../types';
+import { TIngredientDetailsActions } from '../types/actions/ingredient-details';
 
-const initialState = {
+export type TIngredientDetailsState = {
+    ingredient: TIngredient | null;
+};
+
+const initialState: TIngredientDetailsState = {
     ingredient: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
-export const ingredientDetailsReducer = (state = initialState, action) => {
+export const ingredientDetailsReducer = (
+    // eslint-disable-next-line @typescript-eslint/default-param-last
+    state: TIngredientDetailsState = initialState,
+    action: TIngredientDetailsActions,
+) => {
     switch (action.type) {
     case SHOW_INGREDIENT_DETAILS: {
         return {

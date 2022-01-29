@@ -22,7 +22,9 @@ const IngredientDetailsPage = () => {
     );
 
     React.useEffect(() => {
-        dispatch(showIngredientDetails(ingredient));
+        if (ingredient) {
+            dispatch(showIngredientDetails(ingredient));
+        }
         return () => { dispatch(hideIngredientDetails()); };
     }, [ingredient, dispatch]);
 
