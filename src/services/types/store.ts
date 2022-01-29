@@ -5,13 +5,15 @@ import { TAuthActions } from './actions/auth';
 import { TConstructorActions } from './actions/constructor';
 import { TIngredientDetailsActions } from './actions/ingredient-details';
 import { TIngredientsListActions } from './actions/ingredients-list';
+import { TOrderActions } from './actions/order';
 import ApiClient from '../api-client';
 
 type TApplicationActions =
     | TAuthActions
     | TConstructorActions
     | TIngredientDetailsActions
-    | TIngredientsListActions;
+    | TIngredientsListActions
+    | TOrderActions;
 
 export type TGetState = typeof store.getState;
 export type TRootState = ReturnType<TGetState>;
