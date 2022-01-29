@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../services/hooks';
 import Form from '../form/form';
 import ErrorMessage from '../error-message/error-message';
 import { getUser, updateUser } from '../../services/actions/auth';
@@ -10,7 +10,7 @@ const ProfileForm = () => {
     const [name, setName] = React.useState<string>('');
     const [email, setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
-    const { auth } = useSelector((state: any) => state);
+    const { auth } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -39,8 +39,10 @@ const ProfileForm = () => {
     };
     const reset = (e: React.SyntheticEvent): void => {
         e.preventDefault();
-        setName(auth.user.name);
-        setEmail(auth.user.email);
+        if (auth.user) {
+            setName(auth.user.name);
+            setEmail(auth.user.email);
+        }
         setPassword('');
     };
 

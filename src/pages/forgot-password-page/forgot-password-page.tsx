@@ -1,7 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../services/hooks';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
@@ -11,8 +11,8 @@ import loginStyles from '../login-page/login-page.module.css';
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = React.useState<string>('');
-    const { auth } = useSelector((state: any) => state);
-    const { resetPassword } = useSelector((state: any) => state);
+    const { auth } = useSelector((state) => state);
+    const { resetPassword } = useSelector((state) => state);
     const location = useLocation();
     const dispatch = useDispatch();
 

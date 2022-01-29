@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import Modal from '../modal/modal';
 import donePath from '../../images/done.gif';
 
@@ -10,7 +10,7 @@ type TOrderDetailsProps = {
 };
 
 const OrderDetails: React.FC<TOrderDetailsProps> = ({ visible, onClose }) => {
-    const { order } = useSelector((state: any) => state);
+    const { order } = useSelector((state) => state);
 
     return (
         <Modal title="" visible={visible} onClose={onClose}>

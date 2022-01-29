@@ -1,12 +1,12 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/hooks';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import ErrorMessage from '../../components/error-message/error-message';
 import { logOutUser } from '../../services/actions/auth';
 
 const LogoutPage = () => {
-    const { auth } = useSelector((state: any) => state);
+    const { auth } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     React.useEffect(

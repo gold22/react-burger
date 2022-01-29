@@ -1,8 +1,8 @@
 import React from 'react';
 import { generatePath, useHistory, useLocation } from 'react-router-dom';
 import { useDrag } from 'react-dnd';
-import { useSelector } from 'react-redux';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useSelector } from '../../services/hooks';
 import { getIngredientCount } from '../../utils/ingredients';
 import { TIngredient, TIngredientDragItem, TLocationState } from '../../services/types';
 import styles from './ingredient-card.module.css';
@@ -12,7 +12,7 @@ type TIngredientCardProps = {
 };
 
 const IngredientCard: React.FC<TIngredientCardProps> = ({ ingredient }) => {
-    const count = useSelector((state: any) => getIngredientCount(
+    const count = useSelector((state) => getIngredientCount(
         ingredient.id, state.burgerConstructor.ingredients,
     ));
     const location = useLocation();

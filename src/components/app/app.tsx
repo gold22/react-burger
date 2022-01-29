@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/hooks';
 import AppHeader from '../app-header/app-header';
 import ConstructorPage from '../../pages/constructor-page/constructor-page';
 import DialogPage from '../dialog-page/dialog-page';
@@ -19,7 +19,7 @@ import { TLocationState } from '../../services/types';
 import { getIngredients } from '../../services/actions/ingredients-list';
 
 const App = () => {
-    const { ingredientsList } = useSelector((state: any) => state);
+    const { ingredientsList } = useSelector((state) => state);
     const location = useLocation<TLocationState>();
     const history = useHistory();
     const dispatch = useDispatch();
