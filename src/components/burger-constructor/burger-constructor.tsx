@@ -45,7 +45,9 @@ const BurgerConstructor = () => {
     const [, dropRef] = useDrop<TIngredientDragItem, unknown, unknown>({
         accept: 'ingredient',
         drop(item) {
-            dispatch(setBun(item.ingredient));
+            if (item.ingredient) {
+                dispatch(setBun(item.ingredient));
+            }
         },
         canDrop(item) {
             return typeof item.ingredient !== 'undefined' && isBun(item.ingredient);
