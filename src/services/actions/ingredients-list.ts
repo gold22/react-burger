@@ -3,9 +3,16 @@ import {
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_ERROR,
 } from '../constants/ingredients-list';
+import { TDispatch, TGetState, TThunk } from '../types/store';
+import ApiClient from '../api-client';
+import { getErrorMessage } from '../../utils/error';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getIngredients = () => async (dispatch, getState, apiClient) => {
+export const getIngredients: TThunk = () => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: GET_INGREDIENTS_REQUEST,
     });
@@ -24,7 +31,7 @@ export const getIngredients = () => async (dispatch, getState, apiClient) => {
     } catch (error) {
         dispatch({
             type: GET_INGREDIENTS_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };

@@ -3,15 +3,26 @@ import {
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_ERROR,
 } from '../constants/ingredients-list';
+import { TIngredients } from '../types';
+import { TIngredientsListActions } from '../types/actions/ingredients-list';
 
-const initialState = {
+export type TIngredientsListState = {
+    ingredients: TIngredients;
+    isLoading: boolean;
+    loadError: string | null;
+};
+
+const initialState: TIngredientsListState = {
     ingredients: [],
     isLoading: true,
     loadError: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
-export const ingredientsListReducer = (state = initialState, action) => {
+export const ingredientsListReducer = (
+    // eslint-disable-next-line @typescript-eslint/default-param-last
+    state: TIngredientsListState = initialState,
+    action: TIngredientsListActions,
+) => {
     switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
         return {

@@ -12,8 +12,8 @@ export type TApiIngredient = {
     calories: number;
     price: number;
     image: string;
-    imageLarge: string;
-    imageMobile: string;
+    image_large: string;
+    image_mobile: string;
 };
 
 export type TApiIngredients = Array<TApiIngredient>;
