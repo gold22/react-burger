@@ -7,7 +7,7 @@ import {
     RESET_USER_PASSWORD_SUCCESS,
     RESET_USER_PASSWORD_ERROR,
     RESET_PASSWORD_RESET,
-} from '../actions/reset-password';
+} from '../constants/reset-password';
 
 const initialState = {
     isEmailSent: false,

@@ -1,10 +1,11 @@
 import { v4 as uuid } from 'uuid';
-
-export const SET_BUN = 'SET_BUN';
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
-export const REMOVE_INGREDIENTS = 'REMOVE_INGREDIENTS';
-export const MOVE_INGREDIENT = 'MOVE_INGREDIENT';
+import {
+    SET_BUN,
+    ADD_INGREDIENT,
+    REMOVE_INGREDIENT,
+    REMOVE_INGREDIENTS,
+    MOVE_INGREDIENT,
+} from '../constants/constructor';
 
 export const setBun = (bun) => ({
     type: SET_BUN,

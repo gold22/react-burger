@@ -14,7 +14,7 @@ import {
     UPDATE_USER_REQUEST,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
-} from '../actions/auth';
+} from '../constants/auth';
 
 const initialState = {
     user: null,

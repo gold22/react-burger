@@ -4,7 +4,7 @@ import {
     REMOVE_INGREDIENT,
     REMOVE_INGREDIENTS,
     MOVE_INGREDIENT,
-} from '../actions/constructor';
+} from '../constants/constructor';
 import { getBun } from '../../utils/ingredients';
 
 const initialState = {

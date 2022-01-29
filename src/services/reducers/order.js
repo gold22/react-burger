@@ -2,7 +2,7 @@ import {
     CREATE_ORDER_REQUEST,
     CREATE_ORDER_SUCCESS,
     CREATE_ORDER_ERROR,
-} from '../actions/order';
+} from '../constants/order';
 
 const initialState = {
     name: null,

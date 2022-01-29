@@ -2,7 +2,7 @@ import {
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_ERROR,
-} from '../actions/ingredients-list';
+} from '../constants/ingredients-list';
 
 const initialState = {
     ingredients: [],

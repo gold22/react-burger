@@ -1,7 +1,10 @@
-export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
-export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
-export const GET_INGREDIENTS_ERROR = 'GET_INGREDIENTS_ERROR';
+import {
+    GET_INGREDIENTS_REQUEST,
+    GET_INGREDIENTS_SUCCESS,
+    GET_INGREDIENTS_ERROR,
+} from '../constants/ingredients-list';
 
+// eslint-disable-next-line import/prefer-default-export
 export const getIngredients = () => async (dispatch, getState, apiClient) => {
     dispatch({
         type: GET_INGREDIENTS_REQUEST,

@@ -1,7 +1,7 @@
 import {
     SHOW_INGREDIENT_DETAILS,
     HIDE_INGREDIENT_DETAILS,
-} from '../actions/ingredient-details';
+} from '../constants/ingredient-details';
 
 const initialState = {
     ingredient: null,
