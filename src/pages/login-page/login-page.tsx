@@ -7,7 +7,7 @@ import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
 import { logInUser } from '../../services/actions/auth';
 import ApiClient from '../../services/api-client';
-import { TLocationState } from '../../utils/types';
+import { TLocationState } from '../../services/types';
 import styles from './login-page.module.css';
 
 const LoginPage = () => {

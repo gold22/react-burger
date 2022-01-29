@@ -1,4 +1,4 @@
-import { IngredientType, TIngredient, TIngredients } from './types';
+import { IngredientType, TIngredient, TIngredients } from '../services/types';
 
 export const getIngredient = (
     ingredientId: string,

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import IngredientCards from '../ingredient-cards/ingredient-cards';
 import IngredientTabs from '../ingredient-tabs/ingredient-tabs';
 import { isBun, isSauce, isMain } from '../../utils/ingredients';
-import { IngredientType, TIngredient } from '../../utils/types';
+import { IngredientType, TIngredient } from '../../services/types';
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = () => {

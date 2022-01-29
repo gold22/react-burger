@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ConstructorElement from '../constructor-element/constructor-element';
 import { getBun, isBun } from '../../utils/ingredients';
-import { TIngredient } from '../../utils/types';
+import { TIngredient } from '../../services/types';
 import styles from './constructor-elements.module.css';
 
 const ConstructorElements = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import IngredientCard from '../ingredient-card/ingredient-card';
-import { TIngredients } from '../../utils/types';
+import { TIngredients } from '../../services/types';
 import styles from './ingredient-cards.module.css';
 
 type TIngredientCardsProps = {

@@ -7,7 +7,7 @@ import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
 import { resetPasswordReset, resetUserPassword } from '../../services/actions/reset-password';
 import ApiClient from '../../services/api-client';
-import { TLocationState } from '../../utils/types';
+import { TLocationState } from '../../services/types';
 import loginStyles from '../login-page/login-page.module.css';
 
 const ResetPasswordPage = () => {

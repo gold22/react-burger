@@ -4,7 +4,7 @@ import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getIngredientCount } from '../../utils/ingredients';
-import { TIngredient, TIngredientDragItem, TLocationState } from '../../utils/types';
+import { TIngredient, TIngredientDragItem, TLocationState } from '../../services/types';
 import styles from './ingredient-card.module.css';
 
 type TIngredientCardProps = {
