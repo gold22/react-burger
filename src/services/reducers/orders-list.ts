@@ -6,6 +6,7 @@ import {
 } from '../constants/orders-list';
 import { TOrders } from '../types';
 import { TOrdersListActions } from '../types/actions/orders-list';
+import { TApiOrder } from '../types/api';
 
 export type TOrdersListState = {
     orders: TOrders;
@@ -38,21 +39,26 @@ export const ordersListReducer = (
     case ORDERS_LIST_CONNECTION_ERROR: {
         return {
             ...initialState,
-            // connectionError: action.message,
         };
     }
     case ORDERS_LIST_CONNECTION_CLOSED: {
         return {
             ...initialState,
-            // connectionError: action.message,
+            connectionError: action.message,
         };
     }
     case ORDERS_LIST_RECEIVED: {
         return {
             ...state,
-            // orders: action.orders,
-            // total: action.total,
-            // totalToday: action.totalToday,
+            orders: action.data.orders.map((order: TApiOrder) => ({
+                number: order.number,
+                status: order.status,
+                createdAt: new Date(order.createdAt),
+                updatedAt: new Date(order.updatedAt),
+                ingredients: order.ingredients,
+            })),
+            total: action.data.total,
+            totalToday: action.data.totalToday,
         };
     }
     default: {

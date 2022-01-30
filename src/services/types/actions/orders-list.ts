@@ -6,7 +6,7 @@ import {
     ORDERS_LIST_CONNECTION_CLOSED,
     ORDERS_LIST_RECEIVED,
 } from '../../constants/orders-list';
-// import { TOrders } from '../index';
+import { TApiOrders } from '../api';
 
 export interface IOrdersListConnectionOpenAction {
     readonly type: typeof ORDERS_LIST_CONNECTION_OPEN;
@@ -22,19 +22,16 @@ export interface IOrdersListConnectionSuccessAction {
 
 export interface IOrdersListConnectionFailedAction {
     readonly type: typeof ORDERS_LIST_CONNECTION_ERROR;
-    // readonly message: string;
 }
 
 export interface IOrdersListConnectionClosedAction {
     readonly type: typeof ORDERS_LIST_CONNECTION_CLOSED;
-    // readonly message: string;
+    readonly message: string;
 }
 
 export interface IOrdersListReceivedAction {
     readonly type: typeof ORDERS_LIST_RECEIVED;
-    // readonly orders: TOrders;
-    // total: number,
-    // totalToday: number,
+    readonly data: TApiOrders;
 }
 
 export type TOrdersListActions =

@@ -20,11 +20,18 @@ export const socketMiddleware = (wsUrl: string, wsActions: TSocketActions): Midd
             socket.onerror = () => {
                 dispatch({ type: onError });
             };
-            socket.onclose = () => {
-                dispatch({ type: onClose });
+            socket.onclose = (event) => {
+                if (event.wasClean) {
+                    dispatch({ type: onClose, message: null });
+                } else {
+                    const message = 'Произошло неожиданное закрытие соединения'
+                        + `: Код состояния WebSocket - ${event.code}`;
+                    dispatch({ type: onClose, message });
+                }
             };
-            socket.onmessage = () => {
-                dispatch({ type: onMessage });
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                dispatch({ type: onMessage, data });
             };
         } else if (type === close && socket) {
             socket.close();
