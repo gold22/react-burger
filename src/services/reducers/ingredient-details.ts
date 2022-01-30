@@ -17,7 +17,7 @@ export const ingredientDetailsReducer = (
     // eslint-disable-next-line @typescript-eslint/default-param-last
     state: TIngredientDetailsState = initialState,
     action: TIngredientDetailsActions,
-) => {
+): TIngredientDetailsState => {
     switch (action.type) {
     case SHOW_INGREDIENT_DETAILS: {
         return {

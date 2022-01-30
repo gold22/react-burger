@@ -1,7 +1,7 @@
 import {
     TApiConfig,
     TApiIngredients,
-    TApiOrder,
+    TApiOrderInfo,
     TApiUser,
     TApiUserInfo,
     TApiUserCredentials,
@@ -20,7 +20,7 @@ class ApiClient {
         return result.data;
     }
 
-    async createOrder(ingredientsIds: Array<string>): Promise<TApiOrder> {
+    async createOrder(ingredientsIds: Array<string>): Promise<TApiOrderInfo> {
         const body = {
             ingredients: ingredientsIds,
         };

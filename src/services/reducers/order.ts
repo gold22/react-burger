@@ -23,7 +23,7 @@ export const orderReducer = (
     // eslint-disable-next-line @typescript-eslint/default-param-last
     state: TOrderState = initialState,
     action: TOrderActions,
-) => {
+): TOrderState => {
     switch (action.type) {
     case CREATE_ORDER_REQUEST: {
         return {

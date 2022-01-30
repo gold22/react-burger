@@ -1,4 +1,5 @@
 import { Location } from 'history';
+import { TApiOrderStatus } from './api';
 
 export type TIngredient = {
     uuid: string;
@@ -32,3 +33,13 @@ export enum IngredientType {
     Sauce = 'sauce',
     Main = 'main',
 }
+
+export type TOrder = {
+    number: number;
+    status: TApiOrderStatus;
+    createdAt: Date;
+    updatedAt: Date;
+    ingredients: Array<string>;
+};
+
+export type TOrders = Array<TOrder>;

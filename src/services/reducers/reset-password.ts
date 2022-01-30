@@ -32,7 +32,7 @@ export const resetPasswordReducer = (
     // eslint-disable-next-line @typescript-eslint/default-param-last
     state: TResetPasswordState = initialState,
     action: TResetPasswordActions,
-) => {
+): TResetPasswordState => {
     switch (action.type) {
     case SEND_RESET_USER_PASSWORD_EMAIL_REQUEST: {
         return {

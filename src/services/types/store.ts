@@ -7,18 +7,30 @@ import { TIngredientDetailsActions } from './actions/ingredient-details';
 import { TIngredientsListActions } from './actions/ingredients-list';
 import { TOrderActions } from './actions/order';
 import { TResetPasswordActions } from './actions/reset-password';
+import { TOrdersListActions } from './actions/orders-list';
 import ApiClient from '../api-client';
 
-type TApplicationActions =
+export type TApplicationActions =
     | TAuthActions
     | TConstructorActions
     | TIngredientDetailsActions
     | TIngredientsListActions
     | TOrderActions
-    | TResetPasswordActions;
+    | TResetPasswordActions
+    | TOrdersListActions;
+export type TApplicationActionsTypes = TApplicationActions['type'];
 
 export type TGetState = typeof store.getState;
-export type TRootState = ReturnType<TGetState>;
 export type TDispatch = typeof store.dispatch;
+export type TRootState = ReturnType<TGetState>;
 export type TThunk<ReturnType = void> =
     ActionCreator<ThunkAction<ReturnType, TRootState, ApiClient, Action<TApplicationActions>>>;
+
+export type TSocketActions = {
+    open: TApplicationActionsTypes;
+    close: TApplicationActionsTypes;
+    onOpen: TApplicationActionsTypes;
+    onClose: TApplicationActionsTypes;
+    onError: TApplicationActionsTypes;
+    onMessage: TApplicationActionsTypes;
+};

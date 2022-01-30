@@ -22,7 +22,7 @@ export const ingredientsListReducer = (
     // eslint-disable-next-line @typescript-eslint/default-param-last
     state: TIngredientsListState = initialState,
     action: TIngredientsListActions,
-) => {
+): TIngredientsListState => {
     switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
         return {

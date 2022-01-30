@@ -1,0 +1,26 @@
+.main {
+    display: flex;
+    justify-content: center;
+    margin: 0 calc(var(--offset-base-size)  * 10);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: calc(var(--offset-base-size)  * 10) 0 0 0;
+    width: 1240px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin: calc(var(--offset-base-size)  * 5) 0 0 0;
+}
+
+.list {
+    width: 600px;
+}
+
+.status {
+    width: 600px;
+}

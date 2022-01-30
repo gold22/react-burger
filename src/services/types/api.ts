@@ -18,9 +18,29 @@ export type TApiIngredient = {
 
 export type TApiIngredients = Array<TApiIngredient>;
 
-export type TApiOrder = {
+export type TApiOrderInfo = {
     name: string;
     order: { number: string };
+};
+
+export enum TApiOrderStatus {
+    Pending = 'pending',
+    Created = 'created',
+    Done = 'done',
+}
+
+export type TApiOrder = {
+    number: number;
+    status: TApiOrderStatus;
+    createdAt: string;
+    updatedAt: string;
+    ingredients: Array<string>;
+};
+
+export type TApiOrders = {
+    orders: Array<TApiOrder>;
+    total: number;
+    totalToday: number;
 };
 
 export type TApiUser = {
