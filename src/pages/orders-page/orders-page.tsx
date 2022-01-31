@@ -7,7 +7,7 @@ import { closeOrdersListConnection, openOrdersListConnection } from '../../servi
 import styles from './orders-page.module.css';
 
 const OrdersPage = () => {
-    const { connectionError } = useSelector((state) => state.ordersList);
+    const { connectionError, orders } = useSelector((state) => state.ordersList);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -31,7 +31,7 @@ const OrdersPage = () => {
                 <p className="text text_type_main-large">Лента заказов</p>
                 <div className={styles.content}>
                     <div className={styles.list}>
-                        <OrderCards />
+                        <OrderCards orders={orders} />
                     </div>
                     <div className={styles.status}>
                         Статус

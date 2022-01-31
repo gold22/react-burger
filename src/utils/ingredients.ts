@@ -14,6 +14,13 @@ export const getIngredientCount = (ingredientId: string, ingredients: TIngredien
     )
 );
 
+export const getIngredients = (
+    ingredientIds: Array<string>,
+    ingredients: TIngredients,
+): TIngredients => (
+    ingredients.filter((ingredient) => ingredientIds.includes(ingredient.id))
+);
+
 export const getIngredientsPrice = (ingredients: TIngredients): number => (
     ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0)
 );

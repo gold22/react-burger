@@ -52,6 +52,7 @@ export const ordersListReducer = (
             ...state,
             orders: action.data.orders.map((order: TApiOrder) => ({
                 number: order.number,
+                name: order.name,
                 status: order.status,
                 createdAt: new Date(order.createdAt),
                 updatedAt: new Date(order.updatedAt),

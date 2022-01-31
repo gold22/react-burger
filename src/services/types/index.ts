@@ -36,6 +36,7 @@ export enum IngredientType {
 
 export type TOrder = {
     number: number;
+    name: string;
     status: TApiOrderStatus;
     createdAt: Date;
     updatedAt: Date;

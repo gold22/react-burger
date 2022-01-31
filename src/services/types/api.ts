@@ -31,6 +31,7 @@ export enum TApiOrderStatus {
 
 export type TApiOrder = {
     number: number;
+    name: string;
     status: TApiOrderStatus;
     createdAt: string;
     updatedAt: string;

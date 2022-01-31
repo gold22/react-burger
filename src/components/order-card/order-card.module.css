@@ -1,0 +1,46 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--offset-base-size)  * 4);
+    padding: calc(var(--offset-base-size)  * 6);
+    background: var(--background);
+    border-radius: 40px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+}
+
+.icons {
+    display: flex;
+    contain: paint;
+    height: 68px;
+    width: 80%;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    width: 64px;
+    border: 2px solid #4C4CFF;
+    border-radius: 100px;
+    background: var(--background-alt);
+    position: absolute;
+}
+
+.icon img {
+    transform: scale(0.8);
+}
