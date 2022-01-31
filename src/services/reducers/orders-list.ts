@@ -32,8 +32,9 @@ export const ordersListReducer = (
     switch (action.type) {
     case ORDERS_LIST_CONNECTION_SUCCESS: {
         return {
-            ...initialState,
+            ...state,
             isConnected: true,
+            connectionError: null,
         };
     }
     case ORDERS_LIST_CONNECTION_ERROR: {
@@ -42,9 +43,15 @@ export const ordersListReducer = (
         };
     }
     case ORDERS_LIST_CONNECTION_CLOSED: {
+        if (action.message) {
+            return {
+                ...initialState,
+                connectionError: action.message,
+            };
+        }
         return {
-            ...initialState,
-            connectionError: action.message,
+            ...state,
+            isConnected: false,
         };
     }
     case ORDERS_LIST_RECEIVED: {

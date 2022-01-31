@@ -42,6 +42,7 @@ const OrderCard: React.FC<TOrderCardProps> = ({ order }) => {
                 <div className={styles.icons}>
                     {orderIngredients.reverse().map((ingredient, index) => (
                         <div
+                            key={ingredient.id}
                             className={styles.icon}
                             style={{
                                 left: 48 * (orderIngredients.length - index - 1),

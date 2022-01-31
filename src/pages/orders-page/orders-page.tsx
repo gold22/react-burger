@@ -2,6 +2,7 @@ import React from 'react';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import ErrorMessage from '../../components/error-message/error-message';
 import OrderCards from '../../components/order-cards/order-cards';
+import OrdersStatus from '../../components/orders-status/orders-status';
 import { useDispatch, useSelector } from '../../services/hooks';
 import { closeOrdersListConnection, openOrdersListConnection } from '../../services/actions/orders-list';
 import styles from './orders-page.module.css';
@@ -34,7 +35,7 @@ const OrdersPage = () => {
                         <OrderCards orders={orders} />
                     </div>
                     <div className={styles.status}>
-                        Статус
+                        <OrdersStatus />
                     </div>
                 </div>
             </div>
