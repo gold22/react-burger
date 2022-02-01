@@ -5,7 +5,8 @@ import { TAuthActions } from './actions/auth';
 import { TConstructorActions } from './actions/constructor';
 import { TIngredientDetailsActions } from './actions/ingredient-details';
 import { TIngredientsListActions } from './actions/ingredients-list';
-import { TOrderActions } from './actions/order';
+import { TCreateOrderActions } from './actions/order';
+import { TGetOrderActions } from './actions/order-info';
 import { TResetPasswordActions } from './actions/reset-password';
 import { TOrdersListActions } from './actions/orders-list';
 import { TUserOrdersListActions } from './actions/user-orders-list';
@@ -16,7 +17,8 @@ export type TApplicationActions =
     | TConstructorActions
     | TIngredientDetailsActions
     | TIngredientsListActions
-    | TOrderActions
+    | TCreateOrderActions
+    | TGetOrderActions
     | TResetPasswordActions
     | TOrdersListActions
     | TUserOrdersListActions;

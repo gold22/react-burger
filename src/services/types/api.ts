@@ -31,6 +31,7 @@ export enum TApiOrderStatus {
 }
 
 export type TApiOrder = {
+    _id: string;
     number: number;
     name: string;
     status: TApiOrderStatus;

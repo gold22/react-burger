@@ -1,6 +1,7 @@
 import {
     TApiConfig,
     TApiIngredients,
+    TApiOrder,
     TApiOrderInfo,
     TApiUser,
     TApiUserInfo,
@@ -35,6 +36,14 @@ class ApiClient {
             },
             body: JSON.stringify(body),
         });
+    }
+
+    async getOrder(orderNumber: string): Promise<TApiOrder> {
+        const result = await this.fetch(`${this.url}/orders/${orderNumber}`);
+        if (result.orders.length !== 1) {
+            throw new Error(`Заказ #${orderNumber} не найден`);
+        }
+        return result.orders[0];
     }
 
     async registerUser(user: TApiUser): Promise<TApiUserInfo> {

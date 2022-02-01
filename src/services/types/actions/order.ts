@@ -19,7 +19,7 @@ export interface ICreateOrderFailedAction {
     readonly message: string;
 }
 
-export type TOrderActions =
+export type TCreateOrderActions =
     | ICreateOrderAction
     | ICreateOrderSuccessAction
     | ICreateOrderFailedAction;

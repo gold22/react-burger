@@ -35,6 +35,7 @@ export enum IngredientType {
 }
 
 export type TOrder = {
+    id: string;
     number: number;
     name: string;
     status: TApiOrderStatus;

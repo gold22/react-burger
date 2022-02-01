@@ -13,6 +13,7 @@ import ProfilePage from '../../pages/profile-page/profile-page';
 import RegisterPage from '../../pages/register-page/register-page';
 import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page';
 import OrdersPage from '../../pages/orders-page/orders-page';
+import OrderInfoPage from '../../pages/order-info-page/order-info-page';
 import IngredientDetailsDialog from '../ingredient-details-dialog/ingredient-details-dialog';
 import ErrorMessage from '../error-message/error-message';
 import ProtectedRoute from '../protected-route/protected-route';
@@ -71,6 +72,9 @@ const App = () => {
                 </Route>
                 <Route path="/reset-password">
                     <ResetPasswordPage />
+                </Route>
+                <Route path="/feed/:id">
+                    <OrderInfoPage />
                 </Route>
                 <Route path="/feed">
                     <OrdersPage />

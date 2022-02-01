@@ -3,7 +3,7 @@ import {
     CREATE_ORDER_SUCCESS,
     CREATE_ORDER_ERROR,
 } from '../constants/order';
-import { TOrderActions } from '../types/actions/order';
+import { TCreateOrderActions } from '../types/actions/order';
 
 export type TOrderState = {
     name: string | null;
@@ -22,7 +22,7 @@ const initialState: TOrderState = {
 export const orderReducer = (
     // eslint-disable-next-line @typescript-eslint/default-param-last
     state: TOrderState = initialState,
-    action: TOrderActions,
+    action: TCreateOrderActions,
 ): TOrderState => {
     switch (action.type) {
     case CREATE_ORDER_REQUEST: {

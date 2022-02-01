@@ -4,6 +4,7 @@ import { constructorReducer } from './constructor';
 import { ingredientDetailsReducer } from './ingredient-details';
 import { ingredientsListReducer } from './ingredients-list';
 import { orderReducer } from './order';
+import { orderInfoReducer } from './order-info';
 import { ordersListReducer } from './orders-list';
 import { userOrdersListReducer } from './user-orders-list';
 import { resetPasswordReducer } from './reset-password';
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
     ingredientDetails: ingredientDetailsReducer,
     ingredientsList: ingredientsListReducer,
     order: orderReducer,
+    orderInfo: orderInfoReducer,
     ordersList: ordersListReducer,
     userOrdersList: userOrdersListReducer,
     resetPassword: resetPasswordReducer,

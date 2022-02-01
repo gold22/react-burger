@@ -5,6 +5,7 @@
     padding: calc(var(--offset-base-size)  * 6);
     background: var(--background);
     border-radius: 40px;
+    cursor: pointer;
 }
 
 .header {

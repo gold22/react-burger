@@ -1,6 +1,7 @@
 import React from 'react';
+import { generatePath, useHistory, useLocation } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TOrder } from '../../services/types';
+import { TLocationState, TOrder } from '../../services/types';
 import { TApiOrderStatus } from '../../services/types/api';
 import { useSelector } from '../../services/hooks';
 import { getIngredients, getIngredientsPrice } from '../../utils/ingredients';
@@ -33,6 +34,8 @@ const localizeStatus = (status: TApiOrderStatus): string => {
 
 const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
     const { ingredients } = useSelector((state) => state.ingredientsList);
+    const location = useLocation();
+    const history = useHistory<TLocationState>();
 
     const orderIngredients = React.useMemo(
         () => getIngredients(order.ingredients, ingredients),
@@ -43,11 +46,21 @@ const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
         [orderIngredients],
     );
 
+    const handleShowInfo = () => {
+        history.push({
+            pathname: generatePath(`${location.pathname}/:id`, { id: order.number }),
+            // state: { background: location },
+        });
+    };
+
     const statusClass = TApiOrderStatus.Done === order.status
         ? 'text text_type_main-default mt-2 text_color_success'
         : 'text text_type_main-default mt-2';
     return (
-        <div className={styles.card}>
+        <div
+            className={styles.card}
+            onClick={handleShowInfo}
+        >
             <div className={styles.header}>
                 <p className="text text_type_digits-default">{`#${order.number}`}</p>
                 <p className="text text_type_main-default text_color_inactive">{localizeDate(order.createdAt)}</p>
