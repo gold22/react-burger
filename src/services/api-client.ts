@@ -11,8 +11,11 @@ import {
 class ApiClient {
     private readonly url: string;
 
-    constructor({ url }: TApiConfig) {
+    private readonly wsUrl: string;
+
+    constructor({ url, wsUrl }: TApiConfig) {
         this.url = url;
+        this.wsUrl = wsUrl;
     }
 
     async getIngredients(): Promise<TApiIngredients> {
@@ -156,6 +159,23 @@ class ApiClient {
             + `: Код состояния HTTP - ${response.status}`
             + `: HTTP ответ - ${resultText}`,
         );
+    }
+
+    getOrdersSocketUrl(): string {
+        return `${this.wsUrl}/orders/all`;
+    }
+
+    createOrdersSocket(): WebSocket {
+        return new WebSocket(this.getOrdersSocketUrl());
+    }
+
+    getUserOrdersSocketUrl(): string {
+        return `${this.wsUrl}/orders`;
+    }
+
+    createUserOrdersSocket(): WebSocket {
+        const token = ApiClient.getAccessToken().slice(7);
+        return new WebSocket(`${this.getUserOrdersSocketUrl()}?token=${token}`);
     }
 
     static getAccessToken(): string {

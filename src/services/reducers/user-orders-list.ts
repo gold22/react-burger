@@ -1,49 +1,45 @@
 import {
-    ORDERS_LIST_CONNECTION_SUCCESS,
-    ORDERS_LIST_CONNECTION_ERROR,
-    ORDERS_LIST_CONNECTION_CLOSED,
-    ORDERS_LIST_RECEIVED,
-} from '../constants/orders-list';
+    USER_ORDERS_LIST_CONNECTION_SUCCESS,
+    USER_ORDERS_LIST_CONNECTION_ERROR,
+    USER_ORDERS_LIST_CONNECTION_CLOSED,
+    USER_ORDERS_LIST_RECEIVED,
+} from '../constants/user-orders-list';
 import { TOrders } from '../types';
-import { TOrdersListActions } from '../types/actions/orders-list';
+import { TUserOrdersListActions } from '../types/actions/user-orders-list';
 import { mapOrders } from '../../utils/orders';
 
-export type TOrdersListState = {
+export type TUserOrdersListState = {
     orders: TOrders;
-    total: number,
-    totalToday: number,
     isConnected: boolean;
     connectionError: string | null;
 };
 
-const initialState: TOrdersListState = {
+const initialState: TUserOrdersListState = {
     orders: [],
-    total: 0,
-    totalToday: 0,
     isConnected: false,
     connectionError: null,
 };
 
-export const ordersListReducer = (
+export const userOrdersListReducer = (
     // eslint-disable-next-line @typescript-eslint/default-param-last
-    state: TOrdersListState = initialState,
-    action: TOrdersListActions,
-): TOrdersListState => {
+    state: TUserOrdersListState = initialState,
+    action: TUserOrdersListActions,
+): TUserOrdersListState => {
     switch (action.type) {
-    case ORDERS_LIST_CONNECTION_SUCCESS: {
+    case USER_ORDERS_LIST_CONNECTION_SUCCESS: {
         return {
             ...state,
             isConnected: true,
             connectionError: null,
         };
     }
-    case ORDERS_LIST_CONNECTION_ERROR: {
+    case USER_ORDERS_LIST_CONNECTION_ERROR: {
         return {
             ...state,
             connectionError: action.message,
         };
     }
-    case ORDERS_LIST_CONNECTION_CLOSED: {
+    case USER_ORDERS_LIST_CONNECTION_CLOSED: {
         if (action.message) {
             return {
                 ...initialState,
@@ -55,12 +51,10 @@ export const ordersListReducer = (
             isConnected: false,
         };
     }
-    case ORDERS_LIST_RECEIVED: {
+    case USER_ORDERS_LIST_RECEIVED: {
         return {
             ...state,
             orders: mapOrders(action.data.orders),
-            total: action.data.total,
-            totalToday: action.data.totalToday,
         };
     }
     default: {

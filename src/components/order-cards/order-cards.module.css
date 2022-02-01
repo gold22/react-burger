@@ -5,4 +5,5 @@
     max-height: 760px;
     overflow-x: hidden;
     overflow-y: scroll;
+    padding-right: calc(var(--offset-base-size)  * 2);
 }

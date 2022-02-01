@@ -12,10 +12,18 @@ import {
     ORDERS_LIST_CONNECTION_CLOSED,
     ORDERS_LIST_RECEIVED,
 } from './constants/orders-list';
+import {
+    USER_ORDERS_LIST_CONNECTION_OPEN,
+    USER_ORDERS_LIST_CONNECTION_CLOSE,
+    USER_ORDERS_LIST_CONNECTION_SUCCESS,
+    USER_ORDERS_LIST_CONNECTION_ERROR,
+    USER_ORDERS_LIST_CONNECTION_CLOSED,
+    USER_ORDERS_LIST_RECEIVED,
+} from './constants/user-orders-list';
 
 const API_URL = 'https://norma.nomoreparties.space/api';
 const WS_URL = 'wss://norma.nomoreparties.space';
-const apiClient = new ApiClient({ url: API_URL });
+const apiClient = new ApiClient({ url: API_URL, wsUrl: WS_URL });
 
 const ordersListActions = {
     open: ORDERS_LIST_CONNECTION_OPEN,
@@ -25,10 +33,19 @@ const ordersListActions = {
     onError: ORDERS_LIST_CONNECTION_ERROR,
     onMessage: ORDERS_LIST_RECEIVED,
 };
+const userOrdersListActions = {
+    open: USER_ORDERS_LIST_CONNECTION_OPEN,
+    close: USER_ORDERS_LIST_CONNECTION_CLOSE,
+    onOpen: USER_ORDERS_LIST_CONNECTION_SUCCESS,
+    onClose: USER_ORDERS_LIST_CONNECTION_CLOSED,
+    onError: USER_ORDERS_LIST_CONNECTION_ERROR,
+    onMessage: USER_ORDERS_LIST_RECEIVED,
+};
 
 const enhancer = composeWithDevTools(applyMiddleware(
     thunk.withExtraArgument(apiClient),
-    socketMiddleware(`${WS_URL}/orders/all`, ordersListActions),
+    socketMiddleware(() => apiClient.createOrdersSocket(), ordersListActions),
+    socketMiddleware(() => apiClient.createUserOrdersSocket(), userOrdersListActions),
 ));
 // eslint-disable-next-line import/prefer-default-export
 export const store = createStore(rootReducer, enhancer);

@@ -8,6 +8,7 @@ import { TIngredientsListActions } from './actions/ingredients-list';
 import { TOrderActions } from './actions/order';
 import { TResetPasswordActions } from './actions/reset-password';
 import { TOrdersListActions } from './actions/orders-list';
+import { TUserOrdersListActions } from './actions/user-orders-list';
 import ApiClient from '../api-client';
 
 export type TApplicationActions =
@@ -17,7 +18,8 @@ export type TApplicationActions =
     | TIngredientsListActions
     | TOrderActions
     | TResetPasswordActions
-    | TOrdersListActions;
+    | TOrdersListActions
+    | TUserOrdersListActions;
 export type TApplicationActionsTypes = TApplicationActions['type'];
 
 export type TGetState = typeof store.getState;

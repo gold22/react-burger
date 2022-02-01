@@ -22,6 +22,7 @@ export interface IOrdersListConnectionSuccessAction {
 
 export interface IOrdersListConnectionFailedAction {
     readonly type: typeof ORDERS_LIST_CONNECTION_ERROR;
+    readonly message: string | null;
 }
 
 export interface IOrdersListConnectionClosedAction {

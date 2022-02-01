@@ -1,5 +1,6 @@
 export type TApiConfig = {
     url: string;
+    wsUrl: string;
 };
 
 export type TApiIngredient = {
