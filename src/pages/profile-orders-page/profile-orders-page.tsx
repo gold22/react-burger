@@ -29,7 +29,7 @@ const ProfileOrdersPage = () => {
                     {connectionError ? (
                         <ErrorMessage message={connectionError} />
                     ) : (
-                        <OrderCards orders={orders} />
+                        <OrderCards orders={orders} showStatus />
                     )}
                 </div>
             </div>

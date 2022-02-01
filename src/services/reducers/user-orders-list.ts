@@ -54,7 +54,7 @@ export const userOrdersListReducer = (
     case USER_ORDERS_LIST_RECEIVED: {
         return {
             ...state,
-            orders: mapOrders(action.data.orders),
+            orders: mapOrders(action.data.orders.reverse()),
         };
     }
     default: {

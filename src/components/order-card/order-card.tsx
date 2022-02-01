@@ -1,6 +1,7 @@
 import React from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TOrder } from '../../services/types';
+import { TApiOrderStatus } from '../../services/types/api';
 import { useSelector } from '../../services/hooks';
 import { getIngredients, getIngredientsPrice } from '../../utils/ingredients';
 import { ucFirst } from '../../utils/string';
@@ -8,6 +9,7 @@ import styles from './order-card.module.css';
 
 type TOrderCardProps = {
     order: TOrder;
+    showStatus: boolean;
 };
 
 const localizeDate = (date: Date) => {
@@ -19,7 +21,17 @@ const localizeDate = (date: Date) => {
     return `${days}, ${time}`;
 };
 
-const OrderCard: React.FC<TOrderCardProps> = ({ order }) => {
+const localizeStatus = (status: TApiOrderStatus): string => {
+    if (TApiOrderStatus.Created === status) {
+        return 'Создан';
+    }
+    if (TApiOrderStatus.Pending === status) {
+        return 'Готовится';
+    }
+    return 'Выполнен';
+};
+
+const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
     const { ingredients } = useSelector((state) => state.ingredientsList);
 
     const orderIngredients = React.useMemo(
@@ -31,13 +43,21 @@ const OrderCard: React.FC<TOrderCardProps> = ({ order }) => {
         [orderIngredients],
     );
 
+    const statusClass = TApiOrderStatus.Done === order.status
+        ? 'text text_type_main-default mt-2 text_color_success'
+        : 'text text_type_main-default mt-2';
     return (
         <div className={styles.card}>
             <div className={styles.header}>
                 <p className="text text_type_digits-default">{`#${order.number}`}</p>
                 <p className="text text_type_main-default text_color_inactive">{localizeDate(order.createdAt)}</p>
             </div>
-            <p className="text text_type_main-medium">{order.name}</p>
+            <div>
+                <p className="text text_type_main-medium">{order.name}</p>
+                {showStatus && (
+                    <p className={statusClass}>{localizeStatus(order.status)}</p>
+                )}
+            </div>
             <div className={styles.footer}>
                 <div className={styles.icons}>
                     {orderIngredients.reverse().map((ingredient, index) => (
