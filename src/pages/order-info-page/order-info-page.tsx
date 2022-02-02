@@ -34,7 +34,7 @@ const OrderInfoPage = () => {
 
     return (
         <div className={styles.main}>
-            <p className="text text_type_digits-default mt-10 mb-10">{`#${order.number}`}</p>
+            <p className="text text_type_digits-default mt-5 mb-5">{`#${order.number}`}</p>
             <OrderInfo order={order} />
         </div>
     );

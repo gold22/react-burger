@@ -18,6 +18,13 @@ export type TIngredient = {
 
 export type TIngredients = Array<TIngredient>;
 
+export type TIngredientGroupItem = {
+    ingredient: TIngredient;
+    count: number;
+};
+
+export type TIngredientGroupItems = Array<TIngredientGroupItem>;
+
 export type TIngredientDragItem = {
     ingredient?: TIngredient;
     index?: number;

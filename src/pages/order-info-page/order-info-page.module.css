@@ -4,5 +4,5 @@
     justify-content: center;
     align-items: center;
     gap: calc(var(--offset-base-size)  * 5);
-    margin: 120px 0 0 0;
+    margin: 80px 0 0 0;
 }

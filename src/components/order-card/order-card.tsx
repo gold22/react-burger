@@ -4,32 +4,16 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { TLocationState, TOrder } from '../../services/types';
 import { TApiOrderStatus } from '../../services/types/api';
 import { useSelector } from '../../services/hooks';
-import { getIngredients, getIngredientsPrice } from '../../utils/ingredients';
-import { ucFirst } from '../../utils/string';
+import {
+    getGroupedIngredientsPrice,
+    groupIngredients,
+} from '../../utils/ingredients';
+import { localizeDate, localizeStatus } from '../../utils/orders';
 import styles from './order-card.module.css';
 
 type TOrderCardProps = {
     order: TOrder;
     showStatus: boolean;
-};
-
-const localizeDate = (date: Date) => {
-    const diff = (new Date()).getTime() - date.getTime();
-    const rtf = new Intl.RelativeTimeFormat('ru', { numeric: 'auto' });
-    const days = ucFirst(rtf.format(-Math.floor(diff / (1000 * 60 * 60 * 24)), 'day'));
-    const dtf = new Intl.DateTimeFormat('ru', { hour: 'numeric', minute: 'numeric', timeZoneName: 'short' });
-    const time = dtf.format(date);
-    return `${days}, ${time}`;
-};
-
-const localizeStatus = (status: TApiOrderStatus): string => {
-    if (TApiOrderStatus.Created === status) {
-        return 'Создан';
-    }
-    if (TApiOrderStatus.Pending === status) {
-        return 'Готовится';
-    }
-    return 'Выполнен';
 };
 
 const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
@@ -38,11 +22,11 @@ const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
     const history = useHistory<TLocationState>();
 
     const orderIngredients = React.useMemo(
-        () => getIngredients(order.ingredients, ingredients),
+        () => groupIngredients(order.ingredients, ingredients),
         [order.ingredients, ingredients],
     );
     const orderPrice = React.useMemo(
-        () => getIngredientsPrice(orderIngredients),
+        () => getGroupedIngredientsPrice(orderIngredients),
         [orderIngredients],
     );
 
@@ -73,15 +57,15 @@ const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
             </div>
             <div className={styles.footer}>
                 <div className={styles.icons}>
-                    {orderIngredients.reverse().map((ingredient, index) => (
+                    {orderIngredients.reverse().map((item, index) => (
                         <div
-                            key={ingredient.id}
+                            key={item.ingredient.id}
                             className={styles.icon}
                             style={{
                                 left: 48 * (orderIngredients.length - index - 1),
                             }}
                         >
-                            <img src={ingredient.imageMobile} alt={ingredient.name} />
+                            <img src={item.ingredient.imageMobile} alt={item.ingredient.name} />
                         </div>
                     ))}
                 </div>
