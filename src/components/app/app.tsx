@@ -14,6 +14,7 @@ import RegisterPage from '../../pages/register-page/register-page';
 import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page';
 import OrdersPage from '../../pages/orders-page/orders-page';
 import OrderInfoPage from '../../pages/order-info-page/order-info-page';
+import OrderInfoDialog from '../order-info-dialog/order-info-dialog';
 import IngredientDetailsDialog from '../ingredient-details-dialog/ingredient-details-dialog';
 import ErrorMessage from '../error-message/error-message';
 import ProtectedRoute from '../protected-route/protected-route';
@@ -96,12 +97,20 @@ const App = () => {
                 </Route>
             </Switch>
             {background && (
-                <Route path="/ingredients/:id">
-                    <IngredientDetailsDialog
-                        visible
-                        onClose={() => history.goBack()}
-                    />
-                </Route>
+                <Switch location={location}>
+                    <Route path="/feed/:id">
+                        <OrderInfoDialog onClose={() => history.goBack()} />
+                    </Route>
+                    <ProtectedRoute path="/profile/orders/:id">
+                        <OrderInfoDialog onClose={() => history.goBack()} />
+                    </ProtectedRoute>
+                    <Route path="/ingredients/:id">
+                        <IngredientDetailsDialog
+                            visible
+                            onClose={() => history.goBack()}
+                        />
+                    </Route>
+                </Switch>
             )}
         </main>
     );

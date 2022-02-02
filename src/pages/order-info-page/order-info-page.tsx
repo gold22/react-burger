@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '../../services/hooks';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import OrderInfo from '../../components/order-info/order-info';
 import ErrorMessage from '../../components/error-message/error-message';
-import { getOrder } from '../../services/actions/order-info';
+import { clearOrder, getOrder } from '../../services/actions/order-info';
 import styles from './order-info-page.module.css';
 
 type TOrderInfoPageParams = {
@@ -16,10 +16,10 @@ const OrderInfoPage = () => {
     const { order, loadError } = useSelector((state) => state.orderInfo);
     const dispatch = useDispatch();
 
-    React.useEffect(
-        () => { dispatch(getOrder(id)); },
-        [id, dispatch],
-    );
+    React.useEffect(() => {
+        dispatch(getOrder(id));
+        return () => { dispatch(clearOrder()); };
+    }, [id, dispatch]);
 
     if (loadError) {
         return (

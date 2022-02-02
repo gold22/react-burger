@@ -2,6 +2,7 @@ import {
     GET_ORDER_REQUEST,
     GET_ORDER_SUCCESS,
     GET_ORDER_ERROR,
+    CLEAR_ORDER,
 } from '../../constants/order-info';
 import { TOrder } from '../index';
 
@@ -19,7 +20,12 @@ export interface IGetOrderFailedAction {
     readonly message: string;
 }
 
+export interface IClearOrderAction {
+    readonly type: typeof CLEAR_ORDER;
+}
+
 export type TGetOrderActions =
     | IGetOrderAction
     | IGetOrderSuccessAction
-    | IGetOrderFailedAction;
+    | IGetOrderFailedAction
+    | IClearOrderAction;

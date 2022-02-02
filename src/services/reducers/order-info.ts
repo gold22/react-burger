@@ -2,6 +2,7 @@ import {
     GET_ORDER_REQUEST,
     GET_ORDER_SUCCESS,
     GET_ORDER_ERROR,
+    CLEAR_ORDER,
 } from '../constants/order-info';
 import { TOrder } from '../types';
 import { TGetOrderActions } from '../types/actions/order-info';
@@ -44,6 +45,9 @@ export const orderInfoReducer = (
             isLoading: false,
             loadError: action.message,
         };
+    }
+    case CLEAR_ORDER: {
+        return initialState;
     }
     default: {
         return state;

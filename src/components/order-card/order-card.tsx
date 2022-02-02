@@ -33,7 +33,7 @@ const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
     const handleShowInfo = () => {
         history.push({
             pathname: generatePath(`${location.pathname}/:id`, { id: order.number }),
-            // state: { background: location },
+            state: { background: location },
         });
     };
 
