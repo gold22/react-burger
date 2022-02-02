@@ -79,6 +79,9 @@ const App = () => {
                 <Route path="/feed">
                     <OrdersPage />
                 </Route>
+                <ProtectedRoute path="/profile/orders/:id">
+                    <OrderInfoPage />
+                </ProtectedRoute>
                 <ProtectedRoute path="/profile/orders">
                     <ProfileOrdersPage />
                 </ProtectedRoute>
