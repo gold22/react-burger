@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import {
     ConstructorElement as ConstructorElementComponent,
@@ -13,6 +12,7 @@ import {
     setBun,
 } from '../../services/actions/constructor';
 import { TIngredient, TIngredientDragItem } from '../../services/types';
+import { useDispatch } from '../../services/hooks';
 import styles from './constructor-element.module.css';
 
 type TConstructorElementProps = {
