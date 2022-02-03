@@ -1,8 +1,18 @@
-export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
-export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
-export const GET_INGREDIENTS_ERROR = 'GET_INGREDIENTS_ERROR';
+import {
+    GET_INGREDIENTS_REQUEST,
+    GET_INGREDIENTS_SUCCESS,
+    GET_INGREDIENTS_ERROR,
+} from '../constants/ingredients-list';
+import { TDispatch, TGetState, TThunk } from '../types/store';
+import ApiClient from '../api-client';
+import { getErrorMessage } from '../../utils/error';
 
-export const getIngredients = () => async (dispatch, getState, apiClient) => {
+// eslint-disable-next-line import/prefer-default-export
+export const getIngredients: TThunk = () => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: GET_INGREDIENTS_REQUEST,
     });
@@ -21,7 +31,7 @@ export const getIngredients = () => async (dispatch, getState, apiClient) => {
     } catch (error) {
         dispatch({
             type: GET_INGREDIENTS_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };

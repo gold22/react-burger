@@ -1,7 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../services/hooks';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
@@ -13,7 +13,7 @@ const RegisterPage = () => {
     const [name, setName] = React.useState<string>('');
     const [email, setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
-    const { auth } = useSelector((state: any) => state);
+    const { auth } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     const updateName: React.ChangeEventHandler<HTMLInputElement> = (e) => {

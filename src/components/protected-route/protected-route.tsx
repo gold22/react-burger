@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { getUser } from '../../services/actions/auth';
 import ApiClient from '../../services/api-client';
 
@@ -9,7 +9,7 @@ type TProtectedRouteProps = {
 };
 
 const ProtectedRoute: React.FC<TProtectedRouteProps> = ({ children, path }) => {
-    const { auth } = useSelector((state: any) => state);
+    const { auth } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     React.useEffect(() => {

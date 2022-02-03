@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import ErrorMessage from '../../components/error-message/error-message';
@@ -13,7 +13,7 @@ type TIngredientDetailsPageParams = {
 
 const IngredientDetailsPage = () => {
     const { id } = useParams<TIngredientDetailsPageParams>();
-    const { ingredients } = useSelector((state: any) => state.ingredientsList);
+    const { ingredients } = useSelector((state) => state.ingredientsList);
     const dispatch = useDispatch();
 
     const ingredient = React.useMemo(
@@ -22,7 +22,9 @@ const IngredientDetailsPage = () => {
     );
 
     React.useEffect(() => {
-        dispatch(showIngredientDetails(ingredient));
+        if (ingredient) {
+            dispatch(showIngredientDetails(ingredient));
+        }
         return () => { dispatch(hideIngredientDetails()); };
     }, [ingredient, dispatch]);
 

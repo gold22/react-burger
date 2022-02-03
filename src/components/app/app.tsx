@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/hooks';
 import AppHeader from '../app-header/app-header';
 import ConstructorPage from '../../pages/constructor-page/constructor-page';
 import DialogPage from '../dialog-page/dialog-page';
@@ -12,14 +12,17 @@ import ProfileOrdersPage from '../../pages/profile-orders-page/profile-orders-pa
 import ProfilePage from '../../pages/profile-page/profile-page';
 import RegisterPage from '../../pages/register-page/register-page';
 import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page';
+import OrdersPage from '../../pages/orders-page/orders-page';
+import OrderInfoPage from '../../pages/order-info-page/order-info-page';
+import OrderInfoDialog from '../order-info-dialog/order-info-dialog';
 import IngredientDetailsDialog from '../ingredient-details-dialog/ingredient-details-dialog';
 import ErrorMessage from '../error-message/error-message';
 import ProtectedRoute from '../protected-route/protected-route';
-import { TLocationState } from '../../utils/types';
+import { TLocationState } from '../../services/types';
 import { getIngredients } from '../../services/actions/ingredients-list';
 
 const App = () => {
-    const { ingredientsList } = useSelector((state: any) => state);
+    const { ingredientsList } = useSelector((state) => state);
     const location = useLocation<TLocationState>();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -71,6 +74,15 @@ const App = () => {
                 <Route path="/reset-password">
                     <ResetPasswordPage />
                 </Route>
+                <Route path="/feed/:id">
+                    <OrderInfoPage />
+                </Route>
+                <Route path="/feed">
+                    <OrdersPage />
+                </Route>
+                <ProtectedRoute path="/profile/orders/:id">
+                    <OrderInfoPage />
+                </ProtectedRoute>
                 <ProtectedRoute path="/profile/orders">
                     <ProfileOrdersPage />
                 </ProtectedRoute>
@@ -85,12 +97,20 @@ const App = () => {
                 </Route>
             </Switch>
             {background && (
-                <Route path="/ingredients/:id">
-                    <IngredientDetailsDialog
-                        visible
-                        onClose={() => history.goBack()}
-                    />
-                </Route>
+                <Switch location={location}>
+                    <Route path="/feed/:id">
+                        <OrderInfoDialog onClose={() => history.goBack()} />
+                    </Route>
+                    <ProtectedRoute path="/profile/orders/:id">
+                        <OrderInfoDialog onClose={() => history.goBack()} />
+                    </ProtectedRoute>
+                    <Route path="/ingredients/:id">
+                        <IngredientDetailsDialog
+                            visible
+                            onClose={() => history.goBack()}
+                        />
+                    </Route>
+                </Switch>
             )}
         </main>
     );

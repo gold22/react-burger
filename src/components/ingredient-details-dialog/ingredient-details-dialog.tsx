@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import ErrorMessage from '../error-message/error-message';
@@ -18,7 +18,7 @@ type TIngredientDetailsDialogParams = {
 
 const IngredientDetailsDialog: React.FC<TIngredientDetailsDialogProps> = ({ visible, onClose }) => {
     const { id } = useParams<TIngredientDetailsDialogParams>();
-    const { ingredients } = useSelector((state: any) => state.ingredientsList);
+    const { ingredients } = useSelector((state) => state.ingredientsList);
     const dispatch = useDispatch();
 
     const ingredient = React.useMemo(
@@ -27,7 +27,9 @@ const IngredientDetailsDialog: React.FC<TIngredientDetailsDialogProps> = ({ visi
     );
 
     React.useEffect(() => {
-        dispatch(showIngredientDetails(ingredient));
+        if (ingredient) {
+            dispatch(showIngredientDetails(ingredient));
+        }
         return () => { dispatch(hideIngredientDetails()); };
     }, [ingredient, dispatch]);
 

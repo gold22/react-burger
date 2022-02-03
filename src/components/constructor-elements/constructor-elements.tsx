@@ -1,12 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import ConstructorElement from '../constructor-element/constructor-element';
 import { getBun, isBun } from '../../utils/ingredients';
-import { TIngredient } from '../../utils/types';
+import { TIngredient } from '../../services/types';
 import styles from './constructor-elements.module.css';
 
 const ConstructorElements = () => {
-    const { bun, ingredients } = useSelector((state: any) => ({
+    const { bun, ingredients } = useSelector((state) => ({
         bun: getBun(state.burgerConstructor.ingredients),
         ingredients: state.burgerConstructor.ingredients.filter(
             (ingredient: TIngredient) => !isBun(ingredient),

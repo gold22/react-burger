@@ -1,20 +1,20 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../services/hooks';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
 import { resetPasswordReset, resetUserPassword } from '../../services/actions/reset-password';
 import ApiClient from '../../services/api-client';
-import { TLocationState } from '../../utils/types';
+import { TLocationState } from '../../services/types';
 import loginStyles from '../login-page/login-page.module.css';
 
 const ResetPasswordPage = () => {
     const [password, setPassword] = React.useState<string>('');
     const [token, setToken] = React.useState<string>('');
-    const { auth } = useSelector((state: any) => state);
-    const { resetPassword } = useSelector((state: any) => state);
+    const { auth } = useSelector((state) => state);
+    const { resetPassword } = useSelector((state) => state);
     const location = useLocation<TLocationState>();
     const dispatch = useDispatch();
 

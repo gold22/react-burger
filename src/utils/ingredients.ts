@@ -1,4 +1,10 @@
-import { IngredientType, TIngredient, TIngredients } from './types';
+import {
+    IngredientType,
+    TIngredient,
+    TIngredientGroupItem,
+    TIngredientGroupItems,
+    TIngredients,
+} from '../services/types';
 
 export const getIngredient = (
     ingredientId: string,
@@ -14,8 +20,30 @@ export const getIngredientCount = (ingredientId: string, ingredients: TIngredien
     )
 );
 
+export const groupIngredients = (
+    ingredientIds: Array<string>,
+    ingredients: TIngredients,
+): TIngredientGroupItems => {
+    const ingredientsMap = new Map<string, TIngredientGroupItem>();
+    for (const ingredient of ingredients) {
+        if (ingredientIds.includes(ingredient.id)) {
+            const groupItem = ingredientsMap.get(ingredient.id);
+            if (groupItem) {
+                groupItem.count += 1;
+            } else {
+                ingredientsMap.set(ingredient.id, { ingredient, count: 1 });
+            }
+        }
+    }
+    return Array.from(ingredientsMap.values());
+};
+
 export const getIngredientsPrice = (ingredients: TIngredients): number => (
     ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0)
+);
+
+export const getGroupedIngredientsPrice = (items: TIngredientGroupItems): number => (
+    items.reduce((sum, item) => sum + item.count * item.ingredient.price, 0)
 );
 
 export const getIngredientsIds = (ingredients: TIngredients): Array<string> => (

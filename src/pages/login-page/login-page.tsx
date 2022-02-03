@@ -1,20 +1,20 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../services/hooks';
 import DialogPage from '../../components/dialog-page/dialog-page';
 import Form from '../../components/form/form';
 import ErrorMessage from '../../components/error-message/error-message';
 import { logInUser } from '../../services/actions/auth';
 import ApiClient from '../../services/api-client';
-import { TLocationState } from '../../utils/types';
+import { TLocationState } from '../../services/types';
 import styles from './login-page.module.css';
 
 const LoginPage = () => {
     const [email, setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
     const location = useLocation<TLocationState>();
-    const { auth } = useSelector((state: any) => state);
+    const { auth } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     const updateEmail: React.ChangeEventHandler<HTMLInputElement> = (e) => {

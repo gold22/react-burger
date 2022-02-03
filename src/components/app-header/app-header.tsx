@@ -9,7 +9,7 @@ const AppHeader = () => (
         <div className={styles.headerContent}>
             <nav className={styles.leftNav}>
                 <AppNavLink icon="burger" text="Конструктор" to="/" exact />
-                <AppNavLink icon="list" text="Лента заказов" to="/orders" />
+                <AppNavLink icon="list" text="Лента заказов" to="/feed" />
             </nav>
             <div className={styles.logo}>
                 <Link to="/">

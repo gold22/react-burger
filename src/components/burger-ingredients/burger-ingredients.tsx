@@ -1,14 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import IngredientCards from '../ingredient-cards/ingredient-cards';
 import IngredientTabs from '../ingredient-tabs/ingredient-tabs';
 import { isBun, isSauce, isMain } from '../../utils/ingredients';
-import { IngredientType, TIngredient } from '../../utils/types';
+import { IngredientType, TIngredient } from '../../services/types';
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = () => {
     const [currentTab, setCurrentTab] = React.useState<IngredientType>(IngredientType.Bun);
-    const { ingredients } = useSelector((state: any) => state.ingredientsList);
+    const { ingredients } = useSelector((state) => state.ingredientsList);
     const categories = {
         bun: React.useRef<HTMLDivElement>(null!),
         sauce: React.useRef<HTMLDivElement>(null!),

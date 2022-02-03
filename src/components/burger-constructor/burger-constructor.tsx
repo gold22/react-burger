@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../services/hooks';
 import ConstructorElements from '../constructor-elements/constructor-elements';
 import ErrorDialog from '../error-dialog/error-dialog';
 import OrderDetails from '../order-details/order-details';
@@ -11,16 +11,16 @@ import { getIngredientsPrice, isBun } from '../../utils/ingredients';
 import { createOrder } from '../../services/actions/order';
 import { removeIngredients, setBun } from '../../services/actions/constructor';
 import ApiClient from '../../services/api-client';
-import { TIngredientDragItem } from '../../utils/types';
+import { TIngredientDragItem } from '../../services/types';
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
     const [showDetails, setShowDetails] = React.useState<boolean>(false);
-    const { ingredientsCount, orderPrice } = useSelector((state: any) => ({
+    const { ingredientsCount, orderPrice } = useSelector((state) => ({
         ingredientsCount: state.burgerConstructor.ingredients.length,
         orderPrice: getIngredientsPrice(state.burgerConstructor.ingredients),
     }));
-    const { order } = useSelector((state: any) => state);
+    const { order } = useSelector((state) => state);
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -45,7 +45,9 @@ const BurgerConstructor = () => {
     const [, dropRef] = useDrop<TIngredientDragItem, unknown, unknown>({
         accept: 'ingredient',
         drop(item) {
-            dispatch(setBun(item.ingredient));
+            if (item.ingredient) {
+                dispatch(setBun(item.ingredient));
+            }
         },
         canDrop(item) {
             return typeof item.ingredient !== 'undefined' && isBun(item.ingredient);

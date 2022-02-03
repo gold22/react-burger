@@ -4,15 +4,24 @@ import {
     REMOVE_INGREDIENT,
     REMOVE_INGREDIENTS,
     MOVE_INGREDIENT,
-} from '../actions/constructor';
+} from '../constants/constructor';
+import { TIngredients } from '../types';
+import { TConstructorActions } from '../types/actions/constructor';
 import { getBun } from '../../utils/ingredients';
 
-const initialState = {
+export type TConstructorState = {
+    ingredients: TIngredients;
+};
+
+const initialState: TConstructorState = {
     ingredients: [],
 };
 
-// eslint-disable-next-line import/prefer-default-export,@typescript-eslint/default-param-last
-export const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (
+    // eslint-disable-next-line @typescript-eslint/default-param-last
+    state: TConstructorState = initialState,
+    action: TConstructorActions,
+): TConstructorState => {
     switch (action.type) {
     case SET_BUN: {
         const ingredients = getBun(state.ingredients)

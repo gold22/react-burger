@@ -3,7 +3,7 @@ import Modal from '../modal/modal';
 
 type TErrorDialogProps = {
     visible: boolean;
-    message?: string;
+    message: string | null;
     onClose: () => void;
 };
 

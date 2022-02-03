@@ -1,61 +1,22 @@
-/**
- * @typedef {Object} AuthResult
- * @property {{name: string, email: string}} user
- * @property {string} accessToken
- * @property {string} refreshToken
- */
-
-export type TApiConfig = {
-    url: string;
-};
-
-export type TApiIngredient = {
-    _id: string;
-    name: string;
-    type: string;
-    proteins: number;
-    fat: number;
-    carbohydrates: number;
-    calories: number;
-    price: number;
-    image: string;
-    imageLarge: string;
-    imageMobile: string;
-};
-
-export type TApiIngredients = Array<TApiIngredient>;
-
-export type TApiOrder = {
-    name: string;
-    order: { number: string };
-};
-
-export type TApiUser = {
-    name: string;
-    email: string;
-    password: string;
-};
-
-export type TApiUserInfo = {
-    name: string;
-    email: string;
-};
-
-export type TApiUserCredentials = {
-    email: string;
-    password: string;
-};
-
-export type TApiUserResetPasswordInfo = {
-    password: string;
-    token: string;
-};
+import {
+    TApiConfig,
+    TApiIngredients,
+    TApiOrder,
+    TApiOrderInfo,
+    TApiUser,
+    TApiUserInfo,
+    TApiUserCredentials,
+    TApiUserResetPasswordInfo,
+} from './types/api';
 
 class ApiClient {
     private readonly url: string;
 
-    constructor({ url }: TApiConfig) {
+    private readonly wsUrl: string;
+
+    constructor({ url, wsUrl }: TApiConfig) {
         this.url = url;
+        this.wsUrl = wsUrl;
     }
 
     async getIngredients(): Promise<TApiIngredients> {
@@ -63,7 +24,7 @@ class ApiClient {
         return result.data;
     }
 
-    async createOrder(ingredientsIds: Array<string>): Promise<TApiOrder> {
+    async createOrder(ingredientsIds: Array<string>): Promise<TApiOrderInfo> {
         const body = {
             ingredients: ingredientsIds,
         };
@@ -77,8 +38,15 @@ class ApiClient {
         });
     }
 
+    async getOrder(orderNumber: string): Promise<TApiOrder> {
+        const result = await this.fetch(`${this.url}/orders/${orderNumber}`);
+        if (result.orders.length !== 1) {
+            throw new Error(`Заказ #${orderNumber} не найден`);
+        }
+        return result.orders[0];
+    }
+
     async registerUser(user: TApiUser): Promise<TApiUserInfo> {
-        /** @type {AuthResult} */
         const result = await this.fetch(`${this.url}/auth/register`, {
             method: 'POST',
             headers: {
@@ -92,7 +60,6 @@ class ApiClient {
     }
 
     async logInUser(user: TApiUserCredentials): Promise<TApiUserInfo> {
-        /** @type {AuthResult} */
         const result = await this.fetch(`${this.url}/auth/login`, {
             method: 'POST',
             headers: {
@@ -201,6 +168,23 @@ class ApiClient {
             + `: Код состояния HTTP - ${response.status}`
             + `: HTTP ответ - ${resultText}`,
         );
+    }
+
+    getOrdersSocketUrl(): string {
+        return `${this.wsUrl}/orders/all`;
+    }
+
+    createOrdersSocket(): WebSocket {
+        return new WebSocket(this.getOrdersSocketUrl());
+    }
+
+    getUserOrdersSocketUrl(): string {
+        return `${this.wsUrl}/orders`;
+    }
+
+    createUserOrdersSocket(): WebSocket {
+        const token = ApiClient.getAccessToken().slice(7);
+        return new WebSocket(`${this.getUserOrdersSocketUrl()}?token=${token}`);
     }
 
     static getAccessToken(): string {

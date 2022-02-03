@@ -1,0 +1,38 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--offset-base-size)  * 12);
+}
+
+.orderPanels {
+    display: flex;
+    gap: calc(var(--offset-base-size)  * 8);
+}
+
+.orderPanel {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--offset-base-size)  * 6);
+}
+
+.doneOrderPanel {
+    composes: orderPanel;
+    width: 75%;
+}
+
+.pendingOrderPanel {
+    composes: orderPanel;
+    width: 25%;
+}
+
+.orders {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: calc(var(--offset-base-size)  * 2);
+    max-height: 332px;
+}
+
+.totalShadow {
+    text-shadow: 0 0 16px rgba(51, 51, 255, 0.25), 0 0 8px rgba(51, 51, 255, 0.25), 0 4px 32px rgba(51, 51, 255, 0.5);
+}

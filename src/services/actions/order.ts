@@ -1,10 +1,19 @@
 import { getIngredientsIds } from '../../utils/ingredients';
+import {
+    CREATE_ORDER_REQUEST,
+    CREATE_ORDER_SUCCESS,
+    CREATE_ORDER_ERROR,
+} from '../constants/order';
+import { TDispatch, TGetState, TThunk } from '../types/store';
+import ApiClient from '../api-client';
+import { getErrorMessage } from '../../utils/error';
 
-export const CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST';
-export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
-export const CREATE_ORDER_ERROR = 'CREATE_ORDER_ERROR';
-
-export const createOrder = () => async (dispatch, getState, apiClient) => {
+// eslint-disable-next-line import/prefer-default-export
+export const createOrder: TThunk = () => async (
+    dispatch: TDispatch,
+    getState: TGetState,
+    apiClient: ApiClient,
+) => {
     dispatch({
         type: CREATE_ORDER_REQUEST,
     });
@@ -19,7 +28,7 @@ export const createOrder = () => async (dispatch, getState, apiClient) => {
     } catch (error) {
         dispatch({
             type: CREATE_ORDER_ERROR,
-            message: error.message,
+            message: getErrorMessage(error),
         });
     }
 };
