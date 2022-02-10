@@ -42,6 +42,10 @@
     position: absolute;
 }
 
+.icon p {
+    position: absolute;
+}
+
 .icon img {
     transform: scale(0.8);
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import { generatePath, useHistory, useLocation } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { v4 as uuid } from 'uuid';
 import { TLocationState, TOrder } from '../../services/types';
 import { TApiOrderStatus } from '../../services/types/api';
 import { useSelector } from '../../services/hooks';
 import {
-    getGroupedIngredientsPrice,
-    groupIngredients,
+    getIngredients,
+    getIngredientsPrice,
 } from '../../utils/ingredients';
 import { localizeDate, localizeStatus } from '../../utils/orders';
 import styles from './order-card.module.css';
@@ -22,11 +23,19 @@ const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
     const history = useHistory<TLocationState>();
 
     const orderIngredients = React.useMemo(
-        () => groupIngredients(order.ingredients, ingredients),
+        () => getIngredients(order.ingredients, ingredients)
+            .map((ingredient) => ({ ...ingredient, uuid: uuid() })),
         [order.ingredients, ingredients],
     );
     const orderPrice = React.useMemo(
-        () => getGroupedIngredientsPrice(orderIngredients),
+        () => getIngredientsPrice(orderIngredients),
+        [orderIngredients],
+    );
+
+    const maxIngredientsCount = 5;
+    const restIngredientsCount = orderIngredients.length - maxIngredientsCount;
+    const displayedIngredients = React.useMemo(
+        () => orderIngredients.slice(0, maxIngredientsCount + 1).reverse(),
         [orderIngredients],
     );
 
@@ -57,15 +66,24 @@ const OrderCard: React.FC<TOrderCardProps> = ({ order, showStatus }) => {
             </div>
             <div className={styles.footer}>
                 <div className={styles.icons}>
-                    {orderIngredients.reverse().map((item, index) => (
+                    {displayedIngredients.map((ingredient, index) => (
                         <div
-                            key={item.ingredient.id}
+                            key={ingredient.uuid}
                             className={styles.icon}
                             style={{
-                                left: 48 * (orderIngredients.length - index - 1),
+                                left: 48 * (displayedIngredients.length - index - 1),
                             }}
                         >
-                            <img src={item.ingredient.imageMobile} alt={item.ingredient.name} />
+                            <img
+                                src={ingredient.imageMobile}
+                                alt={ingredient.name}
+                                style={{
+                                    opacity: (index === 0 && restIngredientsCount > 0) ? 0.6 : 1,
+                                }}
+                            />
+                            {index === 0 && restIngredientsCount > 0 ? (
+                                <p className="text text_type_main-default">{`+${restIngredientsCount}`}</p>
+                            ) : null}
                         </div>
                     ))}
                 </div>

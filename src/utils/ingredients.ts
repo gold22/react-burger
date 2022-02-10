@@ -20,18 +20,33 @@ export const getIngredientCount = (ingredientId: string, ingredients: TIngredien
     )
 );
 
+export const getIngredients = (
+    ingredientIds: Array<string>,
+    ingredients: TIngredients,
+): TIngredients => {
+    const result: TIngredients = [];
+    for (const ingredientId of ingredientIds) {
+        const ingredient = getIngredient(ingredientId, ingredients);
+        if (ingredient) {
+            result.push(ingredient);
+        }
+    }
+    return result;
+};
+
 export const groupIngredients = (
     ingredientIds: Array<string>,
     ingredients: TIngredients,
 ): TIngredientGroupItems => {
     const ingredientsMap = new Map<string, TIngredientGroupItem>();
-    for (const ingredient of ingredients) {
-        if (ingredientIds.includes(ingredient.id)) {
-            const groupItem = ingredientsMap.get(ingredient.id);
-            if (groupItem) {
-                groupItem.count += 1;
-            } else {
-                ingredientsMap.set(ingredient.id, { ingredient, count: 1 });
+    for (const ingredientId of ingredientIds) {
+        const groupItem = ingredientsMap.get(ingredientId);
+        if (groupItem) {
+            groupItem.count += 1;
+        } else {
+            const ingredient = getIngredient(ingredientId, ingredients);
+            if (ingredient) {
+                ingredientsMap.set(ingredientId, { ingredient, count: 1 });
             }
         }
     }
