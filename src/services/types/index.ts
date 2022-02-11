@@ -2,7 +2,7 @@ import { Location } from 'history';
 import { TApiOrderStatus } from './api';
 
 export type TIngredient = {
-    uuid: string;
+    uuid?: string;
     id: string;
     name: string;
     type: string;
