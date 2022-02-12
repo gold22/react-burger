@@ -26,10 +26,6 @@ export type TAuthState = {
     loginError: string | null;
     isLoggingOut: boolean;
     logoutError: string | null;
-    isSendingEmail: boolean;
-    sendingEmailError: string | null;
-    isResettingPassword: boolean;
-    resetPasswordError: string | null;
     isLoading: boolean;
     loadError: string | null;
     isUpdating: boolean;
@@ -44,10 +40,6 @@ const initialState: TAuthState = {
     loginError: null,
     isLoggingOut: false,
     logoutError: null,
-    isSendingEmail: false,
-    sendingEmailError: null,
-    isResettingPassword: false,
-    resetPasswordError: null,
     isLoading: true,
     loadError: null,
     isUpdating: true,
