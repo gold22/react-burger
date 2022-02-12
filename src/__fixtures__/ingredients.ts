@@ -1,4 +1,4 @@
-import { TIngredient } from '../services/types';
+import { TIngredient, TIngredients } from '../services/types';
 
 export const bunN200i: TIngredient = {
     id: '60d3b41abdacab0026a733c6',
@@ -55,3 +55,10 @@ export const sauceSpicyX: TIngredient = {
     imageLarge: 'https://code.s3.yandex.net/react/code/sauce-02-large.png',
     imageMobile: 'https://code.s3.yandex.net/react/code/sauce-02-mobile.png',
 };
+
+export const ingredients: TIngredients = [
+    bunN200i,
+    bunR2D3,
+    mainFillet,
+    sauceSpicyX,
+];
