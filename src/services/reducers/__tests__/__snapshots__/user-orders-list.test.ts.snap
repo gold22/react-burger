@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_CLOSED 1`] = `
+exports[`user orders list reducer should handle USER_ORDERS_LIST_CONNECTION_CLOSED 1`] = `
 Object {
   "connectionError": null,
   "isConnected": false,
@@ -45,52 +45,42 @@ Object {
       "updatedAt": 2022-02-12T15:47:32.195Z,
     },
   ],
-  "total": 9848,
-  "totalToday": 17,
 }
 `;
 
-exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_CLOSED 2`] = `
+exports[`user orders list reducer should handle USER_ORDERS_LIST_CONNECTION_CLOSED 2`] = `
 Object {
   "connectionError": "Connection close error",
   "isConnected": false,
   "orders": Array [],
-  "total": 0,
-  "totalToday": 0,
 }
 `;
 
-exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_ERROR 1`] = `
+exports[`user orders list reducer should handle USER_ORDERS_LIST_CONNECTION_ERROR 1`] = `
 Object {
   "connectionError": null,
   "isConnected": false,
   "orders": Array [],
-  "total": 0,
-  "totalToday": 0,
 }
 `;
 
-exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_ERROR 2`] = `
+exports[`user orders list reducer should handle USER_ORDERS_LIST_CONNECTION_ERROR 2`] = `
 Object {
   "connectionError": "Connection error",
   "isConnected": false,
   "orders": Array [],
-  "total": 0,
-  "totalToday": 0,
 }
 `;
 
-exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_SUCCESS 1`] = `
+exports[`user orders list reducer should handle USER_ORDERS_LIST_CONNECTION_SUCCESS 1`] = `
 Object {
   "connectionError": null,
   "isConnected": true,
   "orders": Array [],
-  "total": 0,
-  "totalToday": 0,
 }
 `;
 
-exports[`orders list reducer should handle ORDERS_LIST_RECEIVED 1`] = `
+exports[`user orders list reducer should handle USER_ORDERS_LIST_RECEIVED 1`] = `
 Object {
   "connectionError": null,
   "isConnected": true,
@@ -135,17 +125,13 @@ Object {
       "updatedAt": 2022-02-12T15:47:32.195Z,
     },
   ],
-  "total": 9848,
-  "totalToday": 17,
 }
 `;
 
-exports[`orders list reducer should return the initial state 1`] = `
+exports[`user orders list reducer should return the initial state 1`] = `
 Object {
   "connectionError": null,
   "isConnected": false,
   "orders": Array [],
-  "total": 0,
-  "totalToday": 0,
 }
 `;

@@ -50,7 +50,7 @@ describe('orders list reducer', () => {
         };
         expect(ordersListReducer(state, { type: ORDERS_LIST_CONNECTION_CLOSED, message: null }))
             .toMatchSnapshot();
-        expect(ordersListReducer(state, { type: ORDERS_LIST_CONNECTION_CLOSED, message: 'Connection closed error' }))
+        expect(ordersListReducer(state, { type: ORDERS_LIST_CONNECTION_CLOSED, message: 'Connection close error' }))
             .toMatchSnapshot();
     });
 });

@@ -27,7 +27,7 @@ export interface IUserOrdersListConnectionFailedAction {
 
 export interface IUserOrdersListConnectionClosedAction {
     readonly type: typeof USER_ORDERS_LIST_CONNECTION_CLOSED;
-    readonly message: string;
+    readonly message: string | null;
 }
 
 export interface IUserOrdersListReceivedAction {
