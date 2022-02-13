@@ -36,16 +36,19 @@ const IngredientCard: React.FC<TIngredientCardProps> = ({ ingredient }) => {
             className={styles.main}
             onClick={handleShowDetails}
             ref={dragRef}
+            data-type="ingredient-card"
         >
             {count > 0 && (
-                <Counter count={count} size="default" />
+                <div data-type="ingredient-counter">
+                    <Counter count={count} size="default" />
+                </div>
             )}
             <img className="ml-4 mr-4" src={image} alt={name} />
             <div className={`mt-1 mb-1 ${styles.price}`}>
-                <p className="text text_type_digits-default mr-2">{price}</p>
+                <p className="text text_type_digits-default mr-2" data-type="ingredient-price">{price}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <p className={`text text_type_main-default ${styles.name}`}>{name}</p>
+            <p className={`text text_type_main-default ${styles.name}`} data-type="ingredient-name">{name}</p>
         </div>
     );
 };

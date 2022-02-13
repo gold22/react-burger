@@ -103,7 +103,9 @@
     "@types/history": "^4.7.10",
     "@types/react-router-dom": "^5.3.2",
     "@types/uuid": "^8.3.4",
+    "cypress": "^9.4.1",
     "eslint-config-airbnb": "18.2.1",
-    "eslint-config-airbnb-typescript": "^16.1.0"
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-plugin-cypress": "^2.12.1"
   }
 }

@@ -13,7 +13,7 @@ const OrderDetails: React.FC<TOrderDetailsProps> = ({ visible, onClose }) => {
 
     return (
         <Modal title="" visible={visible} onClose={onClose}>
-            <p className="text text_type_digits-large mt-4">{order.number}</p>
+            <p className="text text_type_digits-large mt-4" data-testid="order-number">{order.number}</p>
             <p className="text text_type_main-medium mt-8 mb-15">идентификатор заказа</p>
             <img src={donePath} alt="Заказ оформлен" />
             <p className="text text_type_main-default mt-15 mb-2">Ваш заказ начали готовить</p>

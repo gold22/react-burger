@@ -11,7 +11,7 @@ const IngredientDetails: React.FC<TIngredientDetailsProps> = ({ ingredient }) =>
     return (
         <>
             <img src={imageLarge} alt={name} />
-            <p className="text text_type_main-medium mt-4 mb-8">{name}</p>
+            <p className="text text_type_main-medium mt-4 mb-8" data-type="ingredient-name">{name}</p>
             <div className={styles.details}>
                 <div className={styles.detail}>
                     <p className="text text_type_main-default text_color_inactive">Калории, ккал</p>

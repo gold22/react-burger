@@ -10,12 +10,13 @@ type TAppNavLinkProps = {
     exact?: boolean;
 };
 
-const AppNavLink: React.FC<TAppNavLinkProps> = ({ icon, text, to, exact }) => {
+const AppNavLink: React.FC<TAppNavLinkProps> = ({ icon, text, to, exact, ...props }) => {
     const match = useRouteMatch(to);
     const iconType = match && (match.isExact || !exact) ? 'primary' : 'secondary';
     const textColor = match && (match.isExact || !exact) ? 'text_color_primary' : 'text_color_inactive';
     return (
-        <NavLink to={to} exact={exact} className={`${styles.main} pl-5 pr-5 pb-4 pt-4`}>
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <NavLink to={to} exact={exact} className={`${styles.main} pl-5 pr-5 pb-4 pt-4`} {...props}>
             {icon === 'burger' && <BurgerIcon type={iconType} />}
             {icon === 'list' && <ListIcon type={iconType} />}
             {icon === 'profile' && <ProfileIcon type={iconType} />}

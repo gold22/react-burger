@@ -60,16 +60,19 @@ const BurgerIngredients = () => {
                     title="Булки"
                     ingredients={buns}
                     ref={categories.bun}
+                    data-testid="bun-cards"
                 />
                 <IngredientCards
                     title="Соусы"
                     ingredients={sauces}
                     ref={categories.sauce}
+                    data-testid="sauce-cards"
                 />
                 <IngredientCards
                     title="Начинка"
                     ingredients={mains}
                     ref={categories.main}
+                    data-testid="main-cards"
                 />
             </div>
         </section>

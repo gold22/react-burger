@@ -57,7 +57,7 @@ const BurgerConstructor = () => {
     if (ingredientsCount === 0) {
         return (
             <section className={`${styles.main} pt-25 pl-4`}>
-                <div className={styles.dropArea} ref={dropRef}>
+                <div className={styles.dropArea} ref={dropRef} data-testid="bun-drop-area">
                     <p className="text text_type_main-default">Начните сборку бургера с переноса булки сюда</p>
                 </div>
             </section>
@@ -65,7 +65,7 @@ const BurgerConstructor = () => {
     }
 
     return (
-        <section className={`${styles.main} pt-25 pl-4`}>
+        <section className={`${styles.main} pt-25 pl-4`} data-testid="burger-constructor">
             <ConstructorElements />
             <div className={`${styles.submit} pt-10 pr-8`}>
                 <div className={styles.total}>

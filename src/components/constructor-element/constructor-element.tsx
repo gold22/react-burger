@@ -53,8 +53,8 @@ const ConstructorElement: React.FC<TConstructorElementProps> = ({ ingredient, ty
 
     if (type === 'center') {
         return (
-            <div ref={dragRef}>
-                <div className={`${styles.optional} pr-1`} ref={dropRef}>
+            <div ref={dragRef} data-type="element-drag-area">
+                <div className={`${styles.optional} pr-1`} ref={dropRef} data-type="element-drop-area">
                     <DragIcon type="primary" />
                     <ConstructorElementComponent
                         text={ingredient.name}
@@ -67,7 +67,7 @@ const ConstructorElement: React.FC<TConstructorElementProps> = ({ ingredient, ty
         );
     }
     return (
-        <div className={`${styles.main} pl-8`} ref={dropRef}>
+        <div className={`${styles.main} pl-8`} ref={dropRef} data-type="element-drop-area">
             <ConstructorElementComponent
                 type={type}
                 isLocked
