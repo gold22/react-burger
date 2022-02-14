@@ -23,3 +23,7 @@ yarn test
 ```
 yarn cypress run --env email=<email>,password=<password>
 ```
+
+### Demo on GitHub pages
+
+https://gold22.github.io/react-burger
