@@ -6,8 +6,20 @@
 yarn install
 ```
 
-### Run
+### Run in development mode
 
 ```
 yarn start
+```
+
+### Run unit tests
+
+```
+yarn test
+```
+
+### Run Cypress tests
+
+```
+yarn cypress run --env email=<email>,password=<password>
 ```
