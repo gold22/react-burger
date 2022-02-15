@@ -2,29 +2,29 @@
 
 ### Installation
 
-```
+```Shell
 yarn install
 ```
 
 ### Run in development mode
 
-```
+```Shell
 yarn start
 ```
 
 ### Run unit tests
 
-```
+```Shell
 yarn test
 ```
 
 ### Run Cypress tests
 
-```bash
+```Shell
 yarn cypress run --env email=<email>,password=<password>
 ```
 
-```bash
+```Shell
 yarn cypress run --env email=<email>,password=<password> --config baseUrl=https://react.gold.students.nomoredomains.work
 ```
 
