@@ -33,8 +33,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "predeploy-to-github": "yarn build",
+    "deploy-to-github": "gh-pages -d build",
+    "predeploy-to-yandex": "yarn build",
+    "deploy-to-yandex": "scp -r ./build/* praktikum@84.201.178.244:/home/praktikum/react-burger"
   },
   "eslintConfig": {
     "extends": [
