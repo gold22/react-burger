@@ -2,7 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -33,6 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
+    "cypress": "cypress open cache clear",
     "predeploy-to-github": "yarn build",
     "deploy-to-github": "gh-pages -d build",
     "predeploy-to-yandex": "yarn build",

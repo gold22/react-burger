@@ -21,11 +21,11 @@ yarn test
 ### Run Cypress tests
 
 ```Shell
-yarn cypress run --env email=<email>,password=<password>
+yarn cypress --env email=<email>,password=<password>
 ```
 
 ```Shell
-yarn cypress run --env email=<email>,password=<password> --config baseUrl=https://react.gold.students.nomoredomains.work
+yarn cypress --env email=<email>,password=<password> --config baseUrl=https://react.gold.students.nomoredomains.work
 ```
 
 ### Demo on GitHub pages
