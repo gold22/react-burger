@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ingredient details reducer should handle HIDE_INGREDIENT_DETAILS 1`] = `
+Object {
+  "ingredient": null,
+}
+`;
+
+exports[`ingredient details reducer should handle SHOW_INGREDIENT_DETAILS 1`] = `
+Object {
+  "ingredient": Object {
+    "calories": 420,
+    "carbohydrates": 53,
+    "fat": 24,
+    "id": "60d3b41abdacab0026a733c6",
+    "image": "https://code.s3.yandex.net/react/code/bun-02.png",
+    "imageLarge": "https://code.s3.yandex.net/react/code/bun-02-large.png",
+    "imageMobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+    "name": "Краторная булка N-200i",
+    "price": 1255,
+    "proteins": 80,
+    "type": "bun",
+  },
+}
+`;
+
+exports[`ingredient details reducer should return the initial state 1`] = `
+Object {
+  "ingredient": null,
+}
+`;

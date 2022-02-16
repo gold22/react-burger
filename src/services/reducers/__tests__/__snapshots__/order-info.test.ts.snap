@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`order info reducer should handle CLEAR_ORDER 1`] = `
+Object {
+  "isLoading": true,
+  "loadError": null,
+  "order": null,
+}
+`;
+
+exports[`order info reducer should handle GET_ORDER_ERROR 1`] = `
+Object {
+  "isLoading": false,
+  "loadError": "Get order error",
+  "order": null,
+}
+`;
+
+exports[`order info reducer should handle GET_ORDER_REQUEST 1`] = `
+Object {
+  "isLoading": true,
+  "loadError": null,
+  "order": null,
+}
+`;
+
+exports[`order info reducer should handle GET_ORDER_SUCCESS 1`] = `
+Object {
+  "isLoading": false,
+  "loadError": null,
+  "order": Object {
+    "createdAt": 2022-02-12T15:47:31.913Z,
+    "id": "6207d6936d7cd8001b2d5a91",
+    "ingredients": Array [
+      "60d3b41abdacab0026a733c6",
+      "60d3b41abdacab0026a733ce",
+      "60d3b41abdacab0026a733c6",
+    ],
+    "name": "Традиционный-галактический краторный бургер",
+    "number": 9932,
+    "status": "done",
+    "updatedAt": 2022-02-12T15:47:32.195Z,
+  },
+}
+`;
+
+exports[`order info reducer should return the initial state 1`] = `
+Object {
+  "isLoading": true,
+  "loadError": null,
+  "order": null,
+}
+`;

@@ -9,10 +9,11 @@ type TIngredientCardsProps = {
 };
 
 const IngredientCards = React.forwardRef<HTMLDivElement, TIngredientCardsProps>((
-    { title, ingredients },
+    { title, ingredients, ...props },
     ref,
 ) => (
-    <div ref={ref}>
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <div ref={ref} {...props}>
         <p className="text text_type_main-medium">{title}</p>
         <div className={`${styles.cards} pt-6 pb-10 pl-4`}>
             {ingredients.map((ingredient) => (

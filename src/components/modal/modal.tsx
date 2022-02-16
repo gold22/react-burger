@@ -48,7 +48,7 @@ const Modal: React.FC<TModalProps> = ({ title, visible, children, onClose }) => 
                 <div className={styles.title}>
                     <p className="text text_type_main-large">{title}</p>
                     <div className={styles.closeArea}>
-                        <div className={styles.closeIcon}>
+                        <div className={styles.closeIcon} data-type="close-icon">
                             <CloseIcon type="primary" onClick={handleCloseClick} />
                         </div>
                     </div>

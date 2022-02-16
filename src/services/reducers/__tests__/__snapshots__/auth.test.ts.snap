@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth reducer should handle GET_USER_ERROR 1`] = `
+Object {
+  "isLoading": false,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": "Get user error",
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": null,
+}
+`;
+
+exports[`auth reducer should handle GET_USER_REQUEST 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": null,
+}
+`;
+
+exports[`auth reducer should handle GET_USER_SUCCESS 1`] = `
+Object {
+  "isLoading": false,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": Object {
+    "email": "test@example.tld",
+    "name": "Test",
+  },
+}
+`;
+
+exports[`auth reducer should handle LOGIN_USER_ERROR 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": "Login error",
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": null,
+}
+`;
+
+exports[`auth reducer should handle LOGIN_USER_REQUEST 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": true,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": null,
+}
+`;
+
+exports[`auth reducer should handle LOGIN_USER_SUCCESS 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": Object {
+    "email": "test@example.tld",
+    "name": "Test",
+  },
+}
+`;
+
+exports[`auth reducer should handle LOGOUT_USER_ERROR 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": "Logout error",
+  "registrationError": null,
+  "updateError": null,
+  "user": Object {
+    "email": "test@example.tld",
+    "name": "Test",
+  },
+}
+`;
+
+exports[`auth reducer should handle LOGOUT_USER_REQUEST 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": true,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": Object {
+    "email": "test@example.tld",
+    "name": "Test",
+  },
+}
+`;
+
+exports[`auth reducer should handle LOGOUT_USER_SUCCESS 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": null,
+}
+`;
+
+exports[`auth reducer should handle REGISTER_USER_ERROR 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": "Registration error",
+  "updateError": null,
+  "user": null,
+}
+`;
+
+exports[`auth reducer should handle REGISTER_USER_REQUEST 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": true,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": null,
+}
+`;
+
+exports[`auth reducer should handle REGISTER_USER_SUCCESS 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": Object {
+    "email": "test@example.tld",
+    "name": "Test",
+  },
+}
+`;
+
+exports[`auth reducer should handle UPDATE_USER_ERROR 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": false,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": "Update user error",
+  "user": null,
+}
+`;
+
+exports[`auth reducer should handle UPDATE_USER_REQUEST 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": Object {
+    "email": "test@example.tld",
+    "name": "Test",
+  },
+}
+`;
+
+exports[`auth reducer should handle UPDATE_USER_SUCCESS 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": false,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": Object {
+    "email": "updated@example.tld",
+    "name": "Updated",
+  },
+}
+`;
+
+exports[`auth reducer should return the initial state 1`] = `
+Object {
+  "isLoading": true,
+  "isLoggingIn": false,
+  "isLoggingOut": false,
+  "isRegistering": false,
+  "isUpdating": true,
+  "loadError": null,
+  "loginError": null,
+  "logoutError": null,
+  "registrationError": null,
+  "updateError": null,
+  "user": null,
+}
+`;

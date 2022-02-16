@@ -8,7 +8,7 @@ const AppHeader = () => (
     <header className={`${styles.header} ml-10 mr-10 mt-10`}>
         <div className={styles.headerContent}>
             <nav className={styles.leftNav}>
-                <AppNavLink icon="burger" text="Конструктор" to="/" exact />
+                <AppNavLink icon="burger" text="Конструктор" to="/" exact data-testid="constructor-link" />
                 <AppNavLink icon="list" text="Лента заказов" to="/feed" />
             </nav>
             <div className={styles.logo}>

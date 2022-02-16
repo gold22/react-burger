@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_CLOSED 1`] = `
+Object {
+  "connectionError": null,
+  "isConnected": false,
+  "orders": Array [
+    Object {
+      "createdAt": 2022-02-12T16:37:04.209Z,
+      "id": "6207e2306d7cd8001b2d5af9",
+      "ingredients": Array [
+        "60d3b41abdacab0026a733c6",
+        "60d3b41abdacab0026a733c8",
+        "60d3b41abdacab0026a733c6",
+      ],
+      "name": "Краторный люминесцентный бургер",
+      "number": 9935,
+      "status": "created",
+      "updatedAt": 2022-02-12T16:37:04.448Z,
+    },
+    Object {
+      "createdAt": 2022-02-12T16:35:50.383Z,
+      "id": "6207e1e66d7cd8001b2d5af7",
+      "ingredients": Array [
+        "60d3b41abdacab0026a733c7",
+        "60d3b41abdacab0026a733cc",
+        "60d3b41abdacab0026a733c7",
+      ],
+      "name": "Spicy флюоресцентный бургер",
+      "number": 9934,
+      "status": "pending",
+      "updatedAt": 2022-02-12T16:35:50.614Z,
+    },
+    Object {
+      "createdAt": 2022-02-12T15:47:31.913Z,
+      "id": "6207d6936d7cd8001b2d5a91",
+      "ingredients": Array [
+        "60d3b41abdacab0026a733c6",
+        "60d3b41abdacab0026a733ce",
+        "60d3b41abdacab0026a733c6",
+      ],
+      "name": "Традиционный-галактический краторный бургер",
+      "number": 9932,
+      "status": "done",
+      "updatedAt": 2022-02-12T15:47:32.195Z,
+    },
+  ],
+  "total": 9848,
+  "totalToday": 17,
+}
+`;
+
+exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_CLOSED 2`] = `
+Object {
+  "connectionError": "Connection close error",
+  "isConnected": false,
+  "orders": Array [],
+  "total": 0,
+  "totalToday": 0,
+}
+`;
+
+exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_ERROR 1`] = `
+Object {
+  "connectionError": null,
+  "isConnected": false,
+  "orders": Array [],
+  "total": 0,
+  "totalToday": 0,
+}
+`;
+
+exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_ERROR 2`] = `
+Object {
+  "connectionError": "Connection error",
+  "isConnected": false,
+  "orders": Array [],
+  "total": 0,
+  "totalToday": 0,
+}
+`;
+
+exports[`orders list reducer should handle ORDERS_LIST_CONNECTION_SUCCESS 1`] = `
+Object {
+  "connectionError": null,
+  "isConnected": true,
+  "orders": Array [],
+  "total": 0,
+  "totalToday": 0,
+}
+`;
+
+exports[`orders list reducer should handle ORDERS_LIST_RECEIVED 1`] = `
+Object {
+  "connectionError": null,
+  "isConnected": true,
+  "orders": Array [
+    Object {
+      "createdAt": 2022-02-12T16:37:04.209Z,
+      "id": "6207e2306d7cd8001b2d5af9",
+      "ingredients": Array [
+        "60d3b41abdacab0026a733c6",
+        "60d3b41abdacab0026a733c8",
+        "60d3b41abdacab0026a733c6",
+      ],
+      "name": "Краторный люминесцентный бургер",
+      "number": 9935,
+      "status": "created",
+      "updatedAt": 2022-02-12T16:37:04.448Z,
+    },
+    Object {
+      "createdAt": 2022-02-12T16:35:50.383Z,
+      "id": "6207e1e66d7cd8001b2d5af7",
+      "ingredients": Array [
+        "60d3b41abdacab0026a733c7",
+        "60d3b41abdacab0026a733cc",
+        "60d3b41abdacab0026a733c7",
+      ],
+      "name": "Spicy флюоресцентный бургер",
+      "number": 9934,
+      "status": "pending",
+      "updatedAt": 2022-02-12T16:35:50.614Z,
+    },
+    Object {
+      "createdAt": 2022-02-12T15:47:31.913Z,
+      "id": "6207d6936d7cd8001b2d5a91",
+      "ingredients": Array [
+        "60d3b41abdacab0026a733c6",
+        "60d3b41abdacab0026a733ce",
+        "60d3b41abdacab0026a733c6",
+      ],
+      "name": "Традиционный-галактический краторный бургер",
+      "number": 9932,
+      "status": "done",
+      "updatedAt": 2022-02-12T15:47:32.195Z,
+    },
+  ],
+  "total": 9848,
+  "totalToday": 17,
+}
+`;
+
+exports[`orders list reducer should return the initial state 1`] = `
+Object {
+  "connectionError": null,
+  "isConnected": false,
+  "orders": Array [],
+  "total": 0,
+  "totalToday": 0,
+}
+`;

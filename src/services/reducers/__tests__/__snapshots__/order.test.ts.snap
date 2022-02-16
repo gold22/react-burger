@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`order reducer should handle CREATE_ORDER_ERROR 1`] = `
+Object {
+  "creationError": "Create order error",
+  "isCreating": false,
+  "name": null,
+  "number": null,
+}
+`;
+
+exports[`order reducer should handle CREATE_ORDER_REQUEST 1`] = `
+Object {
+  "creationError": null,
+  "isCreating": true,
+  "name": null,
+  "number": null,
+}
+`;
+
+exports[`order reducer should handle CREATE_ORDER_SUCCESS 1`] = `
+Object {
+  "creationError": null,
+  "isCreating": false,
+  "name": "Традиционный-галактический краторный бургер",
+  "number": "9932",
+}
+`;
+
+exports[`order reducer should return the initial state 1`] = `
+Object {
+  "creationError": null,
+  "isCreating": false,
+  "name": null,
+  "number": null,
+}
+`;
