@@ -34,7 +34,7 @@
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "cypress": "cypress open cache clear",
-    "predeploy-to-github": "yarn build",
+    "predeploy-to-github": "cross-env PUBLIC_URL=/react-burger yarn build",
     "deploy-to-github": "gh-pages -d build",
     "predeploy-to-yandex": "yarn build",
     "deploy-to-yandex": "scp -r ./build/* praktikum@84.201.178.244:/home/praktikum/react-burger"
@@ -109,6 +109,7 @@
     "@types/history": "^4.7.10",
     "@types/react-router-dom": "^5.3.2",
     "@types/uuid": "^8.3.4",
+    "cross-env": "^7.0.3",
     "cypress": "^9.4.1",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-airbnb-typescript": "^16.1.0",

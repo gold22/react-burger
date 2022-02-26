@@ -41,7 +41,16 @@ export const socketMiddleware = (createSocket: () => WebSocket, wsActions: TSock
                 }
             };
         } else if (type === close && socket) {
-            socket.close();
+            socket.onerror = null;
+            socket.onclose = null;
+            socket.onmessage = null;
+            if (socket.CONNECTING === socket.readyState) {
+                socket.onopen = (event) => {
+                    (event.currentTarget as WebSocket).close();
+                };
+            } else if (socket.OPEN === socket.readyState) {
+                socket.close();
+            }
             socket = null;
         }
         next(action);

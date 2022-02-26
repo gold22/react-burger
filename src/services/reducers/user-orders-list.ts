@@ -3,6 +3,7 @@ import {
     USER_ORDERS_LIST_CONNECTION_ERROR,
     USER_ORDERS_LIST_CONNECTION_CLOSED,
     USER_ORDERS_LIST_RECEIVED,
+    USER_ORDERS_LIST_CONNECTION_CLOSE,
 } from '../constants/user-orders-list';
 import { TOrders } from '../types';
 import { TUserOrdersListActions } from '../types/actions/user-orders-list';
@@ -26,6 +27,13 @@ export const userOrdersListReducer = (
     action: TUserOrdersListActions,
 ): TUserOrdersListState => {
     switch (action.type) {
+    case USER_ORDERS_LIST_CONNECTION_CLOSE: {
+        return {
+            ...state,
+            isConnected: false,
+            connectionError: null,
+        };
+    }
     case USER_ORDERS_LIST_CONNECTION_SUCCESS: {
         return {
             ...state,
