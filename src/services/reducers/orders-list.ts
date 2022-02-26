@@ -3,6 +3,7 @@ import {
     ORDERS_LIST_CONNECTION_ERROR,
     ORDERS_LIST_CONNECTION_CLOSED,
     ORDERS_LIST_RECEIVED,
+    ORDERS_LIST_CONNECTION_CLOSE,
 } from '../constants/orders-list';
 import { TOrders } from '../types';
 import { TOrdersListActions } from '../types/actions/orders-list';
@@ -30,6 +31,13 @@ export const ordersListReducer = (
     action: TOrdersListActions,
 ): TOrdersListState => {
     switch (action.type) {
+    case ORDERS_LIST_CONNECTION_CLOSE: {
+        return {
+            ...state,
+            isConnected: false,
+            connectionError: null,
+        };
+    }
     case ORDERS_LIST_CONNECTION_SUCCESS: {
         return {
             ...state,
